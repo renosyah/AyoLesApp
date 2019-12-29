@@ -2,6 +2,8 @@ package com.syahputrareno975.ayolesapp.service
 
 import com.syahputrareno975.ayolesapp.model.banner.AllBannerResponse
 import com.syahputrareno975.ayolesapp.model.category.AllCategoryResponse
+import com.syahputrareno975.ayolesapp.model.category.OneCategoryResponse
+import com.syahputrareno975.ayolesapp.model.course.AllCourseResponse
 import com.syahputrareno975.ayolesapp.model.login.LoginResponse
 import com.syahputrareno975.ayolesapp.model.queryModel.Query
 import retrofit2.Retrofit
@@ -23,10 +25,17 @@ interface RetrofitService {
     @POST("graphql")
     fun allCategory(@Body query: Query) : Observable<AllCategoryResponse>
 
+    @POST("graphql")
+    fun oneCategory(@Body query: Query) : Observable<OneCategoryResponse>
+
+    @POST("graphql")
+    fun allCourses(@Body query: Query) : Observable<AllCourseResponse>
+
+
 
     companion object {
 
-        val baseURL = "http://192.168.137.1:8000/"
+        val baseURL = "http://192.168.9.101:8000/"
 
         fun create() : RetrofitService {
             val retrofit = Retrofit.Builder()

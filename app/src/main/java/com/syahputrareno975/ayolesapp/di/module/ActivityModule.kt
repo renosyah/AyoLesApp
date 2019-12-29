@@ -4,6 +4,8 @@ import android.app.Activity
 import com.syahputrareno975.ayolesapp.service.RetrofitService
 import com.syahputrareno975.ayolesapp.ui.activity.login.LoginActivityContract
 import com.syahputrareno975.ayolesapp.ui.activity.login.LoginActivityPresenter
+import com.syahputrareno975.ayolesapp.ui.activity.search_course.SearchCourseActivityContract
+import com.syahputrareno975.ayolesapp.ui.activity.search_course.SearchCourseActivityPresenter
 import dagger.Module
 import dagger.Provides
 
@@ -24,5 +26,9 @@ class ActivityModule(private var activity : Activity) {
     fun provideLoginActivityPresenter(): LoginActivityContract.Presenter {
         return LoginActivityPresenter()
     }
-    
+
+    @Provides
+    fun provideSearchCourseActivityPresenter(): SearchCourseActivityContract.Presenter {
+        return SearchCourseActivityPresenter()
+    }
 }

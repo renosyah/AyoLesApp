@@ -1,7 +1,5 @@
-package com.syahputrareno975.ayolesapp.ui.fragment.fragment_home
+package com.syahputrareno975.ayolesapp.ui.activity.search_course
 
-import com.syahputrareno975.ayolesapp.model.banner.AllBannerRequest
-import com.syahputrareno975.ayolesapp.model.banner.AllBannerResponse
 import com.syahputrareno975.ayolesapp.model.category.AllCategoryRequest
 import com.syahputrareno975.ayolesapp.model.category.AllCategoryResponse
 import com.syahputrareno975.ayolesapp.model.course.AllCourseRequest
@@ -12,39 +10,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class FragmentHomePresenter : FragmentHomeContract.Presenter {
-
+class SearchCourseActivityPresenter : SearchCourseActivityContract.Presenter {
 
     private val subscriptions = CompositeDisposable()
     private val api : RetrofitService = RetrofitService.create()
-    private lateinit var view: FragmentHomeContract.View
+    private lateinit var view: SearchCourseActivityContract.View
 
-    override fun getAllCategoryForCourse(r: AllCategoryRequest) {
-        view.showProgress(true)
-        val subscribe = api.allCategory(Query(r.toSchema()))
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({result : AllCategoryResponse? ->
-                view.showProgress(false)
-                if (result != null){
-                    if (result.Errors.isNotEmpty()){
-                        var message = ""
-                        for (i in result.Errors){
-                            message += i.Message
-                        }
-                        view.showError(message)
-                    }
-                    view.onGetAllCategoryForCourse(result)
-                }
-            },{t : Throwable ->
-                view.showProgress(false)
-                view.showError(t.message!!)
-            })
-
-        subscriptions.add(subscribe)
-    }
-
-    override fun getAllCourses(r: AllCourseRequest,position : Int) {
+    override fun getAllCourses(r: AllCourseRequest) {
         view.showProgress(true)
         val subscribe = api.allCourses(Query(r.toSchema()))
             .subscribeOn(Schedulers.io())
@@ -59,7 +31,7 @@ class FragmentHomePresenter : FragmentHomeContract.Presenter {
                         }
                         view.showError(message)
                     }
-                    view.onGetAllCourses(result,position)
+                    view.onGetAllCourses(result)
                 }
             },{t : Throwable ->
                 view.showProgress(false)
@@ -94,40 +66,13 @@ class FragmentHomePresenter : FragmentHomeContract.Presenter {
         subscriptions.add(subscribe)
     }
 
-    override fun getAllBanner(r: AllBannerRequest) {
-        view.showProgress(true)
-        val subscribe = api.allBanner(Query(r.toSchema()))
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({result : AllBannerResponse? ->
-                view.showProgress(false)
-                if (result != null) {
-                    if (result.Errors.isNotEmpty()) {
-                        var message = ""
-                        for (i in result.Errors) {
-                            message += i.Message + "\n"
-                        }
-                        view.showError(message)
-                    }
-                    view.onGetAllBanner(result)
-                }
-            },{ t : Throwable ->
-                view.showProgress(false)
-                view.showError(t.message!!)
-            })
-
-        subscriptions.add(subscribe)
-    }
-
-    override fun subscribe() {
-
-    }
+    override fun subscribe(){}
 
     override fun unsubscribe() {
         subscriptions.clear()
     }
 
-    override fun attach(view: FragmentHomeContract.View) {
+    override fun attach(view: SearchCourseActivityContract.View) {
         this.view = view
     }
 }

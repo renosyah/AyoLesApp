@@ -1,6 +1,8 @@
 package com.syahputrareno975.ayolesapp.ui.fragment.fragment_class
 
 import com.syahputrareno975.ayolesapp.base.BaseContract
+import com.syahputrareno975.ayolesapp.model.course.AllCourseRequest
+import com.syahputrareno975.ayolesapp.model.course.AllCourseResponse
 
 class FragmentClassContract {
     interface View: BaseContract.View {
@@ -16,5 +18,6 @@ class FragmentClassContract {
     interface Presenter: BaseContract.Presenter<View> {
 
         // add for request
+
     }
 }

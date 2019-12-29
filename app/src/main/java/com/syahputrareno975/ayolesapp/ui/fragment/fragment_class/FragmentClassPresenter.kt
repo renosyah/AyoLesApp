@@ -9,6 +9,7 @@ class FragmentClassPresenter : FragmentClassContract.Presenter {
     private val api : RetrofitService = RetrofitService.create()
     private lateinit var view: FragmentClassContract.View
 
+
     override fun subscribe() {
 
     }
