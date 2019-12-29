@@ -43,7 +43,7 @@
                     android:textSize="16sp" />
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/add_to_class_button"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="30dp"

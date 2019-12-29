@@ -1,4 +1,4 @@
-package com.syahputrareno975.ayolesapp.model.courseDetailModel
+package com.syahputrareno975.ayolesapp.model.courseDetail
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

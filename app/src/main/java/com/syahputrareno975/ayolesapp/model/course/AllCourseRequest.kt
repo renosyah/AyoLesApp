@@ -13,12 +13,7 @@ class AllCourseRequest : Serializable {
 
     constructor()
 
-    constructor(
-        CategoryId: String,
-        SearchBy: String,
-        SearchValue: String,
-        OrderBy: String,
-        OrderDir: String,
+    constructor(CategoryId: String, SearchBy: String, SearchValue: String, OrderBy: String, OrderDir: String,
         Offset: Int,
         Limit: Int
     ) {

@@ -8,9 +8,8 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.syahputrareno975.ayolesapp.R
-import com.syahputrareno975.ayolesapp.model.courseDetailModel.CourseDetailModel
+import com.syahputrareno975.ayolesapp.model.courseDetail.CourseDetailModel
 import com.syahputrareno975.ayolesapp.service.RetrofitService
-import kotlinx.android.synthetic.main.adapter_image_detail_course.view.*
 
 class AdapterImageDetailCourse : RecyclerView.Adapter<AdapterImageDetailCourse.Holder> {
 
