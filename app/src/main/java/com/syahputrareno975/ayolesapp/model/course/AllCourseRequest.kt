@@ -33,6 +33,6 @@ class AllCourseRequest : Serializable {
 
 
     fun toSchema() : String {
-        return "query { course_list( category_id:\"${CategoryId}\", search_by:\"$SearchBy\", search_value:\"$SearchValue\", order_by:\"$OrderBy\", order_dir:\"$OrderDir\", offset:$Offset, limit:$Limit ) { id, course_name,image_url,teacher{id,name email},category {id,name,image_url}}}"
+        return "query { course_list( category_id:\"${CategoryId}\", search_by:\"$SearchBy\", search_value:\"$SearchValue\", order_by:\"$OrderBy\", order_dir:\"$OrderDir\", offset:$Offset, limit:$Limit ) { id, course_name,image_url,teacher{id,name email},category {id,name,image_url},course_details { id,course_id , overview_text, description_text,image_url }}}"
     }
 }

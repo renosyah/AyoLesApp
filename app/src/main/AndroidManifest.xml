@@ -14,10 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.activity.search_course.SearchCourseActivity"></activity>
+        <activity android:name=".ui.activity.detail_course.DetailCourseActivity"></activity>
+        <activity android:name=".ui.activity.search_course.SearchCourseActivity" />
         <activity
             android:name=".ui.activity.main_menu.MainMenu"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.activity.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

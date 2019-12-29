@@ -1,6 +1,7 @@
 package com.syahputrareno975.ayolesapp.ui.activity.search_course
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -16,6 +17,7 @@ import com.syahputrareno975.ayolesapp.model.category.CategoryModel
 import com.syahputrareno975.ayolesapp.model.course.AllCourseRequest
 import com.syahputrareno975.ayolesapp.model.course.AllCourseResponse
 import com.syahputrareno975.ayolesapp.model.course.CourseModel
+import com.syahputrareno975.ayolesapp.ui.activity.detail_course.DetailCourseActivity
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterCategory
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterCourseCard
 import kotlinx.android.synthetic.main.activity_search_course.*
@@ -98,7 +100,9 @@ class SearchCourseActivity : AppCompatActivity(),SearchCourseActivityContract.Vi
 
     fun getCourse(){
         adapterCourse = AdapterCourseCard(context,listCourses) { courseModel, i ->
-
+            val intent = Intent(context, DetailCourseActivity::class.java)
+            intent.putExtra("data",courseModel)
+            startActivity(intent)
         }
         course_recycleview.adapter = adapterCourse
         course_recycleview.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)

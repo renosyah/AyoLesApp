@@ -28,6 +28,7 @@ import com.syahputrareno975.ayolesapp.model.category.CategoryModel
 import com.syahputrareno975.ayolesapp.model.course.AllCourseRequest
 import com.syahputrareno975.ayolesapp.model.course.AllCourseResponse
 import com.syahputrareno975.ayolesapp.model.course.VerticalCourseModel
+import com.syahputrareno975.ayolesapp.ui.activity.detail_course.DetailCourseActivity
 import com.syahputrareno975.ayolesapp.ui.activity.search_course.SearchCourseActivity
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterBanner
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterCategory
@@ -114,6 +115,7 @@ class FragmentHome : Fragment(),FragmentHomeContract.View {
             val intent = Intent(ctx,SearchCourseActivity::class.java)
             intent.putExtra("query",query)
             startActivity(intent)
+            search_home_edittext.setText("")
         }
 
         getAllBanner()
@@ -124,6 +126,9 @@ class FragmentHome : Fragment(),FragmentHomeContract.View {
     fun getAllCourses(){
         adapterVerticalCourse = AdapterVerticalCourse(ctx,verticalCourses) {courseModel, i ->
             // on student enroll course
+            val intent = Intent(ctx, DetailCourseActivity::class.java)
+            intent.putExtra("data",courseModel)
+            startActivity(intent)
 
         }
         course_recycleview.adapter = adapterVerticalCourse
