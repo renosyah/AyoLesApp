@@ -10,6 +10,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
@@ -33,7 +34,9 @@ import com.syahputrareno975.ayolesapp.ui.activity.search_course.SearchCourseActi
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterBanner
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterCategory
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterVerticalCourse
+import kotlinx.android.synthetic.main.fragment_class.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.not_found
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
@@ -110,12 +113,20 @@ class FragmentHome : Fragment(),FragmentHomeContract.View {
             }
 
         })
+
         go_search_textview.setOnClickListener {
             val query = search_home_edittext.text.toString()
             val intent = Intent(ctx,SearchCourseActivity::class.java)
             intent.putExtra("query",query)
             startActivity(intent)
             search_home_edittext.setText("")
+        }
+        search_home_edittext.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                go_search_textview.performClick()
+                return@setOnEditorActionListener true
+            }
+            return@setOnEditorActionListener false
         }
 
         getAllBanner()
@@ -147,8 +158,7 @@ class FragmentHome : Fragment(),FragmentHomeContract.View {
     }
 
     fun getAllCategory(){
-        categoryList.add(CategoryModel("","All",""))
-        adapterCategory = AdapterCategory(ctx,categoryList) { categoryModel, i ->
+        adapterCategory = AdapterCategory(ctx,categoryList,false) { categoryModel, i ->
             val intent = Intent(ctx,SearchCourseActivity::class.java)
             intent.putExtra("category_id",categoryModel.Id)
             startActivity(intent)
@@ -197,13 +207,17 @@ class FragmentHome : Fragment(),FragmentHomeContract.View {
 
         presenter.getAllBanner(AllBannerRequest())
     }
-
+    fun checkNoResultFound(forceShow : Boolean){
+        not_found.visibility = if (verticalCourses.isEmpty() || forceShow) View.VISIBLE else View.GONE
+        course_recycleview.visibility = if (verticalCourses.isEmpty() || forceShow) View.GONE else View.VISIBLE
+        banner_recycleview.visibility = if (bannerList.isEmpty() || forceShow) View.GONE else View.VISIBLE
+    }
     override fun showProgress(show: Boolean) {
-
+        not_found.visibility = View.GONE
     }
 
     override fun showError(error: String) {
-        Toast.makeText(ctx,error,Toast.LENGTH_SHORT).show()
+        checkNoResultFound(true)
     }
 
     override fun onGetAllBanner(s: AllBannerResponse) {
@@ -222,6 +236,7 @@ class FragmentHome : Fragment(),FragmentHomeContract.View {
             verticalCourses.add(VerticalCourseModel(i.Id, i.Name, ArrayList()))
         }
         populateHorizontalCourses()
+        checkNoResultFound(false)
     }
 
     override fun onGetAllCourses(s: AllCourseResponse, position: Int) {

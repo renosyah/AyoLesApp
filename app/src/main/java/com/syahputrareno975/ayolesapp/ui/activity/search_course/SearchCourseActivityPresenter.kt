@@ -2,6 +2,7 @@ package com.syahputrareno975.ayolesapp.ui.activity.search_course
 
 import com.syahputrareno975.ayolesapp.model.category.AllCategoryRequest
 import com.syahputrareno975.ayolesapp.model.category.AllCategoryResponse
+import com.syahputrareno975.ayolesapp.model.category.CategoryModel
 import com.syahputrareno975.ayolesapp.model.course.AllCourseRequest
 import com.syahputrareno975.ayolesapp.model.course.AllCourseResponse
 import com.syahputrareno975.ayolesapp.model.queryModel.Query

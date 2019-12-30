@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.syahputrareno975.ayolesapp.R
@@ -85,7 +87,13 @@ class SearchCourseActivity : AppCompatActivity(),SearchCourseActivityContract.Vi
 
             }
         })
-
+        search_course_edittext.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                presenter.getAllCourses(reqAllCourse)
+                return@setOnEditorActionListener true
+            }
+            return@setOnEditorActionListener false
+        }
         search_course_nestedscrollview.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
                 if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight) {
                     // pagination if user reach scroll to bottom on course
@@ -111,7 +119,6 @@ class SearchCourseActivity : AppCompatActivity(),SearchCourseActivityContract.Vi
     }
 
     fun getCategory(){
-        categoryList.add(CategoryModel("","All",""))
         adapterCategory = AdapterCategory(context,categoryList){categoryModel, i ->
             listCourses.clear()
             reqAllCourse.Offset = 0
@@ -123,22 +130,37 @@ class SearchCourseActivity : AppCompatActivity(),SearchCourseActivityContract.Vi
         presenter.getAllCategory(reqAllCategory)
     }
 
+    fun showTagedCategory(){
+        for (i in categoryList){
+            if (i.Id == reqAllCourse.CategoryId){
+                i.IsClick = true
+                break
+            }
+        }
+    }
+
+    fun checkNoResultFound(forceShow : Boolean){
+        not_found.visibility = if (listCourses.isEmpty() || forceShow) View.VISIBLE else View.GONE
+        course_recycleview.visibility = if (listCourses.isEmpty() || forceShow) View.GONE else View.VISIBLE
+    }
 
     override fun showProgress(show: Boolean) {
-
+        not_found.visibility = View.GONE
     }
 
     override fun showError(error: String) {
-
+        checkNoResultFound(true)
     }
 
     override fun onGetAllCourses(s: AllCourseResponse) {
         listCourses.addAll(s.Data.CourseList)
         adapterCourse.notifyDataSetChanged()
+        checkNoResultFound(false)
     }
 
     override fun onGetAllCategory(s: AllCategoryResponse) {
         categoryList.addAll(s.Data.CategoryList)
+        showTagedCategory()
         adapterCategory.notifyDataSetChanged()
     }
 

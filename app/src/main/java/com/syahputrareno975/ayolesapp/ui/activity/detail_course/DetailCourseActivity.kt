@@ -14,16 +14,18 @@ import com.syahputrareno975.ayolesapp.di.module.ActivityModule
 import com.syahputrareno975.ayolesapp.model.banner.BannerModel
 import com.syahputrareno975.ayolesapp.model.classRoom.AddClassRoomRequest
 import com.syahputrareno975.ayolesapp.model.classRoom.AddClassRoomResponse
+import com.syahputrareno975.ayolesapp.model.classRoom.OneClassByIdRoomRequest
+import com.syahputrareno975.ayolesapp.model.classRoom.OneClassByIdRoomResponse
 import com.syahputrareno975.ayolesapp.model.course.CourseModel
 import com.syahputrareno975.ayolesapp.model.student.StudentModel
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterBanner
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterImageDetailCourse
 import com.syahputrareno975.ayolesapp.util.SerializableSave
 import kotlinx.android.synthetic.main.activity_detail_course.*
+import java.util.*
 import javax.inject.Inject
 
 class DetailCourseActivity : AppCompatActivity(),DetailCourseActivityContract.View {
-
 
     @Inject
     lateinit var presenter: DetailCourseActivityContract.Presenter
@@ -65,6 +67,10 @@ class DetailCourseActivity : AppCompatActivity(),DetailCourseActivityContract.Vi
         setImageCourse()
 
         fake_toolbar.background.alpha = 125
+
+        presenter.getOneClassRoomById(OneClassByIdRoomRequest(courseData.Id,studentSession.Id))
+        class_is_taken.visibility = View.GONE
+        add_to_class_button.visibility = View.GONE
     }
 
     fun setImageCourse(){
@@ -90,16 +96,22 @@ class DetailCourseActivity : AppCompatActivity(),DetailCourseActivityContract.Vi
     }
 
     override fun showProgress(show: Boolean) {
-        add_to_class_button.isEnabled = show
+
     }
 
     override fun showError(error: String) {
-        Toast.makeText(context,error,Toast.LENGTH_SHORT).show()
+
     }
 
     override fun onAddClassRoom(s: AddClassRoomResponse) {
-        Toast.makeText(context,if (s.Data.ClassRoomRegister.Course.CourseName.toString().isEmpty()) "this course already added to your classroom" else "${s.Data.ClassRoomRegister.Course.CourseName} is added to your classroom",Toast.LENGTH_SHORT).show()
+        Toast.makeText(context,"${s.Data.ClassRoomRegister.Course.CourseName} is added to your classroom",Toast.LENGTH_SHORT).show()
         add_to_class_button.visibility = View.GONE
+        class_is_taken.visibility = View.VISIBLE
+    }
+
+    override fun onGetOneClassRoomById(s: OneClassByIdRoomResponse) {
+        add_to_class_button.visibility = if (s.Data.ClassroomDetailById.Course.CourseName.isEmpty()) View.VISIBLE else View.GONE
+        class_is_taken.visibility = if (s.Data.ClassroomDetailById.Course.CourseName.isEmpty()) View.GONE else  View.VISIBLE
     }
 
     override fun onDestroy() {

@@ -1,6 +1,8 @@
 package com.syahputrareno975.ayolesapp.ui.fragment.fragment_class
 
 import com.syahputrareno975.ayolesapp.base.BaseContract
+import com.syahputrareno975.ayolesapp.model.category.AllCategoryRequest
+import com.syahputrareno975.ayolesapp.model.category.AllCategoryResponse
 import com.syahputrareno975.ayolesapp.model.classRoom.AllClassRoomRequest
 import com.syahputrareno975.ayolesapp.model.classRoom.AllClassRoomResponse
 import com.syahputrareno975.ayolesapp.model.course.AllCourseRequest
@@ -15,11 +17,13 @@ class FragmentClassContract {
 
         // add more for request
         fun onGetAllClass(s : AllClassRoomResponse)
+        fun onGetAllCategory(s : AllCategoryResponse)
     }
 
     interface Presenter: BaseContract.Presenter<View> {
 
         // add for request
         fun getAllClass(r : AllClassRoomRequest)
+        fun getAllCategory(r : AllCategoryRequest)
     }
 }

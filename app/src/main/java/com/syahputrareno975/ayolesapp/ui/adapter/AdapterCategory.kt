@@ -15,12 +15,21 @@ class AdapterCategory : RecyclerView.Adapter<AdapterCategory.Holder>{
     lateinit var context: Context
     lateinit var list : ArrayList<CategoryModel>
     lateinit var onClick : (CategoryModel,Int) -> Unit
+    var enableClickFeedback : Boolean = true
 
     constructor(context: Context, list: ArrayList<CategoryModel>, onClick: (CategoryModel, Int) -> Unit) : super() {
         this.context = context
         this.list = list
         this.onClick = onClick
     }
+
+    constructor(context: Context, list: ArrayList<CategoryModel>,enableClickFeedback: Boolean, onClick: (CategoryModel, Int) -> Unit) : super() {
+        this.context = context
+        this.list = list
+        this.onClick = onClick
+        this.enableClickFeedback = enableClickFeedback
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         return Holder((context as Activity).layoutInflater.inflate(R.layout.adapter_category,parent,false))
@@ -35,8 +44,17 @@ class AdapterCategory : RecyclerView.Adapter<AdapterCategory.Holder>{
 
         holder.name.text = "${item.Name}"
         holder.name.setOnClickListener {
+            for (i in 0 until list.size){
+                list[i].IsClick = false
+            }
+            list[position].IsClick = true
+            this@AdapterCategory.notifyDataSetChanged()
+
             onClick.invoke(item,position)
         }
+        holder.name.setTextColor(
+            context.resources.getColor(if (item.IsClick && enableClickFeedback) R.color.colorPrimaryLight else android.R.color.darker_gray)
+        )
     }
 
 

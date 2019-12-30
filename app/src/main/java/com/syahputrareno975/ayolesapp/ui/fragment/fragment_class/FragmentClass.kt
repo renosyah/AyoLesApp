@@ -16,6 +16,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.syahputrareno975.ayolesapp.R
 import com.syahputrareno975.ayolesapp.di.component.DaggerFragmentComponent
 import com.syahputrareno975.ayolesapp.di.module.FragmentModule
+import com.syahputrareno975.ayolesapp.model.category.AllCategoryRequest
+import com.syahputrareno975.ayolesapp.model.category.AllCategoryResponse
+import com.syahputrareno975.ayolesapp.model.category.CategoryModel
 import com.syahputrareno975.ayolesapp.model.classRoom.AllClassRoomRequest
 import com.syahputrareno975.ayolesapp.model.classRoom.AllClassRoomResponse
 import com.syahputrareno975.ayolesapp.model.classRoom.ClassRoomModel
@@ -23,8 +26,10 @@ import com.syahputrareno975.ayolesapp.model.course.AllCourseRequest
 import com.syahputrareno975.ayolesapp.model.course.AllCourseResponse
 import com.syahputrareno975.ayolesapp.model.course.CourseModel
 import com.syahputrareno975.ayolesapp.model.student.StudentModel
+import com.syahputrareno975.ayolesapp.ui.adapter.AdapterCategory
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterClassRoom
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterCourseCard
+import com.syahputrareno975.ayolesapp.ui.fragment.fragment_home.FragmentHome
 import com.syahputrareno975.ayolesapp.util.SerializableSave
 import kotlinx.android.synthetic.main.fragment_class.*
 import javax.inject.Inject
@@ -32,18 +37,23 @@ import javax.inject.Inject
 
 class FragmentClass : Fragment(),FragmentClassContract.View {
 
-
     @Inject
     lateinit var presenter: FragmentClassContract.Presenter
 
     companion object {
         fun newInstance() = FragmentClass()
+        private val limit_load_category : Int = 5
         private val limit_load_class : Int = 5
     }
 
     lateinit var ctx: Context
 
     lateinit var studentSession : StudentModel
+
+    lateinit var adapterCategory : AdapterCategory
+    val categoryList : ArrayList<CategoryModel> = ArrayList()
+
+    val reqAllCategory = AllCategoryRequest()
 
     lateinit var adapterClassRoom : AdapterClassRoom
     val listClassRoom : ArrayList<ClassRoomModel> = ArrayList()
@@ -71,6 +81,7 @@ class FragmentClass : Fragment(),FragmentClassContract.View {
         presenter.subscribe()
 
         reqAllClass.Limit = limit_load_class
+        reqAllCategory.Limit = limit_load_category
 
         if (SerializableSave(ctx,SerializableSave.userDataFileSessionName).load() != null){
             studentSession = SerializableSave(ctx,SerializableSave.userDataFileSessionName).load() as StudentModel
@@ -105,6 +116,7 @@ class FragmentClass : Fragment(),FragmentClassContract.View {
         })
 
         getAllClass()
+        getAllCategory()
     }
 
     fun getAllClass(){
@@ -118,17 +130,55 @@ class FragmentClass : Fragment(),FragmentClassContract.View {
         presenter.getAllClass(reqAllClass)
     }
 
-    override fun showProgress(show: Boolean) {
+    fun getAllCategory(){
+        adapterCategory = AdapterCategory(ctx,categoryList) { categoryModel, i ->
+            listClassRoom.clear()
+            reqAllClass.Offset = 0
+            reqAllClass.SearchBy = "course.category_id::STRING"
+            reqAllClass.SearchValue = categoryModel.Id
+            presenter.getAllClass(reqAllClass)
+        }
+        category_classes_recycleview.adapter = adapterCategory
+        category_classes_recycleview.layoutManager = LinearLayoutManager(ctx,LinearLayoutManager.HORIZONTAL,false)
+        category_classes_recycleview.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val lln = recyclerView.layoutManager as LinearLayoutManager
+                val visibleItemCount = lln.childCount
+                val totalItemCount = lln.itemCount
+                val pastVisiblesItems = lln.findFirstVisibleItemPosition()
+                if (dx > 0 && (visibleItemCount + pastVisiblesItems) >= totalItemCount){
+                    // pagination if user reach scroll to right on category
+                    reqAllCategory.Offset += limit_load_category
+                    presenter.getAllCategory(reqAllCategory)
+                }
+            }
+        })
 
+        presenter.getAllCategory(reqAllCategory)
+    }
+
+    fun checkNoResultFound(forceShow : Boolean){
+        not_found.visibility = if (listClassRoom.isEmpty() || forceShow) View.VISIBLE else View.GONE
+        classes_recycleview.visibility = if (listClassRoom.isEmpty() || forceShow) View.GONE else View.VISIBLE
+    }
+
+    override fun showProgress(show: Boolean) {
+        not_found.visibility = View.GONE
     }
 
     override fun showError(error: String) {
-        Toast.makeText(context,error, Toast.LENGTH_SHORT).show()
+        checkNoResultFound(true)
     }
 
     override fun onGetAllClass(s: AllClassRoomResponse) {
         listClassRoom.addAll(s.Data.ClassRoomList)
         adapterClassRoom.notifyDataSetChanged()
+        checkNoResultFound(false)
+    }
+
+    override fun onGetAllCategory(s: AllCategoryResponse) {
+        categoryList.addAll(s.Data.CategoryList)
+        adapterCategory.notifyDataSetChanged()
     }
 
     override fun onDestroyView() {

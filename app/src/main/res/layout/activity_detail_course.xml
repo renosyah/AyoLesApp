@@ -42,6 +42,20 @@
                     android:layout_margin="10dp"
                     android:textSize="16sp" />
 
+                <TextView
+                    android:id="@+id/class_is_taken"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="40dp"
+                    android:gravity="center"
+                    android:text="Student Already Has Taken This class"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    tools:visibility="gone" />
+
                 <Button
                     android:id="@+id/add_to_class_button"
                     android:layout_width="match_parent"
@@ -49,6 +63,7 @@
                     android:layout_marginTop="30dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="40dp"
                     android:background="@color/colorPrimaryLight"
                     android:padding="10dp"
                     android:text="Start Class"

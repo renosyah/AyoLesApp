@@ -3,9 +3,7 @@ package com.syahputrareno975.ayolesapp.service
 import com.syahputrareno975.ayolesapp.model.banner.AllBannerResponse
 import com.syahputrareno975.ayolesapp.model.category.AllCategoryResponse
 import com.syahputrareno975.ayolesapp.model.category.OneCategoryResponse
-import com.syahputrareno975.ayolesapp.model.classRoom.AddClassRoomRequest
-import com.syahputrareno975.ayolesapp.model.classRoom.AddClassRoomResponse
-import com.syahputrareno975.ayolesapp.model.classRoom.AllClassRoomResponse
+import com.syahputrareno975.ayolesapp.model.classRoom.*
 import com.syahputrareno975.ayolesapp.model.course.AllCourseResponse
 import com.syahputrareno975.ayolesapp.model.login.LoginResponse
 import com.syahputrareno975.ayolesapp.model.queryModel.Query
@@ -40,11 +38,12 @@ interface RetrofitService {
     @POST("graphql")
     fun addClassRoom(@Body query: Query) : Observable<AddClassRoomResponse>
 
-
+    @POST("graphql")
+    fun oneClassRoomById(@Body query: Query) : Observable<OneClassByIdRoomResponse>
 
     companion object {
 
-        val baseURL = "http://10.200.233.174:8000/"
+        val baseURL = "http://192.168.9.101:8000/"
 
         fun create() : RetrofitService {
             val retrofit = Retrofit.Builder()

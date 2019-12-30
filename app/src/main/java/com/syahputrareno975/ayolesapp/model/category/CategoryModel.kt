@@ -14,6 +14,7 @@ class CategoryModel : Serializable {
     @SerializedName("image_url")
     var ImageUrl : String = ""
 
+    var IsClick = false
 
     constructor()
 

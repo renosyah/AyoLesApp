@@ -4,6 +4,7 @@ import com.syahputrareno975.ayolesapp.model.banner.AllBannerRequest
 import com.syahputrareno975.ayolesapp.model.banner.AllBannerResponse
 import com.syahputrareno975.ayolesapp.model.category.AllCategoryRequest
 import com.syahputrareno975.ayolesapp.model.category.AllCategoryResponse
+import com.syahputrareno975.ayolesapp.model.category.CategoryModel
 import com.syahputrareno975.ayolesapp.model.course.AllCourseRequest
 import com.syahputrareno975.ayolesapp.model.course.AllCourseResponse
 import com.syahputrareno975.ayolesapp.model.queryModel.Query
