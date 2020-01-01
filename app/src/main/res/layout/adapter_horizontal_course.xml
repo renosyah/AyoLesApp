@@ -17,16 +17,19 @@
             android:layout_margin="5dp" />
 
         <TextView
+            android:fontFamily="@string/light_font"
             android:id="@+id/course_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:maxLines="1"
             android:padding="5dp"
+            android:textColor="@color/textColorGray"
             android:text="Data Science"
             android:textSize="16sp" />
 
         <Button
+            android:fontFamily="@string/medium_font"
             android:id="@+id/enroll_button"
             android:layout_width="match_parent"
             android:layout_height="50dp"

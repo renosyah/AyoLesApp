@@ -44,7 +44,7 @@ class MaterialDetailClassRoomActivityPresenter : MaterialDetailClassRoomActivity
         subscriptions.add(subscribe)
     }
 
-    override fun addCourseMaterialProgress(r: AddClassRoomProgressRequest) {
+    override fun addCourseMaterialProgress(r: AddClassRoomProgressRequest,navCode: Int) {
         view.showProgress(true)
         val subscribe = api.addClassRoomProgress(Query(r.toSchema()))
             .subscribeOn(Schedulers.io())
@@ -59,7 +59,7 @@ class MaterialDetailClassRoomActivityPresenter : MaterialDetailClassRoomActivity
                         }
                         view.showError(message)
                     }
-                    view.onAddCourseMaterialProgress(result)
+                    view.onAddCourseMaterialProgress(result,navCode)
                 }
             },{t : Throwable ->
                 view.showProgress(false)

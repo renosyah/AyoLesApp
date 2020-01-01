@@ -6,5 +6,6 @@
     <color name="colorError">#F44336</color>
     <color name="textColorWhite">@android:color/white</color>
     <color name="textColorBlack">@android:color/black</color>
-    <color name="textColorGray">@android:color/darker_gray</color>
+    <color name="textColorGray">#616161</color>
+    <color name="textColorLightGray">@android:color/darker_gray</color>
 </resources>

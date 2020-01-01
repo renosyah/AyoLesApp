@@ -34,6 +34,8 @@ class MaterialDetailClassRoomActivity : AppCompatActivity(),MaterialDetailClassR
     companion object {
         val limit_load = 10
         val limit_load_material = 1
+        val CODE_NEXT = 200
+        val CODE_PREVIOUS = 100
     }
 
     lateinit var context: Context
@@ -59,7 +61,7 @@ class MaterialDetailClassRoomActivity : AppCompatActivity(),MaterialDetailClassR
 
         classRoomModel = intent.getSerializableExtra("classroom") as ClassRoomModel
         reqAllMaterial.Offset = intent.getIntExtra("pos",0)
-        reqAllMaterial.Limit = limit_load_material
+        reqAllMaterial.Limit = 2
         reqAllMaterial.CourseId = classRoomModel.Course.Id
 
         injectDependency()
@@ -91,16 +93,18 @@ class MaterialDetailClassRoomActivity : AppCompatActivity(),MaterialDetailClassR
                 presenter.getAllCourseMaterialDetail(reqAllMaterialDetail)
             }
         })
-        previous_button.visibility = if (reqAllMaterial.Offset - 1 < 0) View.GONE else View.VISIBLE
+
+        previous_button.visibility = if (reqAllMaterial.Offset - 1 < 0) View.INVISIBLE else View.VISIBLE
         previous_button.setOnClickListener {
-            reqAllMaterial.Offset -= limit_load_material
-            presenter.getAllCourseMaterial(reqAllMaterial)
+            // save progress
+            presenter.addCourseMaterialProgress(AddClassRoomProgressRequest(classRoomModel.Id,courseMaterial.Id), CODE_PREVIOUS)
         }
 
         next_button.setOnClickListener {
             // save progress
-            presenter.addCourseMaterialProgress(AddClassRoomProgressRequest(classRoomModel.Id,courseMaterial.Id))
+            presenter.addCourseMaterialProgress(AddClassRoomProgressRequest(classRoomModel.Id,courseMaterial.Id), CODE_NEXT)
         }
+
         getAllMaterialDetail()
     }
 
@@ -129,8 +133,15 @@ class MaterialDetailClassRoomActivity : AppCompatActivity(),MaterialDetailClassR
     }
 
     override fun onGetAllCourseMaterial(s: AllCourseMaterialResponse) {
+        // if data size got 1 instead 2
+        // next button will be hide
+        next_button.visibility = if (s.Data.CourseMaterialList.size <= 1) View.INVISIBLE else View.VISIBLE
+
+        // by using loop then break
+        // to get only data from first index
         for (i in s.Data.CourseMaterialList){
             courseMaterial = i
+            break
         }
         setLayout()
     }
@@ -141,10 +152,17 @@ class MaterialDetailClassRoomActivity : AppCompatActivity(),MaterialDetailClassR
         checkNoResultFound(false)
     }
 
-    override fun onAddCourseMaterialProgress(s: AddClassRoomProgressResponse) {
+    override fun onAddCourseMaterialProgress(s: AddClassRoomProgressResponse,navCode: Int) {
         // save success
-        // load next material
-        reqAllMaterial.Offset += limit_load_material
+        // load next or previous material
+        when (navCode){
+            CODE_NEXT -> {
+                reqAllMaterial.Offset += limit_load_material
+            }
+            CODE_PREVIOUS -> {
+                reqAllMaterial.Offset -= limit_load_material
+            }
+        }
         presenter.getAllCourseMaterial(reqAllMaterial)
     }
 

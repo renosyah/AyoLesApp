@@ -43,6 +43,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center"
+                            android:fontFamily="@string/medium_font"
                             android:text="Student Profile"
                             android:textAlignment="center"
                             android:textColor="@color/textColorGray"
@@ -75,6 +76,7 @@
                         app:srcCompat="@drawable/student" />
 
                     <TextView
+                        android:fontFamily="@string/medium_font"
                         android:layout_marginTop="20dp"
                         android:id="@+id/student_name_textview"
                         android:layout_width="match_parent"
@@ -87,6 +89,7 @@
                         android:textSize="20sp" />
 
                     <TextView
+                        android:fontFamily="@string/medium_font"
                         android:id="@+id/student_email_textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -97,6 +100,7 @@
                         android:textAlignment="center"
                         android:textColor="@color/textColorGray"
                         android:textSize="18sp" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -107,6 +111,7 @@
                     tools:visibility="gone">
 
                     <TextView
+                        android:fontFamily="@string/medium_font"
                         android:id="@+id/complete_course_textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -125,6 +130,7 @@
                         android:nestedScrollingEnabled="false" />
 
                     <TextView
+                        android:fontFamily="@string/medium_font"
                         android:id="@+id/loadmore_textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

@@ -166,6 +166,8 @@ class FragmentProfile : Fragment(),FragmentProfileContract.View {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 100 && resultCode == Activity.RESULT_OK){
+            listClassRoomComplete.clear()
+            reqAllCompletedClass.Offset = 0
             getProfile()
         }
     }

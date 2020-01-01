@@ -34,6 +34,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:maxLines="1"
+                android:textColor="@color/textColorGray"
+                android:fontFamily="@string/medium_font"
                 android:padding="5dp"
                 android:text="Data Science"
                 android:textSize="18sp" />
@@ -44,10 +46,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
+                android:textColor="@color/textColorLightGray"
+                android:fontFamily="@string/light_font"
                 android:padding="5dp"
                 android:text="Learn how data science "
                 android:textSize="14sp" />
-
 
         </LinearLayout>
 

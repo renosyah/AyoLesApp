@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <TextView
+        android:fontFamily="@string/medium_font"
         android:id="@+id/title_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,6 +24,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:fontFamily="@string/light_font"
             android:id="@+id/content_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,6 +33,7 @@
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
             android:textColor="@color/textColorGray"
             android:textSize="18sp" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -45,4 +48,5 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/notfound" />
     </LinearLayout>
+
 </LinearLayout>

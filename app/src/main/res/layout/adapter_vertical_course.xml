@@ -4,12 +4,19 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:orientation="vertical"></LinearLayout>
+
     <TextView
+        android:fontFamily="@string/medium_font"
         android:id="@+id/title_category_course_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
         android:layout_margin="5dp"
+        android:textColor="@color/textColorGray"
         android:text="Science"/>
 
     <androidx.recyclerview.widget.RecyclerView

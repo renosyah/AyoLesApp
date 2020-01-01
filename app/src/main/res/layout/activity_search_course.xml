@@ -38,6 +38,7 @@
                         android:orientation="horizontal">
 
                         <EditText
+                            android:fontFamily="@string/medium_font"
                             android:id="@+id/search_course_edittext"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"

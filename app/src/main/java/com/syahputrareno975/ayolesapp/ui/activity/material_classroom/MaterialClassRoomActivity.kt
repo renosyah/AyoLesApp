@@ -1,5 +1,6 @@
 package com.syahputrareno975.ayolesapp.ui.activity.material_classroom
 
+import android.app.ActionBar
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -7,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.PopupWindow
+import android.widget.SimpleAdapter
 import android.widget.Toast
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +31,7 @@ import com.syahputrareno975.ayolesapp.model.courseMaterial.CourseMaterialModel
 import com.syahputrareno975.ayolesapp.ui.activity.material_detail.MaterialDetailClassRoomActivity
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterImageDetailCourse
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterMaterialClassRoom
+import com.syahputrareno975.ayolesapp.ui.adapter.AdapterSimpleText
 import kotlinx.android.synthetic.main.activity_material_classroom.*
 import javax.inject.Inject
 
@@ -80,6 +84,7 @@ class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityC
         back_imageview.setOnClickListener {
             finish()
         }
+        loadmore_textview.visibility = View.GONE
 
         setAdapterMaterial()
         setMaterialListAndProgress()
@@ -104,6 +109,7 @@ class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityC
         material_classroom_recycleview.adapter = adapterMaterialClassRoom
         material_classroom_recycleview.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
     }
+
 
     fun setMaterialListAndProgress(){
 
@@ -132,7 +138,6 @@ class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityC
             }
         })
 
-        loadmore_textview.visibility = View.GONE
         getAllClassRoomMaterials()
     }
 

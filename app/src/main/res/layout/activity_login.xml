@@ -54,7 +54,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="60dp"
-                        android:fontFamily="sans-serif-medium"
+                        android:fontFamily="@string/medium_font"
                         android:gravity="center"
                         android:text="Discover All Knowlege You Can Gain!"
                         android:textColor="@color/textColorWhite"
@@ -65,6 +65,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@color/colorPrimaryLight"
+                        android:fontFamily="@string/medium_font"
                         android:padding="10dp"
                         android:text="Login With Email"
                         android:textAllCaps="false"
@@ -82,7 +83,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-light"
+                            android:fontFamily="@string/light_font"
                             android:gravity="center"
                             android:text="New Student? "
                             android:textColor="@color/textColorWhite"
@@ -92,7 +93,7 @@
                             android:id="@+id/sigh_up_textview"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-condensed-medium"
+                            android:fontFamily="@string/medium_font"
                             android:gravity="center"
                             android:text=" Sigh up"
                             android:textColor="@color/textColorWhite"
@@ -117,7 +118,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="30dp"
-                        android:fontFamily="sans-serif-light"
+                        android:fontFamily="@string/medium_font"
                         android:gravity="center"
                         android:text="See what we can learn today"
                         android:textColor="@color/textColorWhite"
@@ -128,7 +129,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:textColor="@color/textColorWhite"
-                        android:textColorHint="@color/textColorGray">
+                        android:textColorHint="@color/textColorLightGray">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/email_edittext"
@@ -141,7 +142,7 @@
                             android:inputType="textEmailAddress"
                             android:padding="10dp"
                             android:textColor="@color/textColorWhite"
-                            android:textColorHint="@color/textColorGray" />
+                            android:textColorHint="@color/textColorLightGray" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -150,7 +151,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="30dp"
                         android:textColor="@color/textColorWhite"
-                        android:textColorHint="@color/textColorGray"
+                        android:textColorHint="@color/textColorLightGray"
                         app:passwordToggleEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -173,6 +174,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
+                        android:fontFamily="@string/medium_font"
                         android:gravity="center"
                         android:shadowColor="@android:color/background_light"
                         android:text="Invalid email or password"
@@ -186,6 +188,7 @@
                         android:layout_height="50dp"
                         android:layout_marginTop="30dp"
                         android:background="@color/colorPrimaryLight"
+                        android:fontFamily="@string/medium_font"
                         android:padding="10dp"
                         android:text="Login"
                         android:textAllCaps="false"
@@ -196,7 +199,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30dp"
-                        android:fontFamily="sans-serif-light"
+                        android:fontFamily="@string/light_font"
                         android:gravity="center"
                         android:text="Forget Password? "
                         android:textColor="@color/textColorWhite"

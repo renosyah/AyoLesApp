@@ -25,6 +25,7 @@
             app:srcCompat="@drawable/back" />
 
         <TextView
+            android:fontFamily="@string/medium_font"
             android:id="@+id/course_name_textview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -70,6 +71,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    android:fontFamily="@string/medium_font"
+                    android:text="Lorem ipsum dolor sit amet"
                     android:textColor="@color/textColorBlack"
                     android:textSize="24sp" />
 
@@ -78,9 +81,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    android:textColor="@color/textColorGray"
+                    android:fontFamily="@string/light_font"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
                     android:textSize="16sp" />
 
                 <TextView
+                    android:fontFamily="@string/medium_font"
                     android:id="@+id/class_is_taken"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -95,6 +102,7 @@
                     tools:visibility="gone" />
 
                 <Button
+                    android:fontFamily="@string/medium_font"
                     android:id="@+id/go_to_class_button"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -109,6 +117,7 @@
                     android:textSize="18sp" />
 
                 <Button
+                    android:fontFamily="@string/medium_font"
                     android:id="@+id/add_to_class_button"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"

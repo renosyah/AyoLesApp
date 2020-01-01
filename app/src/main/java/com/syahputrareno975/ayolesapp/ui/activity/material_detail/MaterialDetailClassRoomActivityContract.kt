@@ -18,13 +18,13 @@ class MaterialDetailClassRoomActivityContract {
         // add more for request
         fun onGetAllCourseMaterialDetail(s : AllCourseMaterialDetailResponse)
         fun onGetAllCourseMaterial(s : AllCourseMaterialResponse)
-        fun onAddCourseMaterialProgress(s : AddClassRoomProgressResponse)
+        fun onAddCourseMaterialProgress(s : AddClassRoomProgressResponse,navCode: Int)
     }
 
     interface Presenter: BaseContract.Presenter<View> {
 
         // add for request
-        fun addCourseMaterialProgress(r : AddClassRoomProgressRequest)
+        fun addCourseMaterialProgress(r : AddClassRoomProgressRequest,navCode: Int)
         fun getAllCourseMaterial(r : AllCourseMaterialRequest)
         fun getAllCourseMaterialDetail(r : AllCourseMaterialDetailRequest)
     }

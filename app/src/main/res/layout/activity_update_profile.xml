@@ -25,6 +25,7 @@
             app:srcCompat="@drawable/back" />
 
         <TextView
+            android:fontFamily="@string/medium_font"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -88,7 +89,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="30dp"
-                        android:fontFamily="sans-serif-light"
+                        android:fontFamily="@string/light_font"
                         android:gravity="center"
                         android:text="Update your profile here, whenever you like"
                         android:textColor="@color/textColorBlack"
@@ -99,7 +100,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
                         android:textColor="@color/textColorWhite"
-                        android:textColorHint="@color/textColorGray">
+                        android:textColorHint="@color/textColorLightGray">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/update_name_edittext"
@@ -107,12 +108,12 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"
                             android:ems="10"
-                            android:fontFamily="sans-serif-light"
+                            android:fontFamily="@string/light_font"
                             android:hint="Update Name"
                             android:inputType="textPersonName"
                             android:padding="10dp"
                             android:textColor="@color/textColorBlack"
-                            android:textColorHint="@color/textColorGray" />
+                            android:textColorHint="@color/textColorLightGray" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -121,7 +122,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:textColor="@color/textColorWhite"
-                        android:textColorHint="@color/textColorGray">
+                        android:textColorHint="@color/textColorLightGray" >
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/update_email_edittext"
@@ -129,12 +130,12 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"
                             android:ems="10"
-                            android:fontFamily="sans-serif-light"
+                            android:fontFamily="@string/light_font"
                             android:hint="Update Email"
                             android:inputType="textEmailAddress"
                             android:padding="10dp"
                             android:textColor="@color/textColorBlack"
-                            android:textColorHint="@color/textColorGray" />
+                            android:textColorHint="@color/textColorLightGray" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -143,7 +144,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="30dp"
                         android:textColor="@color/textColorWhite"
-                        android:textColorHint="@color/textColorGray"
+                        android:textColorHint="@color/textColorLightGray"
                         app:passwordToggleEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -152,12 +153,12 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"
                             android:ems="10"
-                            android:fontFamily="sans-serif-light"
+                            android:fontFamily="@string/light_font"
                             android:hint="New Password"
                             android:inputType="textPassword"
                             android:padding="10dp"
                             android:textColor="@color/textColorBlack"
-                            android:textColorHint="@color/textColorGray" />
+                            android:textColorHint="@color/textColorLightGray" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 

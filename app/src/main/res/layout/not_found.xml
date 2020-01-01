@@ -19,10 +19,13 @@
             app:srcCompat="@drawable/notfound" />
 
         <TextView
+            android:textColor="@color/textColorLightGray"
+            android:fontFamily="@string/medium_font"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="No results found"
             android:textSize="24sp" />
+
     </LinearLayout>
 
 </LinearLayout>
