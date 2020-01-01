@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.material_detail.MaterialDetailClassRoomActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        tools:visibility="visible">
+
+
+        <ImageView
+            android:id="@+id/back_imageview"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            app:srcCompat="@drawable/back" />
+
+        <TextView
+            android:id="@+id/title_textview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Chapter 1 : Introduction"
+            android:textAlignment="center"
+            android:textColor="@color/textColorWhite"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/material_detail_nextedscrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/material_detail_recycleview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <include
+                    android:id="@+id/not_found"
+                    layout="@layout/not_found"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/layout_progress"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="40dp"
+                    android:orientation="horizontal"
+                    tools:visibility="visible">
+
+                    <Button
+                        android:id="@+id/previous_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_marginTop="30dp"
+                        android:background="@color/colorPrimaryLight"
+                        android:padding="10dp"
+                        android:text="Previous"
+                        android:textAllCaps="false"
+                        android:textColor="@color/textColorWhite"
+                        android:textSize="16sp"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        android:textColor="@color/textColorGray"
+                        android:textSize="18sp" />
+
+
+                    <Button
+                        android:id="@+id/next_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_marginTop="30dp"
+                        android:background="@color/colorPrimaryLight"
+                        android:padding="10dp"
+                        android:text=" Next "
+                        android:textAllCaps="false"
+                        android:textColor="@color/textColorWhite"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </FrameLayout>
+</LinearLayout>

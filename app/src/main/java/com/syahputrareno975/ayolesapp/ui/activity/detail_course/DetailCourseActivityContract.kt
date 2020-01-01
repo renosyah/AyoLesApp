@@ -5,6 +5,9 @@ import com.syahputrareno975.ayolesapp.model.classRoom.AddClassRoomRequest
 import com.syahputrareno975.ayolesapp.model.classRoom.AddClassRoomResponse
 import com.syahputrareno975.ayolesapp.model.classRoom.OneClassByIdRoomRequest
 import com.syahputrareno975.ayolesapp.model.classRoom.OneClassByIdRoomResponse
+import com.syahputrareno975.ayolesapp.model.course.AllCourseRequest
+import com.syahputrareno975.ayolesapp.model.courseDetail.AllCourseDetailRequest
+import com.syahputrareno975.ayolesapp.model.courseDetail.AllCourseDetailResponse
 
 class DetailCourseActivityContract {
     interface View: BaseContract.View {
@@ -14,6 +17,7 @@ class DetailCourseActivityContract {
         fun showError(error: String)
 
         // add more for request
+        fun onGetAllCourseDetails(r : AllCourseDetailResponse)
         fun onAddClassRoom(s : AddClassRoomResponse)
         fun onGetOneClassRoomById(s : OneClassByIdRoomResponse)
     }
@@ -21,6 +25,7 @@ class DetailCourseActivityContract {
     interface Presenter: BaseContract.Presenter<View> {
 
         // add for request
+        fun getAllCourseDetails(r : AllCourseDetailRequest)
         fun addClassRoom(r : AddClassRoomRequest)
         fun getOneClassRoomById(r : OneClassByIdRoomRequest)
     }

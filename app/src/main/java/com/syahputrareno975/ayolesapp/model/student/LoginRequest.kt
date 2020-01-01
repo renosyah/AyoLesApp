@@ -1,8 +1,8 @@
-package com.syahputrareno975.ayolesapp.model.login
+package com.syahputrareno975.ayolesapp.model.student
 
-import java.io.Serializable
+import com.syahputrareno975.ayolesapp.model.BaseModel
 
-class LoginRequest : Serializable {
+class LoginRequest : BaseModel {
 
     var Email : String = ""
     var Password : String = ""

@@ -5,15 +5,14 @@ import android.content.Intent
 import android.graphics.Point
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.gson.Gson
 import com.syahputrareno975.ayolesapp.R
 import com.syahputrareno975.ayolesapp.di.component.DaggerActivityComponent
 import com.syahputrareno975.ayolesapp.di.module.ActivityModule
-import com.syahputrareno975.ayolesapp.model.login.LoginRequest
-import com.syahputrareno975.ayolesapp.model.login.LoginResponse
+import com.syahputrareno975.ayolesapp.model.student.LoginRequest
+import com.syahputrareno975.ayolesapp.model.student.LoginResponse
 import com.syahputrareno975.ayolesapp.ui.activity.main_menu.MainMenu
+import com.syahputrareno975.ayolesapp.ui.activity.register.RegisterActivity
 import com.syahputrareno975.ayolesapp.util.SerializableSave
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
@@ -47,6 +46,13 @@ class LoginActivity : AppCompatActivity(),LoginActivityContract.View {
             login()
         }
 
+
+        sigh_up_textview.setOnClickListener {
+            startActivity(Intent(context,RegisterActivity::class.java))
+            finish()
+        }
+
+
         closeLoginForm()
 
         if (SerializableSave(context,SerializableSave.userDataFileSessionName).load() != null){
@@ -70,7 +76,12 @@ class LoginActivity : AppCompatActivity(),LoginActivityContract.View {
             error_login_message.text = "Please fill all form!"
             return
         }
-        presenter.login(LoginRequest(email_edittext.text.toString(),password_edittext.text.toString()))
+        presenter.login(
+            LoginRequest(
+                email_edittext.text.toString(),
+                password_edittext.text.toString()
+            )
+        )
         email_edittext.setText("")
         password_edittext.setText("")
     }

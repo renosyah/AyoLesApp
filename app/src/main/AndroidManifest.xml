@@ -14,7 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.activity.detail_course.DetailCourseActivity"></activity>
+        <activity android:name=".ui.activity.material_detail.MaterialDetailClassRoomActivity"></activity>
+        <activity android:name=".ui.activity.update_profile.UpdateProfileActivity" />
+        <activity android:name=".ui.activity.register.RegisterActivity" />
+        <activity android:name=".ui.activity.material_classroom.MaterialClassRoomActivity" />
+        <activity android:name=".ui.activity.detail_course.DetailCourseActivity" />
         <activity android:name=".ui.activity.search_course.SearchCourseActivity" />
         <activity
             android:name=".ui.activity.main_menu.MainMenu"

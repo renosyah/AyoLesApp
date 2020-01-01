@@ -34,6 +34,7 @@ import com.syahputrareno975.ayolesapp.ui.activity.search_course.SearchCourseActi
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterBanner
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterCategory
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterVerticalCourse
+import com.syahputrareno975.ayolesapp.util.SerializableSave
 import kotlinx.android.synthetic.main.fragment_class.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.not_found
@@ -86,6 +87,11 @@ class FragmentHome : Fragment(),FragmentHomeContract.View {
 
         presenter.attach(this)
         presenter.subscribe()
+
+        if (SerializableSave(ctx,SerializableSave.bannerDataFileCacheName).load() != null){
+            val bannerCache = SerializableSave(ctx,SerializableSave.bannerDataFileCacheName).load() as AllBannerResponse
+            bannerList.addAll(bannerCache.Data.BannerList)
+        }
 
         reqAllCategory.Limit = limit_load_category
         reqAllCategoryForCourse.Limit = limit_load_course
@@ -221,9 +227,11 @@ class FragmentHome : Fragment(),FragmentHomeContract.View {
     }
 
     override fun onGetAllBanner(s: AllBannerResponse) {
-        bannerList.clear()
-        bannerList.addAll(s.Data.BannerList)
-        adapterBanner.notifyDataSetChanged()
+        if (SerializableSave(ctx,SerializableSave.bannerDataFileCacheName).save(s)){
+            bannerList.clear()
+            bannerList.addAll(s.Data.BannerList)
+            adapterBanner.notifyDataSetChanged()
+        }
     }
 
     override fun onGetAllCategory(s: AllCategoryResponse) {

@@ -1,6 +1,7 @@
 package com.syahputrareno975.ayolesapp.ui.fragment.fragment_class
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -26,6 +27,7 @@ import com.syahputrareno975.ayolesapp.model.course.AllCourseRequest
 import com.syahputrareno975.ayolesapp.model.course.AllCourseResponse
 import com.syahputrareno975.ayolesapp.model.course.CourseModel
 import com.syahputrareno975.ayolesapp.model.student.StudentModel
+import com.syahputrareno975.ayolesapp.ui.activity.material_classroom.MaterialClassRoomActivity
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterCategory
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterClassRoom
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterCourseCard
@@ -89,7 +91,7 @@ class FragmentClass : Fragment(),FragmentClassContract.View {
 
         search_class_edittext.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                // find class
+                clearTagedCategory()
                 listClassRoom.clear()
                 reqAllClass.Offset = 0
                 reqAllClass.SearchValue = search_class_edittext.text.toString()
@@ -121,7 +123,9 @@ class FragmentClass : Fragment(),FragmentClassContract.View {
 
     fun getAllClass(){
         adapterClassRoom = AdapterClassRoom(ctx,listClassRoom) { classRoomModel, i ->
-
+            val intent = Intent(ctx,MaterialClassRoomActivity::class.java)
+            intent.putExtra("data",classRoomModel)
+            startActivity(intent)
         }
         classes_recycleview.adapter = adapterClassRoom
         classes_recycleview.layoutManager = LinearLayoutManager(ctx,LinearLayoutManager.VERTICAL,false)
@@ -161,7 +165,12 @@ class FragmentClass : Fragment(),FragmentClassContract.View {
         not_found.visibility = if (listClassRoom.isEmpty() || forceShow) View.VISIBLE else View.GONE
         classes_recycleview.visibility = if (listClassRoom.isEmpty() || forceShow) View.GONE else View.VISIBLE
     }
-
+    fun clearTagedCategory(){
+        for (i in categoryList){
+            i.IsClick = false
+        }
+        adapterCategory.notifyDataSetChanged()
+    }
     override fun showProgress(show: Boolean) {
         not_found.visibility = View.GONE
     }

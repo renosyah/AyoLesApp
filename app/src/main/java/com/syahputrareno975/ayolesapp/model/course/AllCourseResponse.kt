@@ -1,10 +1,11 @@
 package com.syahputrareno975.ayolesapp.model.course
 
 import com.google.gson.annotations.SerializedName
+import com.syahputrareno975.ayolesapp.model.BaseModel
 import com.syahputrareno975.ayolesapp.model.queryModel.ErrorModel
 import java.io.Serializable
 
-class AllCourseResponse : Serializable {
+class AllCourseResponse : BaseModel {
     @SerializedName("data")
     var Data : CourseList = CourseList()
 

@@ -9,7 +9,7 @@
         android:icon="@drawable/book"
         android:title="Class" />
     <item
-        android:icon="@drawable/profile"
+        android:icon="@drawable/profile_student"
         android:id="@+id/menu_profile"
         android:title="Profile" />
 </menu>

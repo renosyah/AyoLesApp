@@ -57,7 +57,7 @@
                         android:fontFamily="sans-serif-medium"
                         android:gravity="center"
                         android:text="Discover All Knowlege You Can Gain!"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/textColorWhite"
                         android:textSize="24sp" />
 
                     <Button
@@ -68,7 +68,7 @@
                         android:padding="10dp"
                         android:text="Login With Email"
                         android:textAllCaps="false"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/textColorWhite"
                         android:textSize="18sp" />
 
 
@@ -85,7 +85,7 @@
                             android:fontFamily="sans-serif-light"
                             android:gravity="center"
                             android:text="New Student? "
-                            android:textColor="@android:color/white"
+                            android:textColor="@color/textColorWhite"
                             android:textSize="18sp" />
 
                         <TextView
@@ -95,7 +95,7 @@
                             android:fontFamily="sans-serif-condensed-medium"
                             android:gravity="center"
                             android:text=" Sigh up"
-                            android:textColor="@android:color/white"
+                            android:textColor="@color/textColorWhite"
                             android:textSize="18sp" />
 
                     </LinearLayout>
@@ -120,15 +120,15 @@
                         android:fontFamily="sans-serif-light"
                         android:gravity="center"
                         android:text="See what we can learn today"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/textColorWhite"
                         android:textSize="18sp" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
-                        android:textColor="@android:color/white"
-                        android:textColorHint="@android:color/darker_gray">
+                        android:textColor="@color/textColorWhite"
+                        android:textColorHint="@color/textColorGray">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/email_edittext"
@@ -140,8 +140,8 @@
                             android:hint="Email"
                             android:inputType="textEmailAddress"
                             android:padding="10dp"
-                            android:textColor="@android:color/white"
-                            android:textColorHint="@android:color/darker_gray" />
+                            android:textColor="@color/textColorWhite"
+                            android:textColorHint="@color/textColorGray" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -149,8 +149,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="30dp"
-                        android:textColor="@android:color/white"
-                        android:textColorHint="@android:color/darker_gray"
+                        android:textColor="@color/textColorWhite"
+                        android:textColorHint="@color/textColorGray"
                         app:passwordToggleEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -163,8 +163,8 @@
                             android:hint="Password"
                             android:inputType="textPassword"
                             android:padding="10dp"
-                            android:textColor="@android:color/white"
-                            android:textColorHint="@android:color/darker_gray" />
+                            android:textColor="@color/textColorWhite"
+                            android:textColorHint="@color/textColorGray" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -189,7 +189,7 @@
                         android:padding="10dp"
                         android:text="Login"
                         android:textAllCaps="false"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/textColorWhite"
                         android:textSize="18sp" />
 
                     <TextView
@@ -199,7 +199,7 @@
                         android:fontFamily="sans-serif-light"
                         android:gravity="center"
                         android:text="Forget Password? "
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/textColorWhite"
                         android:textSize="18sp" />
 
                 </LinearLayout>

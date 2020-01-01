@@ -1,9 +1,9 @@
 package com.syahputrareno975.ayolesapp.model.queryModel
 
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
+import com.syahputrareno975.ayolesapp.model.BaseModel
 
-class ErrorModel : Serializable {
+class ErrorModel : BaseModel {
 
     @SerializedName("message")
     var Message = ""

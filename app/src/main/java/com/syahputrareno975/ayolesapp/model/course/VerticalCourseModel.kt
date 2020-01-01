@@ -1,9 +1,8 @@
 package com.syahputrareno975.ayolesapp.model.course
 
-import com.google.gson.annotations.SerializedName
-import java.io.Serializable
+import com.syahputrareno975.ayolesapp.model.BaseModel
 
-class VerticalCourseModel : Serializable {
+class VerticalCourseModel : BaseModel {
     var Id : String = ""
     var Title : String = ""
     var Courses : ArrayList<CourseModel> = ArrayList()

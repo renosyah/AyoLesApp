@@ -1,8 +1,8 @@
 package com.syahputrareno975.ayolesapp.model.course
 
-import java.io.Serializable
+import com.syahputrareno975.ayolesapp.model.BaseModel
 
-class AllCourseRequest : Serializable {
+class AllCourseRequest : BaseModel {
     var CategoryId = ""
     var SearchBy = "course_name"
     var SearchValue = ""

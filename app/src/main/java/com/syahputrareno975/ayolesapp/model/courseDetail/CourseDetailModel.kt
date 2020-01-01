@@ -1,9 +1,9 @@
 package com.syahputrareno975.ayolesapp.model.courseDetail
 
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
+import com.syahputrareno975.ayolesapp.model.BaseModel
 
-class CourseDetailModel : Serializable {
+class CourseDetailModel : BaseModel {
 
     @SerializedName("id")
     var Id  : String = ""

@@ -1,6 +1,7 @@
 package com.syahputrareno975.ayolesapp.ui.activity.detail_course
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -17,7 +18,10 @@ import com.syahputrareno975.ayolesapp.model.classRoom.AddClassRoomResponse
 import com.syahputrareno975.ayolesapp.model.classRoom.OneClassByIdRoomRequest
 import com.syahputrareno975.ayolesapp.model.classRoom.OneClassByIdRoomResponse
 import com.syahputrareno975.ayolesapp.model.course.CourseModel
+import com.syahputrareno975.ayolesapp.model.courseDetail.AllCourseDetailRequest
+import com.syahputrareno975.ayolesapp.model.courseDetail.AllCourseDetailResponse
 import com.syahputrareno975.ayolesapp.model.student.StudentModel
+import com.syahputrareno975.ayolesapp.ui.activity.material_classroom.MaterialClassRoomActivity
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterBanner
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterImageDetailCourse
 import com.syahputrareno975.ayolesapp.util.SerializableSave
@@ -30,8 +34,16 @@ class DetailCourseActivity : AppCompatActivity(),DetailCourseActivityContract.Vi
     @Inject
     lateinit var presenter: DetailCourseActivityContract.Presenter
 
+    companion object {
+        private val limit_load : Int = 3
+    }
+
     lateinit var context: Context
+
+    lateinit var adapterImageDetailCourse : AdapterImageDetailCourse
     lateinit var courseData: CourseModel
+
+    val reqAllCourseDetails = AllCourseDetailRequest()
 
     lateinit var studentSession : StudentModel
 
@@ -50,10 +62,12 @@ class DetailCourseActivity : AppCompatActivity(),DetailCourseActivityContract.Vi
         presenter.attach(this)
         presenter.subscribe()
 
-
         if (SerializableSave(context, SerializableSave.userDataFileSessionName).load() != null){
             studentSession = SerializableSave(context, SerializableSave.userDataFileSessionName).load() as StudentModel
         }
+
+        reqAllCourseDetails.Limit = limit_load
+        reqAllCourseDetails.CourseId = courseData.Id
 
         back_imageview.setOnClickListener {
             finish()
@@ -63,22 +77,32 @@ class DetailCourseActivity : AppCompatActivity(),DetailCourseActivityContract.Vi
             presenter.addClassRoom(AddClassRoomRequest(courseData.Id,studentSession.Id))
         }
 
+
         course_name_textview.text = courseData.CourseName
         setImageCourse()
 
-        fake_toolbar.background.alpha = 125
+        //fake_toolbar.background.alpha = 125
 
         presenter.getOneClassRoomById(OneClassByIdRoomRequest(courseData.Id,studentSession.Id))
         class_is_taken.visibility = View.GONE
+        go_to_class_button.visibility = View.GONE
         add_to_class_button.visibility = View.GONE
     }
 
     fun setImageCourse(){
-        image_course_recycleview.adapter = AdapterImageDetailCourse(context,courseData.CourseDetails)
+        adapterImageDetailCourse = AdapterImageDetailCourse(context,courseData.CourseDetails)
+        image_course_recycleview.adapter = adapterImageDetailCourse
         image_course_recycleview.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
         val snapHelper = PagerSnapHelper()
         snapHelper.attachToRecyclerView(image_course_recycleview)
 
+        setDetailsContentBaseOnSelectedImage()
+
+        courseData.CourseDetails.clear()
+        presenter.getAllCourseDetails(reqAllCourseDetails)
+    }
+
+    fun setDetailsContentBaseOnSelectedImage(){
         if (courseData.CourseDetails.isNotEmpty()){
             image_course_recycleview.addOnScrollListener(object : RecyclerView.OnScrollListener(){
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -87,7 +111,6 @@ class DetailCourseActivity : AppCompatActivity(),DetailCourseActivityContract.Vi
             })
             setTextCourse(0)
         }
-
     }
 
     fun setTextCourse(pos : Int){
@@ -104,14 +127,30 @@ class DetailCourseActivity : AppCompatActivity(),DetailCourseActivityContract.Vi
     }
 
     override fun onAddClassRoom(s: AddClassRoomResponse) {
-        Toast.makeText(context,"${s.Data.ClassRoomRegister.Course.CourseName} is added to your classroom",Toast.LENGTH_SHORT).show()
         add_to_class_button.visibility = View.GONE
         class_is_taken.visibility = View.VISIBLE
+        go_to_class_button.visibility = View.VISIBLE
+        presenter.getOneClassRoomById(OneClassByIdRoomRequest(courseData.Id,studentSession.Id))
     }
 
     override fun onGetOneClassRoomById(s: OneClassByIdRoomResponse) {
         add_to_class_button.visibility = if (s.Data.ClassroomDetailById.Course.CourseName.isEmpty()) View.VISIBLE else View.GONE
         class_is_taken.visibility = if (s.Data.ClassroomDetailById.Course.CourseName.isEmpty()) View.GONE else  View.VISIBLE
+        go_to_class_button.visibility = if (s.Data.ClassroomDetailById.Course.CourseName.isEmpty()) View.GONE else  View.VISIBLE
+
+        go_to_class_button.setOnClickListener {
+            val intent = Intent(context, MaterialClassRoomActivity::class.java)
+            intent.putExtra("data",s.Data.ClassroomDetailById)
+            startActivity(intent)
+            finish()
+        }
+
+    }
+
+    override fun onGetAllCourseDetails(r: AllCourseDetailResponse) {
+        courseData.CourseDetails.addAll(r.Data.CourseDetailList)
+        adapterImageDetailCourse.notifyDataSetChanged()
+        setDetailsContentBaseOnSelectedImage()
     }
 
     override fun onDestroy() {

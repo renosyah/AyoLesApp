@@ -1,4 +1,4 @@
-package com.syahputrareno975.alquranappmvvm.model
+package com.syahputrareno975.ayolesapp.model
 
 import java.io.Serializable
 

@@ -1,9 +1,10 @@
 package com.syahputrareno975.ayolesapp.model.student
 
 import com.google.gson.annotations.SerializedName
+import com.syahputrareno975.ayolesapp.model.BaseModel
 import java.io.Serializable
 
-class StudentModel : Serializable {
+class StudentModel : BaseModel {
 
     @SerializedName("id")
     var Id : String = ""

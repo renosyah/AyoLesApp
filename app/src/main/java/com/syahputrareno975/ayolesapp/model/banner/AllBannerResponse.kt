@@ -1,10 +1,11 @@
 package com.syahputrareno975.ayolesapp.model.banner
 
 import com.google.gson.annotations.SerializedName
+import com.syahputrareno975.ayolesapp.model.BaseModel
 import com.syahputrareno975.ayolesapp.model.queryModel.ErrorModel
 import java.io.Serializable
 
-class AllBannerResponse : Serializable {
+class AllBannerResponse : BaseModel {
     @SerializedName("data")
     var Data : BannerList = BannerList()
 

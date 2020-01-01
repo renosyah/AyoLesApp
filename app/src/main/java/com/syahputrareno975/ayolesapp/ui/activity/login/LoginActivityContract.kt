@@ -1,8 +1,8 @@
 package com.syahputrareno975.ayolesapp.ui.activity.login
 
 import com.syahputrareno975.ayolesapp.base.BaseContract
-import com.syahputrareno975.ayolesapp.model.login.LoginRequest
-import com.syahputrareno975.ayolesapp.model.login.LoginResponse
+import com.syahputrareno975.ayolesapp.model.student.LoginRequest
+import com.syahputrareno975.ayolesapp.model.student.LoginResponse
 
 class LoginActivityContract {
     interface View: BaseContract.View {

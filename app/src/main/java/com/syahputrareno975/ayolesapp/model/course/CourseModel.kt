@@ -1,12 +1,13 @@
 package com.syahputrareno975.ayolesapp.model.course
 
 import com.google.gson.annotations.SerializedName
+import com.syahputrareno975.ayolesapp.model.BaseModel
 import com.syahputrareno975.ayolesapp.model.category.CategoryModel
 import com.syahputrareno975.ayolesapp.model.courseDetail.CourseDetailModel
 import com.syahputrareno975.ayolesapp.model.teacher.TeacherModel
 import java.io.Serializable
 
-class CourseModel : Serializable {
+class CourseModel : BaseModel {
 
     @SerializedName("id")
     var Id : String = ""

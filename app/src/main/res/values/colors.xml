@@ -4,4 +4,7 @@
     <color name="colorPrimaryLight">#4CAF50</color>
     <color name="colorAccent">#F57F17</color>
     <color name="colorError">#F44336</color>
+    <color name="textColorWhite">@android:color/white</color>
+    <color name="textColorBlack">@android:color/black</color>
+    <color name="textColorGray">@android:color/darker_gray</color>
 </resources>

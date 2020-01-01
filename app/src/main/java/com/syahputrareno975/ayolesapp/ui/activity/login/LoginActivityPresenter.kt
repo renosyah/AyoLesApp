@@ -1,7 +1,7 @@
 package com.syahputrareno975.ayolesapp.ui.activity.login
 
-import com.syahputrareno975.ayolesapp.model.login.LoginRequest
-import com.syahputrareno975.ayolesapp.model.login.LoginResponse
+import com.syahputrareno975.ayolesapp.model.student.LoginRequest
+import com.syahputrareno975.ayolesapp.model.student.LoginResponse
 import com.syahputrareno975.ayolesapp.model.queryModel.Query
 import com.syahputrareno975.ayolesapp.service.RetrofitService
 import io.reactivex.android.schedulers.AndroidSchedulers

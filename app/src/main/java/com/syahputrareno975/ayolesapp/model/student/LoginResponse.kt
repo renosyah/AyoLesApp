@@ -1,13 +1,14 @@
-package com.syahputrareno975.ayolesapp.model.login
+package com.syahputrareno975.ayolesapp.model.student
 
 import com.google.gson.annotations.SerializedName
+import com.syahputrareno975.ayolesapp.model.BaseModel
 import com.syahputrareno975.ayolesapp.model.queryModel.ErrorModel
-import com.syahputrareno975.ayolesapp.model.student.StudentModel
 import java.io.Serializable
 
-class LoginResponse : Serializable {
+class LoginResponse : BaseModel {
     @SerializedName("data")
-    var Data : StudentLogin = StudentLogin()
+    var Data : StudentLogin =
+        StudentLogin()
 
     @SerializedName("errors")
     var Errors = ArrayList<ErrorModel>()

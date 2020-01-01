@@ -1,9 +1,9 @@
 package com.syahputrareno975.ayolesapp.model.queryModel
 
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
+import com.syahputrareno975.ayolesapp.model.BaseModel
 
-class Query : Serializable {
+class Query : BaseModel {
 
     @SerializedName("query")
     var query : String = ""

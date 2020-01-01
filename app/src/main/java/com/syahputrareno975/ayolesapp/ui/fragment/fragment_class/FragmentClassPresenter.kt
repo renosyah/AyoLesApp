@@ -19,12 +19,12 @@ class FragmentClassPresenter : FragmentClassContract.Presenter {
     private lateinit var view: FragmentClassContract.View
 
     override fun getAllCategory(r: AllCategoryRequest) {
-        view.showProgress(true)
+        //view.showProgress(true)
         val subscribe = api.allCategory(Query(r.toSchema()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result : AllCategoryResponse? ->
-                view.showProgress(false)
+                //view.showProgress(false)
                 if (result != null){
                     if (result.Errors.isNotEmpty()){
                         var message = ""
@@ -36,7 +36,7 @@ class FragmentClassPresenter : FragmentClassContract.Presenter {
                     view.onGetAllCategory(result)
                 }
             },{t : Throwable ->
-                view.showProgress(false)
+                //view.showProgress(false)
                 view.showError(t.message!!)
             })
 

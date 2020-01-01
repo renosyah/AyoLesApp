@@ -1,8 +1,8 @@
 package com.syahputrareno975.ayolesapp.model.banner
 
-import java.io.Serializable
+import com.syahputrareno975.ayolesapp.model.BaseModel
 
-class AllBannerRequest : Serializable {
+class AllBannerRequest : BaseModel  {
     var SearchBy = "title"
     var SearchValue = ""
     var OrderBy = "title"

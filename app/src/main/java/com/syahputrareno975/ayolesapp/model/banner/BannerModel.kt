@@ -1,9 +1,10 @@
 package com.syahputrareno975.ayolesapp.model.banner
 
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
+import com.syahputrareno975.ayolesapp.model.BaseModel
 
-class BannerModel : Serializable {
+
+class BannerModel : BaseModel {
 
     @SerializedName("id")
     var Id : String = ""

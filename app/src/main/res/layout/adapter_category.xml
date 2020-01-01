@@ -21,7 +21,7 @@
                 android:textAlignment="center"
                 android:gravity="center"
                 android:id="@+id/category_name_textview"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@color/textColorGray"
                 android:textSize="18sp"
                 android:text="CATEGORY"
                 android:layout_width="wrap_content"

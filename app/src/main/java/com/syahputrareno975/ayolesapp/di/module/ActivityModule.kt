@@ -6,8 +6,17 @@ import com.syahputrareno975.ayolesapp.ui.activity.detail_course.DetailCourseActi
 import com.syahputrareno975.ayolesapp.ui.activity.detail_course.DetailCourseActivityPresenter
 import com.syahputrareno975.ayolesapp.ui.activity.login.LoginActivityContract
 import com.syahputrareno975.ayolesapp.ui.activity.login.LoginActivityPresenter
+import com.syahputrareno975.ayolesapp.ui.activity.material_classroom.MaterialClassRoomActivityContract
+import com.syahputrareno975.ayolesapp.ui.activity.material_classroom.MaterialClassRoomActivityPresenter
+import com.syahputrareno975.ayolesapp.ui.activity.material_detail.MaterialDetailClassRoomActivity
+import com.syahputrareno975.ayolesapp.ui.activity.material_detail.MaterialDetailClassRoomActivityContract
+import com.syahputrareno975.ayolesapp.ui.activity.material_detail.MaterialDetailClassRoomActivityPresenter
+import com.syahputrareno975.ayolesapp.ui.activity.register.RegisterActivityContract
+import com.syahputrareno975.ayolesapp.ui.activity.register.RegisterActivityPresenter
 import com.syahputrareno975.ayolesapp.ui.activity.search_course.SearchCourseActivityContract
 import com.syahputrareno975.ayolesapp.ui.activity.search_course.SearchCourseActivityPresenter
+import com.syahputrareno975.ayolesapp.ui.activity.update_profile.UpdateProfileActivityContract
+import com.syahputrareno975.ayolesapp.ui.activity.update_profile.UpdateProfileActivityPresenter
 import dagger.Module
 import dagger.Provides
 
@@ -37,5 +46,25 @@ class ActivityModule(private var activity : Activity) {
     @Provides
     fun provideDetailCourseActivityPresenter(): DetailCourseActivityContract.Presenter {
         return DetailCourseActivityPresenter()
+    }
+
+    @Provides
+    fun provideMaterialClassRoomActivityPresenter(): MaterialClassRoomActivityContract.Presenter {
+        return MaterialClassRoomActivityPresenter()
+    }
+
+    @Provides
+    fun provideRegisterActivityPresenter(): RegisterActivityContract.Presenter {
+        return RegisterActivityPresenter()
+    }
+
+    @Provides
+    fun provideUpdateProfileActivityPresenter(): UpdateProfileActivityContract.Presenter {
+        return  UpdateProfileActivityPresenter()
+    }
+
+    @Provides
+    fun provideMaterialDetailClassRoomActivityPresenter(): MaterialDetailClassRoomActivityContract.Presenter {
+        return  MaterialDetailClassRoomActivityPresenter()
     }
 }

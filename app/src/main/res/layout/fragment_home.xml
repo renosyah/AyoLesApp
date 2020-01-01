@@ -43,7 +43,7 @@
                             android:layout_weight="1"
                             android:background="@android:color/white"
                             android:drawableLeft="@android:drawable/ic_menu_search"
-                            android:hint="Search Course"
+                            android:hint="Search Courses"
                             android:imeOptions="actionSearch"
                             android:maxLines="1"
                             android:singleLine="true"

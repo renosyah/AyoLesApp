@@ -1,8 +1,8 @@
 package com.syahputrareno975.ayolesapp.model.classRoom
 
-import java.io.Serializable
+import com.syahputrareno975.ayolesapp.model.BaseModel
 
-class AllClassRoomRequest : Serializable {
+class AllClassRoomRequest : BaseModel {
     var StudentId = ""
     var SearchBy = "course.course_name"
     var SearchValue = ""

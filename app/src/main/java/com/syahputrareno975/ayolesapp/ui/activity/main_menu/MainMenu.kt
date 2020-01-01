@@ -3,6 +3,7 @@ package com.syahputrareno975.ayolesapp.ui.activity.main_menu
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.syahputrareno975.ayolesapp.R
 import com.syahputrareno975.ayolesapp.ui.fragment.fragment_class.FragmentClass
@@ -13,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_main_menu.*
 class MainMenu : AppCompatActivity() {
 
     lateinit var context :Context
+    var isExit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +43,18 @@ class MainMenu : AppCompatActivity() {
     }
 
     private fun changeFragment(fragment: Fragment){
+        isExit = false
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.content_fragment_frame_layout, fragment)
         fragmentTransaction.commit()
+    }
+
+    override fun onBackPressed() {
+        if (!isExit){
+            Toast.makeText(context,"Press again to exit",Toast.LENGTH_SHORT).show()
+            isExit = true
+            return
+        }
+        super.onBackPressed()
     }
 }

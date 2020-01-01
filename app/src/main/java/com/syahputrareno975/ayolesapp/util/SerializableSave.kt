@@ -9,6 +9,7 @@ class SerializableSave {
 
     companion object {
         val userDataFileSessionName = "ayoles_userSessionData.data"
+        val bannerDataFileCacheName = "ayoles_bannerCacheData.data"
     }
 
     lateinit var context: Context

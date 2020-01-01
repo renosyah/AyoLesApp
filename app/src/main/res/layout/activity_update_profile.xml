@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.update_profile.UpdateProfileActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        tools:visibility="visible">
+
+
+        <ImageView
+            android:id="@+id/back_imageview"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            app:srcCompat="@drawable/back" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Update Profile"
+            android:textAlignment="center"
+            android:textColor="@color/textColorWhite"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/main_update_profile_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/layout_loading_update_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    tools:visibility="gone">
+
+                    <ProgressBar
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_edit_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="20dp"
+                    tools:visibility="visible">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="30dp"
+                        android:fontFamily="sans-serif-light"
+                        android:gravity="center"
+                        android:text="Update your profile here, whenever you like"
+                        android:textColor="@color/textColorBlack"
+                        android:textSize="18sp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="@color/textColorWhite"
+                        android:textColorHint="@color/textColorGray">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/update_name_edittext"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:ems="10"
+                            android:fontFamily="sans-serif-light"
+                            android:hint="Update Name"
+                            android:inputType="textPersonName"
+                            android:padding="10dp"
+                            android:textColor="@color/textColorBlack"
+                            android:textColorHint="@color/textColorGray" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="@color/textColorWhite"
+                        android:textColorHint="@color/textColorGray">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/update_email_edittext"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:ems="10"
+                            android:fontFamily="sans-serif-light"
+                            android:hint="Update Email"
+                            android:inputType="textEmailAddress"
+                            android:padding="10dp"
+                            android:textColor="@color/textColorBlack"
+                            android:textColorHint="@color/textColorGray" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="30dp"
+                        android:textColor="@color/textColorWhite"
+                        android:textColorHint="@color/textColorGray"
+                        app:passwordToggleEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/update_password_edittext"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:ems="10"
+                            android:fontFamily="sans-serif-light"
+                            android:hint="New Password"
+                            android:inputType="textPassword"
+                            android:padding="10dp"
+                            android:textColor="@color/textColorBlack"
+                            android:textColorHint="@color/textColorGray" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/error_texview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center"
+                        android:shadowColor="@android:color/background_light"
+                        android:text="Invalid email or password"
+                        android:textColor="@color/colorError"
+                        android:textSize="18sp"
+                        tools:visibility="gone" />
+
+                    <Button
+                        android:id="@+id/update_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="30dp"
+                        android:background="@color/colorPrimaryLight"
+                        android:padding="10dp"
+                        android:text="Update"
+                        android:textAllCaps="false"
+                        android:textColor="@color/textColorWhite"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,8 +1,8 @@
 package com.syahputrareno975.ayolesapp.model.category
 
-import java.io.Serializable
+import com.syahputrareno975.ayolesapp.model.BaseModel
 
-class AllCategoryRequest : Serializable {
+class AllCategoryRequest : BaseModel {
     var SearchBy = "name"
     var SearchValue = ""
     var OrderBy = "name"
