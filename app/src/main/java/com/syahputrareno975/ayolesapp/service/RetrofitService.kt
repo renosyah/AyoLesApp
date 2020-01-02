@@ -8,6 +8,8 @@ import com.syahputrareno975.ayolesapp.model.classRoomProgress.AddClassRoomProgre
 import com.syahputrareno975.ayolesapp.model.classRoomProgress.AllClassRoomProgressResponse
 import com.syahputrareno975.ayolesapp.model.course.AllCourseResponse
 import com.syahputrareno975.ayolesapp.model.courseDetail.AllCourseDetailResponse
+import com.syahputrareno975.ayolesapp.model.courseExam.AllCourseExamResponse
+import com.syahputrareno975.ayolesapp.model.courseExamAnswer.AllCourseExamAnswerResponse
 import com.syahputrareno975.ayolesapp.model.courseMaterial.AllCourseMaterialResponse
 import com.syahputrareno975.ayolesapp.model.courseMaterialDetail.AllCourseMaterialDetailResponse
 import com.syahputrareno975.ayolesapp.model.student.LoginResponse
@@ -73,9 +75,15 @@ interface RetrofitService {
     @POST("graphql")
     fun addClassRoomProgress(@Body query: Query) : Observable<AddClassRoomProgressResponse>
 
+    @POST("graphql")
+    fun allCourseExam(@Body query: Query) : Observable<AllCourseExamResponse>
+
+    @POST("graphql")
+    fun  allCourseExamAnswer(@Body query: Query) : Observable<AllCourseExamAnswerResponse>
+
     companion object {
 
-        val baseURL = "http://192.168.9.101:8000/"
+        val baseURL = "http://192.168.137.1:8000/"
 
         fun create() : RetrofitService {
             val retrofit = Retrofit.Builder()

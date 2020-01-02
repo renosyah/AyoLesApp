@@ -2,6 +2,7 @@ package com.syahputrareno975.ayolesapp.ui.activity.material_classroom
 
 import android.app.ActionBar
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -28,10 +29,13 @@ import com.syahputrareno975.ayolesapp.model.courseDetail.AllCourseDetailResponse
 import com.syahputrareno975.ayolesapp.model.courseMaterial.AllCourseMaterialRequest
 import com.syahputrareno975.ayolesapp.model.courseMaterial.AllCourseMaterialResponse
 import com.syahputrareno975.ayolesapp.model.courseMaterial.CourseMaterialModel
+import com.syahputrareno975.ayolesapp.ui.activity.exam_classroom.ExamClassRoomActivity
+import com.syahputrareno975.ayolesapp.ui.activity.login.LoginActivity
 import com.syahputrareno975.ayolesapp.ui.activity.material_detail.MaterialDetailClassRoomActivity
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterImageDetailCourse
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterMaterialClassRoom
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterSimpleText
+import com.syahputrareno975.ayolesapp.util.SerializableSave
 import kotlinx.android.synthetic.main.activity_material_classroom.*
 import javax.inject.Inject
 
@@ -86,6 +90,29 @@ class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityC
         }
         loadmore_textview.visibility = View.GONE
 
+        start_exam_button.setOnClickListener {
+
+            AlertDialog.Builder(context)
+                    .setTitle("Start Exam")
+                    .setMessage("Are you sure want to start ${classRoomModel.Course.CourseName}'s exam?")
+                    .setPositiveButton("Yes") { dialog, which ->
+
+                        val intent = Intent(context,ExamClassRoomActivity::class.java)
+                        intent.putExtra("data",classRoomModel)
+                        startActivity(intent)
+
+                        dialog.dismiss()
+
+                    }.setNegativeButton("No"){dialog, which ->
+
+                        dialog.dismiss()
+
+                    }.setCancelable(false)
+                    .create()
+                    .show()
+
+        }
+
         setAdapterMaterial()
         setMaterialListAndProgress()
         setImageCourse()
@@ -122,6 +149,8 @@ class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityC
         reqAllClassRoomProgress.Limit = limit_load
         reqAllClassRoomProgress.Offset = 0
         reqAllClassRoomProgress.ClassroomId = classRoomModel.Id
+
+        title_examp_texview.text =  "finish ${classRoomModel.Course.CourseName}'s exam to get your certificate"
 
         loadmore_textview.setOnClickListener {
             reqAllMaterialClassRoom.Offset += limit_load
@@ -173,6 +202,7 @@ class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityC
         not_found.visibility = if (listMaterialClassRoom.isEmpty() || forceShow) View.VISIBLE else View.GONE
         loadmore_textview.visibility = if (listMaterialClassRoom.isEmpty() || forceShow) View.GONE else View.VISIBLE
         material_classroom_recycleview.visibility = if (listMaterialClassRoom.isEmpty() || forceShow) View.GONE else View.VISIBLE
+        examp_layout.visibility = if (listMaterialClassRoom.isEmpty() || forceShow) View.GONE else View.VISIBLE
     }
 
     fun validateMaterialProgress(){
@@ -200,6 +230,7 @@ class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityC
         adapterMaterialClassRoom.notifyDataSetChanged()
         checkNoResultFound(false)
         loadmore_textview.text = if (s.Data.CourseMaterialList.isEmpty()) "" else loadmore_textview.text
+        examp_layout.visibility = if (s.Data.CourseMaterialList.isEmpty() && listMaterialClassRoom.isNotEmpty()) View.VISIBLE else View.GONE
         getClassRoomProgress()
     }
 

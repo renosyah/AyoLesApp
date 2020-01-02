@@ -1,7 +1,9 @@
 package com.syahputrareno975.ayolesapp.ui.activity.material_detail
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -20,7 +22,10 @@ import com.syahputrareno975.ayolesapp.model.courseMaterial.CourseMaterialModel
 import com.syahputrareno975.ayolesapp.model.courseMaterialDetail.AllCourseMaterialDetailRequest
 import com.syahputrareno975.ayolesapp.model.courseMaterialDetail.AllCourseMaterialDetailResponse
 import com.syahputrareno975.ayolesapp.model.courseMaterialDetail.CourseMaterialDetailModel
+import com.syahputrareno975.ayolesapp.ui.activity.exam_classroom.ExamClassRoomActivity
+import com.syahputrareno975.ayolesapp.ui.activity.login.LoginActivity
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterMaterialDetail
+import com.syahputrareno975.ayolesapp.util.SerializableSave
 import kotlinx.android.synthetic.main.activity_material_detail_class_room.*
 import kotlinx.android.synthetic.main.activity_material_detail_class_room.not_found
 import kotlinx.android.synthetic.main.activity_search_course.*
@@ -70,6 +75,31 @@ class MaterialDetailClassRoomActivity : AppCompatActivity(),MaterialDetailClassR
 
         back_imageview.setOnClickListener {
             onBackPressed()
+        }
+
+        exam_button.setOnClickListener {
+            presenter.addCourseMaterialProgress(AddClassRoomProgressRequest(classRoomModel.Id,courseMaterial.Id), 300)
+
+            AlertDialog.Builder(context)
+                    .setTitle("Start Exam")
+                    .setMessage("Are you sure want to start ${classRoomModel.Course.CourseName}'s exam?")
+                    .setPositiveButton("Yes") { dialog, which ->
+
+                        val intent = Intent(context, ExamClassRoomActivity::class.java)
+                        intent.putExtra("data",classRoomModel)
+                        startActivity(intent)
+                        finish()
+
+                        dialog.dismiss()
+
+                    }.setNegativeButton("No"){dialog, which ->
+
+                        dialog.dismiss()
+
+                    }.setCancelable(false)
+                    .create()
+                    .show()
+
         }
 
         presenter.getAllCourseMaterial(reqAllMaterial)
@@ -135,7 +165,11 @@ class MaterialDetailClassRoomActivity : AppCompatActivity(),MaterialDetailClassR
     override fun onGetAllCourseMaterial(s: AllCourseMaterialResponse) {
         // if data size got 1 instead 2
         // next button will be hide
-        next_button.visibility = if (s.Data.CourseMaterialList.size <= 1) View.INVISIBLE else View.VISIBLE
+        next_button.visibility = if (s.Data.CourseMaterialList.size <= 1) View.GONE else View.VISIBLE
+
+        // and exam button
+        // will show
+        exam_button.visibility = if (s.Data.CourseMaterialList.size <= 1) View.VISIBLE else View.GONE
 
         // by using loop then break
         // to get only data from first index

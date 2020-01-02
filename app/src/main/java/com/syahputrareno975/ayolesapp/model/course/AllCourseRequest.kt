@@ -4,6 +4,7 @@ import com.syahputrareno975.ayolesapp.model.BaseModel
 
 class AllCourseRequest : BaseModel {
     var CategoryId = ""
+    var TeacherId = ""
     var SearchBy = "course_name"
     var SearchValue = ""
     var OrderBy = "course_name"
@@ -13,11 +14,12 @@ class AllCourseRequest : BaseModel {
 
     constructor()
 
-    constructor(CategoryId: String, SearchBy: String, SearchValue: String, OrderBy: String, OrderDir: String,
+    constructor(CategoryId: String,TeacherId: String, SearchBy: String, SearchValue: String, OrderBy: String, OrderDir: String,
         Offset: Int,
         Limit: Int
     ) {
         this.CategoryId = CategoryId
+        this.TeacherId = TeacherId
         this.SearchBy = SearchBy
         this.SearchValue = SearchValue
         this.OrderBy = OrderBy
@@ -28,6 +30,6 @@ class AllCourseRequest : BaseModel {
 
 
     fun toSchema() : String {
-        return "query { course_list( category_id:\"${CategoryId}\", search_by:\"$SearchBy\", search_value:\"$SearchValue\", order_by:\"$OrderBy\", order_dir:\"$OrderDir\", offset:$Offset, limit:$Limit ) { id, course_name,image_url,teacher{id,name email},category {id,name,image_url},course_details { id,course_id , overview_text, description_text,image_url }}}"
+        return "query { course_list( category_id:\"${CategoryId}\", teacher_id : \"${TeacherId}\",search_by:\"$SearchBy\", search_value:\"$SearchValue\", order_by:\"$OrderBy\", order_dir:\"$OrderDir\", offset:$Offset, limit:$Limit ) { id, course_name,image_url,teacher{id,name email},category {id,name,image_url},course_details { id,course_id , overview_text, description_text,image_url }}}"
     }
 }

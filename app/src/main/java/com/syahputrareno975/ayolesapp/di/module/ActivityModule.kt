@@ -4,6 +4,8 @@ import android.app.Activity
 import com.syahputrareno975.ayolesapp.service.RetrofitService
 import com.syahputrareno975.ayolesapp.ui.activity.detail_course.DetailCourseActivityContract
 import com.syahputrareno975.ayolesapp.ui.activity.detail_course.DetailCourseActivityPresenter
+import com.syahputrareno975.ayolesapp.ui.activity.exam_classroom.ExamClassRoomActivityContract
+import com.syahputrareno975.ayolesapp.ui.activity.exam_classroom.ExamClassRoomActivityPresenter
 import com.syahputrareno975.ayolesapp.ui.activity.login.LoginActivityContract
 import com.syahputrareno975.ayolesapp.ui.activity.login.LoginActivityPresenter
 import com.syahputrareno975.ayolesapp.ui.activity.material_classroom.MaterialClassRoomActivityContract
@@ -66,5 +68,10 @@ class ActivityModule(private var activity : Activity) {
     @Provides
     fun provideMaterialDetailClassRoomActivityPresenter(): MaterialDetailClassRoomActivityContract.Presenter {
         return  MaterialDetailClassRoomActivityPresenter()
+    }
+
+    @Provides
+    fun provideExamClassRoomActivityPresenter(): ExamClassRoomActivityContract.Presenter {
+        return  ExamClassRoomActivityPresenter()
     }
 }
