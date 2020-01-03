@@ -155,7 +155,7 @@ class FragmentHome : Fragment(),FragmentHomeContract.View {
 
     fun populateHorizontalCourses(){
 
-        for (i in 0 until verticalCourses.size){
+        for (i in 0..(verticalCourses.size-1)){
             val req = AllCourseRequest()
             req.CategoryId = verticalCourses.get(i).Id
             presenter.getAllCourses(req,i)

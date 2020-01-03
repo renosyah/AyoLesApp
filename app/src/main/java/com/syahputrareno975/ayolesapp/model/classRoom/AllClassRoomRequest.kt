@@ -6,7 +6,7 @@ class AllClassRoomRequest : BaseModel {
     var StudentId = ""
     var SearchBy = "course.course_name"
     var SearchValue = ""
-    var OrderBy = "course.course_name"
+    var OrderBy = "course.create_at"
     var OrderDir = "asc"
     var Offset = 0
     var Limit = 10

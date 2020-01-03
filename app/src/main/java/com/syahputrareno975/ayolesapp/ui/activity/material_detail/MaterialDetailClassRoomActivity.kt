@@ -14,6 +14,8 @@ import com.syahputrareno975.ayolesapp.R
 import com.syahputrareno975.ayolesapp.di.component.DaggerActivityComponent
 import com.syahputrareno975.ayolesapp.di.module.ActivityModule
 import com.syahputrareno975.ayolesapp.model.classRoom.ClassRoomModel
+import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCertificateRequest
+import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCertificateResponse
 import com.syahputrareno975.ayolesapp.model.classRoomProgress.AddClassRoomProgressRequest
 import com.syahputrareno975.ayolesapp.model.classRoomProgress.AddClassRoomProgressResponse
 import com.syahputrareno975.ayolesapp.model.courseMaterial.AllCourseMaterialRequest
@@ -23,8 +25,10 @@ import com.syahputrareno975.ayolesapp.model.courseMaterialDetail.AllCourseMateri
 import com.syahputrareno975.ayolesapp.model.courseMaterialDetail.AllCourseMaterialDetailResponse
 import com.syahputrareno975.ayolesapp.model.courseMaterialDetail.CourseMaterialDetailModel
 import com.syahputrareno975.ayolesapp.ui.activity.exam_classroom.ExamClassRoomActivity
+import com.syahputrareno975.ayolesapp.ui.activity.exam_result.ExamResultActivity
 import com.syahputrareno975.ayolesapp.ui.activity.login.LoginActivity
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterMaterialDetail
+import com.syahputrareno975.ayolesapp.util.EmptyUUID
 import com.syahputrareno975.ayolesapp.util.SerializableSave
 import kotlinx.android.synthetic.main.activity_material_detail_class_room.*
 import kotlinx.android.synthetic.main.activity_material_detail_class_room.not_found
@@ -39,6 +43,7 @@ class MaterialDetailClassRoomActivity : AppCompatActivity(),MaterialDetailClassR
     companion object {
         val limit_load = 10
         val limit_load_material = 1
+        val CODE_EXAM = 300
         val CODE_NEXT = 200
         val CODE_PREVIOUS = 100
     }
@@ -78,28 +83,7 @@ class MaterialDetailClassRoomActivity : AppCompatActivity(),MaterialDetailClassR
         }
 
         exam_button.setOnClickListener {
-            presenter.addCourseMaterialProgress(AddClassRoomProgressRequest(classRoomModel.Id,courseMaterial.Id), 300)
-
-            AlertDialog.Builder(context)
-                    .setTitle("Start Exam")
-                    .setMessage("Are you sure want to start ${classRoomModel.Course.CourseName}'s exam?")
-                    .setPositiveButton("Yes") { dialog, which ->
-
-                        val intent = Intent(context, ExamClassRoomActivity::class.java)
-                        intent.putExtra("data",classRoomModel)
-                        startActivity(intent)
-                        finish()
-
-                        dialog.dismiss()
-
-                    }.setNegativeButton("No"){dialog, which ->
-
-                        dialog.dismiss()
-
-                    }.setCancelable(false)
-                    .create()
-                    .show()
-
+            presenter.addCourseMaterialProgress(AddClassRoomProgressRequest(classRoomModel.Id,courseMaterial.Id), CODE_EXAM)
         }
 
         presenter.getAllCourseMaterial(reqAllMaterial)
@@ -170,6 +154,9 @@ class MaterialDetailClassRoomActivity : AppCompatActivity(),MaterialDetailClassR
         // and exam button
         // will show
         exam_button.visibility = if (s.Data.CourseMaterialList.size <= 1) View.VISIBLE else View.GONE
+        if (s.Data.CourseMaterialList.size <= 1){
+            presenter.getOneClassRoomCertificate(OneClassRoomCertificateRequest(classRoomModel.Id))
+        }
 
         // by using loop then break
         // to get only data from first index
@@ -192,12 +179,35 @@ class MaterialDetailClassRoomActivity : AppCompatActivity(),MaterialDetailClassR
         when (navCode){
             CODE_NEXT -> {
                 reqAllMaterial.Offset += limit_load_material
+                presenter.getAllCourseMaterial(reqAllMaterial)
             }
             CODE_PREVIOUS -> {
                 reqAllMaterial.Offset -= limit_load_material
+                presenter.getAllCourseMaterial(reqAllMaterial)
+            }
+            CODE_EXAM -> {
+
+                val intent = Intent(context, ExamClassRoomActivity::class.java)
+                intent.putExtra("data",classRoomModel)
+                startActivity(intent)
+                finish()
+
             }
         }
-        presenter.getAllCourseMaterial(reqAllMaterial)
+    }
+
+    override fun onGetOneClassRoomCertificate(r: OneClassRoomCertificateResponse) {
+        exam_button.text = (if (r.Data.ClassRoomCertificateDetail.Id == EmptyUUID.EmptyUUID) "Start Exam" else "Exam Result")
+        if (r.Data.ClassRoomCertificateDetail.Id != EmptyUUID.EmptyUUID) {
+            exam_button.setOnClickListener {
+
+                // go to exam result
+                // activity
+                val intent = Intent(context, ExamResultActivity::class.java)
+                intent.putExtra("data", classRoomModel)
+                startActivity(intent)
+            }
+        }
     }
 
     override fun onDestroy() {

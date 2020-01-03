@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.exam_classroom.ExamClassRoomActivity">
+    tools:context=".ui.activity.exam_result.ExamResultActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,13 +17,13 @@
 
 
         <TextView
-            android:id="@+id/title_exam_textview"
+            android:id="@+id/title_exam_result_textview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:fontFamily="@string/medium_font"
             android:gravity="center"
-            android:text="Data Science"
+            android:text="Data Science's Exam Result"
             android:textAlignment="center"
             android:textColor="@color/textColorWhite"
             android:textSize="20sp" />
@@ -35,7 +35,7 @@
         android:layout_height="match_parent">
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/exam_nestedscrollview"
+            android:id="@+id/exam_result_nestedscrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -45,7 +45,7 @@
                 android:orientation="vertical">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/exam_recycleview"
+                    android:id="@+id/exam_result_recycleview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
@@ -57,7 +57,7 @@
                     tools:visibility="gone" />
 
                 <Button
-                    android:id="@+id/finish_exam_button"
+                    android:id="@+id/request_certificate_button"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
@@ -67,7 +67,7 @@
                     android:background="@color/colorPrimaryLight"
                     android:fontFamily="@string/medium_font"
                     android:padding="10dp"
-                    android:text="Finish My Exam"
+                    android:text="Certificate"
                     android:textAllCaps="false"
                     android:textColor="@color/textColorWhite"
                     android:textSize="18sp" />

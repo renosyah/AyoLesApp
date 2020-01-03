@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.activity.exam_classroom.ExamClassRoomActivity"></activity>
+        <activity android:name=".ui.activity.exam_result.ExamResultActivity"></activity>
+        <activity android:name=".ui.activity.exam_classroom.ExamClassRoomActivity" />
         <activity android:name=".ui.activity.material_detail.MaterialDetailClassRoomActivity" />
         <activity android:name=".ui.activity.update_profile.UpdateProfileActivity" />
         <activity android:name=".ui.activity.register.RegisterActivity" />

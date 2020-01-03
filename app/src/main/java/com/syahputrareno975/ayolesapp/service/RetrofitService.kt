@@ -4,6 +4,14 @@ import com.syahputrareno975.ayolesapp.model.banner.AllBannerResponse
 import com.syahputrareno975.ayolesapp.model.category.AllCategoryResponse
 import com.syahputrareno975.ayolesapp.model.category.OneCategoryResponse
 import com.syahputrareno975.ayolesapp.model.classRoom.*
+import com.syahputrareno975.ayolesapp.model.classRoomCertificate.AddClassRoomCertificateResponse
+import com.syahputrareno975.ayolesapp.model.classRoomCertificate.AllClassRoomCertificateRequest
+import com.syahputrareno975.ayolesapp.model.classRoomCertificate.AllClassRoomCertificateResponse
+import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCertificateResponse
+import com.syahputrareno975.ayolesapp.model.classRoomExamProgress.AddClassRoomExamProgressResponse
+import com.syahputrareno975.ayolesapp.model.classRoomExamProgress.AllClassRoomExamProgressResponse
+import com.syahputrareno975.ayolesapp.model.classRoomExamProgress.DeleteClassRoomExamProgressResponse
+import com.syahputrareno975.ayolesapp.model.classRoomExamResult.AllClassRoomExamResultResponse
 import com.syahputrareno975.ayolesapp.model.classRoomProgress.AddClassRoomProgressResponse
 import com.syahputrareno975.ayolesapp.model.classRoomProgress.AllClassRoomProgressResponse
 import com.syahputrareno975.ayolesapp.model.course.AllCourseResponse
@@ -79,7 +87,28 @@ interface RetrofitService {
     fun allCourseExam(@Body query: Query) : Observable<AllCourseExamResponse>
 
     @POST("graphql")
-    fun  allCourseExamAnswer(@Body query: Query) : Observable<AllCourseExamAnswerResponse>
+    fun allCourseExamAnswer(@Body query: Query) : Observable<AllCourseExamAnswerResponse>
+
+    @POST("graphql")
+    fun addClassRoomExamProgress(@Body query: Query) : Observable<AddClassRoomExamProgressResponse>
+
+    @POST("graphql")
+    fun allClassRoomExamProgress(@Body query: Query) : Observable<AllClassRoomExamProgressResponse>
+
+    @POST("graphql")
+    fun deleteClassRoomExamProgress(@Body query: Query) : Observable<DeleteClassRoomExamProgressResponse>
+
+    @POST("graphql")
+    fun allClassRoomExamResult(@Body query: Query) : Observable<AllClassRoomExamResultResponse>
+
+    @POST("graphql")
+    fun addClassRoomCertificate(@Body query: Query) : Observable<AddClassRoomCertificateResponse>
+
+    @POST("graphql")
+    fun oneClassRoomCertificate(@Body query: Query) : Observable<OneClassRoomCertificateResponse>
+
+    @POST("graphql")
+    fun allClassRoomCertificate(@Body query: Query) : Observable<AllClassRoomCertificateResponse>
 
     companion object {
 

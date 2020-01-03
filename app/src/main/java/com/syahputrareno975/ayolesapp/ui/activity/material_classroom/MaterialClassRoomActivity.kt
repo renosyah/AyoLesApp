@@ -12,6 +12,7 @@ import android.view.View
 import android.widget.PopupWindow
 import android.widget.SimpleAdapter
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -21,6 +22,8 @@ import com.syahputrareno975.ayolesapp.R
 import com.syahputrareno975.ayolesapp.di.component.DaggerActivityComponent
 import com.syahputrareno975.ayolesapp.di.module.ActivityModule
 import com.syahputrareno975.ayolesapp.model.classRoom.ClassRoomModel
+import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCertificateRequest
+import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCertificateResponse
 import com.syahputrareno975.ayolesapp.model.classRoomProgress.AllClassRoomProgressRequest
 import com.syahputrareno975.ayolesapp.model.classRoomProgress.AllClassRoomProgressResponse
 import com.syahputrareno975.ayolesapp.model.classRoomProgress.ClassRoomProgressModel
@@ -30,11 +33,13 @@ import com.syahputrareno975.ayolesapp.model.courseMaterial.AllCourseMaterialRequ
 import com.syahputrareno975.ayolesapp.model.courseMaterial.AllCourseMaterialResponse
 import com.syahputrareno975.ayolesapp.model.courseMaterial.CourseMaterialModel
 import com.syahputrareno975.ayolesapp.ui.activity.exam_classroom.ExamClassRoomActivity
+import com.syahputrareno975.ayolesapp.ui.activity.exam_result.ExamResultActivity
 import com.syahputrareno975.ayolesapp.ui.activity.login.LoginActivity
 import com.syahputrareno975.ayolesapp.ui.activity.material_detail.MaterialDetailClassRoomActivity
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterImageDetailCourse
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterMaterialClassRoom
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterSimpleText
+import com.syahputrareno975.ayolesapp.util.EmptyUUID
 import com.syahputrareno975.ayolesapp.util.SerializableSave
 import kotlinx.android.synthetic.main.activity_material_classroom.*
 import javax.inject.Inject
@@ -92,24 +97,9 @@ class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityC
 
         start_exam_button.setOnClickListener {
 
-            AlertDialog.Builder(context)
-                    .setTitle("Start Exam")
-                    .setMessage("Are you sure want to start ${classRoomModel.Course.CourseName}'s exam?")
-                    .setPositiveButton("Yes") { dialog, which ->
-
-                        val intent = Intent(context,ExamClassRoomActivity::class.java)
-                        intent.putExtra("data",classRoomModel)
-                        startActivity(intent)
-
-                        dialog.dismiss()
-
-                    }.setNegativeButton("No"){dialog, which ->
-
-                        dialog.dismiss()
-
-                    }.setCancelable(false)
-                    .create()
-                    .show()
+            val intent = Intent(context,ExamClassRoomActivity::class.java)
+            intent.putExtra("data",classRoomModel)
+            startActivityForResult(intent,101)
 
         }
 
@@ -168,6 +158,7 @@ class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityC
         })
 
         getAllClassRoomMaterials()
+        presenter.getOneClassRoomCertificate(OneClassRoomCertificateRequest(classRoomModel.Id))
     }
 
     fun setImageCourse(){
@@ -180,6 +171,7 @@ class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityC
         setDetailsContentBaseOnSelectedImage()
 
         classRoomModel.Course.CourseDetails.clear()
+
         presenter.getAllCourseDetails(reqAllCourseDetails)
     }
 
@@ -244,6 +236,30 @@ class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityC
         adapterImageDetailCourse.notifyDataSetChanged()
         setDetailsContentBaseOnSelectedImage()
     }
+
+    override fun onGetOneClassRoomCertificate(r: OneClassRoomCertificateResponse) {
+        start_exam_button.setText(if (r.Data.ClassRoomCertificateDetail.Id == EmptyUUID.EmptyUUID) "Start Exam" else "Result")
+        if (r.Data.ClassRoomCertificateDetail.Id != EmptyUUID.EmptyUUID) {
+            start_exam_button.setOnClickListener {
+
+                // go to exam result
+                // activity
+                val intent = Intent(context, ExamResultActivity::class.java)
+                intent.putExtra("data",classRoomModel)
+                startActivityForResult(intent,101)
+
+            }
+            see_certificate_button.setBackgroundColor(ContextCompat.getColor(context,R.color.colorPrimaryLight))
+            see_certificate_button.setTextColor(ContextCompat.getColor(context,R.color.textColorWhite))
+            see_certificate_button.setOnClickListener {
+
+                // go to certificate
+                // activity
+            }
+        }
+    }
+
+
 
     override fun onDestroy() {
         super.onDestroy()

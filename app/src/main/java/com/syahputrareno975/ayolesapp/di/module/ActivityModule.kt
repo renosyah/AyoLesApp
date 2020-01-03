@@ -6,6 +6,8 @@ import com.syahputrareno975.ayolesapp.ui.activity.detail_course.DetailCourseActi
 import com.syahputrareno975.ayolesapp.ui.activity.detail_course.DetailCourseActivityPresenter
 import com.syahputrareno975.ayolesapp.ui.activity.exam_classroom.ExamClassRoomActivityContract
 import com.syahputrareno975.ayolesapp.ui.activity.exam_classroom.ExamClassRoomActivityPresenter
+import com.syahputrareno975.ayolesapp.ui.activity.exam_result.ExamResultActivityContract
+import com.syahputrareno975.ayolesapp.ui.activity.exam_result.ExamResultActivityPresenter
 import com.syahputrareno975.ayolesapp.ui.activity.login.LoginActivityContract
 import com.syahputrareno975.ayolesapp.ui.activity.login.LoginActivityPresenter
 import com.syahputrareno975.ayolesapp.ui.activity.material_classroom.MaterialClassRoomActivityContract
@@ -73,5 +75,10 @@ class ActivityModule(private var activity : Activity) {
     @Provides
     fun provideExamClassRoomActivityPresenter(): ExamClassRoomActivityContract.Presenter {
         return  ExamClassRoomActivityPresenter()
+    }
+
+    @Provides
+    fun provideExamResultActivityPresenter(): ExamResultActivityContract.Presenter {
+        return ExamResultActivityPresenter()
     }
 }

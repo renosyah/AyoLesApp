@@ -78,7 +78,6 @@
                         android:layout_marginRight="5dp"
                         android:maxWidth="120dp"
                         android:maxHeight="80dp"
-                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/notfound" />
 
                 </LinearLayout>

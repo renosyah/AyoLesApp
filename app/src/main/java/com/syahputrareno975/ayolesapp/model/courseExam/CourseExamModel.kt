@@ -42,6 +42,24 @@ class CourseExamModel : BaseModel {
         this.Answers = Answers
     }
 
+    fun isAnswered() : Boolean {
+        for (i in this.Answers){
+            if (i.IsSelected){
+                return true
+            }
+        }
+        return false
+    }
+
+    fun getAnswer() : CourseExamAnswerModel? {
+        for (i in this.Answers){
+            if (i.IsSelected){
+                return i
+            }
+        }
+        return null
+    }
+
     companion object {
         val TYPE_TEXT : Int = 0
         val TYPE_IMAGE : Int = 1

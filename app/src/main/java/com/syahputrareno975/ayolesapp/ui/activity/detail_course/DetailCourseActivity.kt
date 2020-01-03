@@ -24,6 +24,7 @@ import com.syahputrareno975.ayolesapp.model.student.StudentModel
 import com.syahputrareno975.ayolesapp.ui.activity.material_classroom.MaterialClassRoomActivity
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterBanner
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterImageDetailCourse
+import com.syahputrareno975.ayolesapp.util.EmptyUUID
 import com.syahputrareno975.ayolesapp.util.SerializableSave
 import kotlinx.android.synthetic.main.activity_detail_course.*
 import java.util.*
@@ -134,9 +135,9 @@ class DetailCourseActivity : AppCompatActivity(),DetailCourseActivityContract.Vi
     }
 
     override fun onGetOneClassRoomById(s: OneClassByIdRoomResponse) {
-        add_to_class_button.visibility = if (s.Data.ClassroomDetailById.Course.CourseName.isEmpty()) View.VISIBLE else View.GONE
-        class_is_taken.visibility = if (s.Data.ClassroomDetailById.Course.CourseName.isEmpty()) View.GONE else  View.VISIBLE
-        go_to_class_button.visibility = if (s.Data.ClassroomDetailById.Course.CourseName.isEmpty()) View.GONE else  View.VISIBLE
+        add_to_class_button.visibility = if (s.Data.ClassroomDetailById.Course.Id == EmptyUUID.EmptyUUID) View.VISIBLE else View.GONE
+        class_is_taken.visibility = if (s.Data.ClassroomDetailById.Course.Id == EmptyUUID.EmptyUUID) View.GONE else  View.VISIBLE
+        go_to_class_button.visibility = if (s.Data.ClassroomDetailById.Course.Id == EmptyUUID.EmptyUUID) View.GONE else  View.VISIBLE
 
         go_to_class_button.setOnClickListener {
             val intent = Intent(context, MaterialClassRoomActivity::class.java)

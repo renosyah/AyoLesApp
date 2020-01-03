@@ -1,5 +1,7 @@
 package com.syahputrareno975.ayolesapp.ui.activity.material_classroom
 
+import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCertificateRequest
+import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCertificateResponse
 import com.syahputrareno975.ayolesapp.model.classRoomProgress.AllClassRoomProgressRequest
 import com.syahputrareno975.ayolesapp.model.classRoomProgress.AllClassRoomProgressResponse
 import com.syahputrareno975.ayolesapp.model.courseDetail.AllCourseDetailRequest
@@ -17,6 +19,24 @@ class MaterialClassRoomActivityPresenter: MaterialClassRoomActivityContract.Pres
     private val subscriptions = CompositeDisposable()
     private val api : RetrofitService = RetrofitService.create()
     private lateinit var view: MaterialClassRoomActivityContract.View
+
+    override fun getOneClassRoomCertificate(r: OneClassRoomCertificateRequest) {
+        view.showProgress(true)
+        val subscribe = api.oneClassRoomCertificate(Query(r.toSchema()))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({result : OneClassRoomCertificateResponse? ->
+                    view.showProgress(false)
+                    if (result != null){
+                        view.onGetOneClassRoomCertificate(result)
+                    }
+                },{t : Throwable ->
+                    view.showProgress(false)
+                    view.showError(t.message!!)
+                })
+
+        subscriptions.add(subscribe)
+    }
 
     override fun getAllClassRoomProgress(r: AllClassRoomProgressRequest) {
         view.showProgress(true)
