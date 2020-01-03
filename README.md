@@ -15,7 +15,7 @@ ayoles is a simple online course app
 
 * Home Menu
 
-![GitHub Logo](/img/2_1.jpg) ![GitHub Logo](/img/2_2.jpg) ![GitHub Logo](/img/2_3.jpg)
+![GitHub Logo](/img/2_1.jpg) ![GitHub Logo](/img/2_3.jpg)
 
 
 
