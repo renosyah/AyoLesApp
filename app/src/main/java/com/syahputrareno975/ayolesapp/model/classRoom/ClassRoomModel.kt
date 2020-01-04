@@ -16,6 +16,8 @@ class ClassRoomModel : BaseModel {
     @SerializedName("student_id")
     var StudentID : String = ""
 
+    var isCompleted = false
+
     constructor()
 
     constructor(Id: String, Course: CourseModel, StudentID: String) {

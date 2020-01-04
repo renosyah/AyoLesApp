@@ -87,6 +87,18 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/course_qualification_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="@string/light_font"
+                    android:text="Lorem\nipsum\ndolor\nsit\namet"
+                    android:textColor="@color/textColorGray"
+                    android:textSize="16sp" />
+
+                <TextView
                     android:fontFamily="@string/medium_font"
                     android:id="@+id/class_is_taken"
                     android:layout_width="match_parent"

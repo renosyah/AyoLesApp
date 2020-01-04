@@ -7,6 +7,8 @@ import com.syahputrareno975.ayolesapp.model.classRoom.OneClassByIdRoomResponse
 import com.syahputrareno975.ayolesapp.model.course.AllCourseResponse
 import com.syahputrareno975.ayolesapp.model.courseDetail.AllCourseDetailRequest
 import com.syahputrareno975.ayolesapp.model.courseDetail.AllCourseDetailResponse
+import com.syahputrareno975.ayolesapp.model.courseQualification.OneCourseQualificationRequest
+import com.syahputrareno975.ayolesapp.model.courseQualification.OneCourseQualificationResponse
 import com.syahputrareno975.ayolesapp.model.queryModel.Query
 import com.syahputrareno975.ayolesapp.service.RetrofitService
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -15,10 +17,34 @@ import io.reactivex.schedulers.Schedulers
 
 class DetailCourseActivityPresenter : DetailCourseActivityContract.Presenter {
 
-
     private val subscriptions = CompositeDisposable()
     private val api : RetrofitService = RetrofitService.create()
     private lateinit var view: DetailCourseActivityContract.View
+
+    override fun getOneCourseQualification(r: OneCourseQualificationRequest) {
+        view.showProgress(true)
+        val subscribe = api.oneCourseQualification(Query(r.toSchema()))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({result : OneCourseQualificationResponse? ->
+                    view.showProgress(false)
+                    if (result != null){
+                        if (result.Errors.isNotEmpty()){
+                            var message = ""
+                            for (i in result.Errors){
+                                message += i.Message
+                            }
+                            view.showError(message)
+                        }
+                        view.onGetOneCourseQualification(result)
+                    }
+                },{t : Throwable ->
+                    view.showProgress(false)
+                    view.showError(t.message!!)
+                })
+
+        subscriptions.add(subscribe)
+    }
 
     override fun getAllCourseDetails(r: AllCourseDetailRequest) {
         view.showProgress(true)

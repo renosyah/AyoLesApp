@@ -3,6 +3,8 @@ package com.syahputrareno975.ayolesapp.ui.fragment.fragment_profile
 import com.syahputrareno975.ayolesapp.model.category.AllCategoryResponse
 import com.syahputrareno975.ayolesapp.model.classRoom.AllClassRoomRequest
 import com.syahputrareno975.ayolesapp.model.classRoom.AllClassRoomResponse
+import com.syahputrareno975.ayolesapp.model.classRoomCertificate.AllClassRoomCertificateRequest
+import com.syahputrareno975.ayolesapp.model.classRoomCertificate.AllClassRoomCertificateResponse
 import com.syahputrareno975.ayolesapp.model.queryModel.Query
 import com.syahputrareno975.ayolesapp.model.student.OneStudentRequest
 import com.syahputrareno975.ayolesapp.model.student.OneStudentResponse
@@ -14,9 +16,35 @@ import io.reactivex.schedulers.Schedulers
 
 class FragmentProfilePresenter : FragmentProfileContract.Presenter {
 
+
     private val subscriptions = CompositeDisposable()
     private val api : RetrofitService = RetrofitService.create()
     private lateinit var view: FragmentProfileContract.View
+
+    override fun getAllClassRoomCertificate(r: AllClassRoomCertificateRequest) {
+        view.showProgress(true)
+        val subscribe = api.allClassRoomCertificate(Query(r.toSchema()))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({result : AllClassRoomCertificateResponse? ->
+                    view.showProgress(false)
+                    if (result != null){
+                        if (result.Errors.isNotEmpty()){
+                            var message = ""
+                            for (i in result.Errors){
+                                message += i.Message
+                            }
+                            view.showError(message)
+                        }
+                        view.onGetAllClassRoomCertificate(result)
+                    }
+                },{t : Throwable ->
+                    view.showProgress(false)
+                    view.showError(t.message!!)
+                })
+
+        subscriptions.add(subscribe)
+    }
 
     override fun getAllClass(r: AllClassRoomRequest) {
         view.showProgress(true)

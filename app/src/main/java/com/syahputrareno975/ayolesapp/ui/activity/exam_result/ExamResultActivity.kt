@@ -2,9 +2,10 @@ package com.syahputrareno975.ayolesapp.ui.activity.exam_result
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,17 +13,16 @@ import com.syahputrareno975.ayolesapp.R
 import com.syahputrareno975.ayolesapp.di.component.DaggerActivityComponent
 import com.syahputrareno975.ayolesapp.di.module.ActivityModule
 import com.syahputrareno975.ayolesapp.model.classRoom.ClassRoomModel
-import com.syahputrareno975.ayolesapp.model.classRoomCertificate.AddClassRoomCertificateRequest
-import com.syahputrareno975.ayolesapp.model.classRoomCertificate.AddClassRoomCertificateResponse
 import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCertificateRequest
 import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCertificateResponse
 import com.syahputrareno975.ayolesapp.model.classRoomExamResult.AllClassRoomExamResultRequest
 import com.syahputrareno975.ayolesapp.model.classRoomExamResult.AllClassRoomExamResultResponse
 import com.syahputrareno975.ayolesapp.model.classRoomExamResult.ClassRoomExamResultModel
+import com.syahputrareno975.ayolesapp.service.RetrofitService
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterExamResult
-import com.syahputrareno975.ayolesapp.util.EmptyUUID
 import kotlinx.android.synthetic.main.activity_exam_result.*
 import javax.inject.Inject
+
 
 class ExamResultActivity : AppCompatActivity(), ExamResultActivityContract.View {
 
@@ -61,6 +61,7 @@ class ExamResultActivity : AppCompatActivity(), ExamResultActivityContract.View 
         request_certificate_button.setOnClickListener {
             // request score
             // and cert
+            presenter.getOneClassRoomCertificate(OneClassRoomCertificateRequest(classRoomModel.Id))
         }
 
         exam_result_nestedscrollview.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
@@ -105,6 +106,10 @@ class ExamResultActivity : AppCompatActivity(), ExamResultActivityContract.View 
         checkNoResultFound(false)
     }
 
+    override fun onGetOneClassRoomCertificate(s: OneClassRoomCertificateResponse) {
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("${RetrofitService.baseURL}cert/${s.Data.ClassRoomCertificateDetail.HashId}"))
+        startActivity(browserIntent)
+    }
 
     override fun onDestroy() {
         super.onDestroy()

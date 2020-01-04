@@ -20,6 +20,7 @@ import com.syahputrareno975.ayolesapp.model.courseExam.AllCourseExamResponse
 import com.syahputrareno975.ayolesapp.model.courseExamAnswer.AllCourseExamAnswerResponse
 import com.syahputrareno975.ayolesapp.model.courseMaterial.AllCourseMaterialResponse
 import com.syahputrareno975.ayolesapp.model.courseMaterialDetail.AllCourseMaterialDetailResponse
+import com.syahputrareno975.ayolesapp.model.courseQualification.OneCourseQualificationResponse
 import com.syahputrareno975.ayolesapp.model.student.LoginResponse
 import com.syahputrareno975.ayolesapp.model.queryModel.Query
 import com.syahputrareno975.ayolesapp.model.student.RegisterResponse
@@ -58,6 +59,9 @@ interface RetrofitService {
 
     @POST("graphql")
     fun allCourseDetails(@Body query: Query) : Observable<AllCourseDetailResponse>
+
+    @POST("graphql")
+    fun oneCourseQualification(@Body query: Query) : Observable<OneCourseQualificationResponse>
 
     @POST("graphql")
     fun allClassRoom(@Body query: Query) : Observable<AllClassRoomResponse>

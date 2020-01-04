@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
 import com.syahputrareno975.ayolesapp.R
 import com.syahputrareno975.ayolesapp.di.component.DaggerActivityComponent
 import com.syahputrareno975.ayolesapp.di.module.ActivityModule
@@ -20,6 +21,9 @@ import com.syahputrareno975.ayolesapp.model.classRoom.OneClassByIdRoomResponse
 import com.syahputrareno975.ayolesapp.model.course.CourseModel
 import com.syahputrareno975.ayolesapp.model.courseDetail.AllCourseDetailRequest
 import com.syahputrareno975.ayolesapp.model.courseDetail.AllCourseDetailResponse
+import com.syahputrareno975.ayolesapp.model.courseQualification.CourseQualificationModel
+import com.syahputrareno975.ayolesapp.model.courseQualification.OneCourseQualificationRequest
+import com.syahputrareno975.ayolesapp.model.courseQualification.OneCourseQualificationResponse
 import com.syahputrareno975.ayolesapp.model.student.StudentModel
 import com.syahputrareno975.ayolesapp.ui.activity.material_classroom.MaterialClassRoomActivity
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterBanner
@@ -69,6 +73,8 @@ class DetailCourseActivity : AppCompatActivity(),DetailCourseActivityContract.Vi
 
         reqAllCourseDetails.Limit = limit_load
         reqAllCourseDetails.CourseId = courseData.Id
+
+        course_qualification_textview.text = CourseQualificationModel().toString()
 
         back_imageview.setOnClickListener {
             finish()
@@ -152,6 +158,11 @@ class DetailCourseActivity : AppCompatActivity(),DetailCourseActivityContract.Vi
         courseData.CourseDetails.addAll(r.Data.CourseDetailList)
         adapterImageDetailCourse.notifyDataSetChanged()
         setDetailsContentBaseOnSelectedImage()
+        presenter.getOneCourseQualification(OneCourseQualificationRequest("",courseData.Id))
+    }
+
+    override fun onGetOneCourseQualification(s: OneCourseQualificationResponse) {
+        course_qualification_textview.text = s.Data.CourseQualificationDetail.toString()
     }
 
     override fun onDestroy() {

@@ -111,15 +111,14 @@
                     tools:visibility="gone">
 
                     <TextView
-                        android:fontFamily="@string/medium_font"
-                        android:id="@+id/complete_course_textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
-                        android:text="Completed Courses"
+                        android:fontFamily="@string/medium_font"
+                        android:text="Completed Course"
                         android:textColor="@color/textColorGray"
                         android:textSize="18sp" />
 

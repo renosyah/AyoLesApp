@@ -8,6 +8,8 @@ import com.syahputrareno975.ayolesapp.model.classRoom.OneClassByIdRoomResponse
 import com.syahputrareno975.ayolesapp.model.course.AllCourseRequest
 import com.syahputrareno975.ayolesapp.model.courseDetail.AllCourseDetailRequest
 import com.syahputrareno975.ayolesapp.model.courseDetail.AllCourseDetailResponse
+import com.syahputrareno975.ayolesapp.model.courseQualification.OneCourseQualificationRequest
+import com.syahputrareno975.ayolesapp.model.courseQualification.OneCourseQualificationResponse
 
 class DetailCourseActivityContract {
     interface View: BaseContract.View {
@@ -20,6 +22,7 @@ class DetailCourseActivityContract {
         fun onGetAllCourseDetails(r : AllCourseDetailResponse)
         fun onAddClassRoom(s : AddClassRoomResponse)
         fun onGetOneClassRoomById(s : OneClassByIdRoomResponse)
+        fun onGetOneCourseQualification(s : OneCourseQualificationResponse)
     }
 
     interface Presenter: BaseContract.Presenter<View> {
@@ -28,5 +31,6 @@ class DetailCourseActivityContract {
         fun getAllCourseDetails(r : AllCourseDetailRequest)
         fun addClassRoom(r : AddClassRoomRequest)
         fun getOneClassRoomById(r : OneClassByIdRoomRequest)
+        fun getOneCourseQualification(r : OneCourseQualificationRequest)
     }
 }

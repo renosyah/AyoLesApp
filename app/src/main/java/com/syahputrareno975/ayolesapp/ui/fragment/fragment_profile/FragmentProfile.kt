@@ -19,19 +19,23 @@ import com.syahputrareno975.ayolesapp.di.module.FragmentModule
 import com.syahputrareno975.ayolesapp.model.classRoom.AllClassRoomRequest
 import com.syahputrareno975.ayolesapp.model.classRoom.AllClassRoomResponse
 import com.syahputrareno975.ayolesapp.model.classRoom.ClassRoomModel
+import com.syahputrareno975.ayolesapp.model.classRoomCertificate.AllClassRoomCertificateRequest
+import com.syahputrareno975.ayolesapp.model.classRoomCertificate.AllClassRoomCertificateResponse
+import com.syahputrareno975.ayolesapp.model.classRoomCertificate.ClassRoomCertificateModel
 import com.syahputrareno975.ayolesapp.model.student.OneStudentRequest
 import com.syahputrareno975.ayolesapp.model.student.OneStudentResponse
 import com.syahputrareno975.ayolesapp.model.student.StudentModel
+import com.syahputrareno975.ayolesapp.ui.activity.exam_result.ExamResultActivity
 import com.syahputrareno975.ayolesapp.ui.activity.login.LoginActivity
 import com.syahputrareno975.ayolesapp.ui.activity.update_profile.UpdateProfileActivity
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterClassRoom
+import com.syahputrareno975.ayolesapp.ui.adapter.AdapterCompletedCourse
 import com.syahputrareno975.ayolesapp.ui.fragment.fragment_class.FragmentClassContract
 import com.syahputrareno975.ayolesapp.util.SerializableSave
 import kotlinx.android.synthetic.main.fragment_profile.*
 import javax.inject.Inject
 
 class FragmentProfile : Fragment(),FragmentProfileContract.View {
-
 
     @Inject
     lateinit var presenter: FragmentProfileContract.Presenter
@@ -45,10 +49,12 @@ class FragmentProfile : Fragment(),FragmentProfileContract.View {
     lateinit var studentSession : StudentModel
 
     //temporary
-    lateinit var adapterClassRoomComplete : AdapterClassRoom
+    lateinit var adapterClassRoomComplete : AdapterCompletedCourse
     val listClassRoomComplete : ArrayList<ClassRoomModel> = ArrayList()
-
     val reqAllCompletedClass = AllClassRoomRequest()
+
+    val listAllCert : ArrayList<ClassRoomCertificateModel> = ArrayList()
+    val reqAllCert = AllClassRoomCertificateRequest()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,11 +84,17 @@ class FragmentProfile : Fragment(),FragmentProfileContract.View {
         student_name_textview.text = studentSession.Name
         student_email_textview.text = studentSession.Email
 
+        reqAllCompletedClass.Offset = 0
         reqAllCompletedClass.Limit = limit_load_class
         reqAllCompletedClass.StudentId = studentSession.Id
 
+        reqAllCert.Offset = 0
+        reqAllCert.Limit = limit_load_class
+        reqAllCert.StudentId = studentSession.Id
+
         loadmore_textview.setOnClickListener {
             reqAllCompletedClass.Offset += limit_load_class
+            reqAllCert.Offset += limit_load_class
             presenter.getAllClass(reqAllCompletedClass)
         }
 
@@ -120,7 +132,14 @@ class FragmentProfile : Fragment(),FragmentProfileContract.View {
     }
 
     fun getProfile(){
-        adapterClassRoomComplete = AdapterClassRoom(ctx,listClassRoomComplete){classRoomModel, i ->
+        adapterClassRoomComplete = AdapterCompletedCourse(ctx,listClassRoomComplete){classRoomModel, i ->
+            if (!classRoomModel.isCompleted) {
+                return@AdapterCompletedCourse
+            }
+
+            val intent = Intent(context, ExamResultActivity::class.java)
+            intent.putExtra("data", classRoomModel)
+            startActivity(intent)
 
         }
         complete_course_recycleview.adapter = adapterClassRoomComplete
@@ -128,6 +147,17 @@ class FragmentProfile : Fragment(),FragmentProfileContract.View {
 
         presenter.getOneStudent(OneStudentRequest(studentSession.Id))
         presenter.getAllClass(reqAllCompletedClass)
+    }
+
+    fun checkCompleteClass(){
+        for (i in listAllCert){
+            for (o in listClassRoomComplete){
+                if (o.Id == i.ClassroomId){
+                    o.isCompleted = true
+                }
+            }
+        }
+        adapterClassRoomComplete.notifyDataSetChanged()
     }
 
     override fun showProgress(show: Boolean) {
@@ -148,6 +178,12 @@ class FragmentProfile : Fragment(),FragmentProfileContract.View {
         layout_completed_course.visibility = if (listClassRoomComplete.isEmpty()) View.GONE else View.VISIBLE
         adapterClassRoomComplete.notifyDataSetChanged()
         loadmore_textview.visibility = if (s.Data.ClassRoomList.isEmpty()) View.GONE else View.VISIBLE
+        presenter.getAllClassRoomCertificate(reqAllCert)
+    }
+
+    override fun onGetAllClassRoomCertificate(s: AllClassRoomCertificateResponse) {
+        listAllCert.addAll(s.Data.ClassRoomCertificateList)
+        checkCompleteClass()
     }
 
     override fun onDestroyView() {

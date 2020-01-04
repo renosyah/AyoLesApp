@@ -17,11 +17,13 @@ class ExamResultActivityContract {
 
         // add more for request
         fun onGetAllClassRoomExamResult(s : AllClassRoomExamResultResponse)
+        fun onGetOneClassRoomCertificate(s : OneClassRoomCertificateResponse)
     }
 
     interface Presenter: BaseContract.Presenter<View> {
 
         // add for request
         fun getAllClassRoomExamResult(r : AllClassRoomExamResultRequest)
+        fun getOneClassRoomCertificate(r : OneClassRoomCertificateRequest)
     }
 }
