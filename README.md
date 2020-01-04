@@ -41,6 +41,8 @@ ayoles is a simple online course app
 
 ![GitHub Logo](/img/6_1.jpg) ![GitHub Logo](/img/6_2.jpg)
 
+## server side with golang
 
+[github.com/renosyah/AyoLesCore](https://github.com/renosyah/AyoLesCore)
 
 
