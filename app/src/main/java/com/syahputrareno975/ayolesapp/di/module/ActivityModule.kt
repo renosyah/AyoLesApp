@@ -2,6 +2,8 @@ package com.syahputrareno975.ayolesapp.di.module
 
 import android.app.Activity
 import com.syahputrareno975.ayolesapp.service.RetrofitService
+import com.syahputrareno975.ayolesapp.ui.activity.certificate_view.CertificateActivityContract
+import com.syahputrareno975.ayolesapp.ui.activity.certificate_view.CertificateActivityPresenter
 import com.syahputrareno975.ayolesapp.ui.activity.detail_course.DetailCourseActivityContract
 import com.syahputrareno975.ayolesapp.ui.activity.detail_course.DetailCourseActivityPresenter
 import com.syahputrareno975.ayolesapp.ui.activity.exam_classroom.ExamClassRoomActivityContract
@@ -81,4 +83,10 @@ class ActivityModule(private var activity : Activity) {
     fun provideExamResultActivityPresenter(): ExamResultActivityContract.Presenter {
         return ExamResultActivityPresenter()
     }
+
+    @Provides
+    fun provideCertificateActivityPresenter(): CertificateActivityContract.Presenter {
+        return  CertificateActivityPresenter()
+    }
+
 }

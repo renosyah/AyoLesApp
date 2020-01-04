@@ -114,6 +114,9 @@ interface RetrofitService {
     @POST("graphql")
     fun allClassRoomCertificate(@Body query: Query) : Observable<AllClassRoomCertificateResponse>
 
+    @GET("cert/{hash_id}?type=as_text")
+    fun getCertificate(@Path("hash_id") hashId : String) : Observable<String>
+
     companion object {
 
         val baseURL = "http://192.168.137.1:8000/"

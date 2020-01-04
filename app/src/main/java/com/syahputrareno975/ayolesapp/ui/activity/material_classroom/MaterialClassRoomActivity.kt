@@ -34,6 +34,7 @@ import com.syahputrareno975.ayolesapp.model.courseMaterial.AllCourseMaterialRequ
 import com.syahputrareno975.ayolesapp.model.courseMaterial.AllCourseMaterialResponse
 import com.syahputrareno975.ayolesapp.model.courseMaterial.CourseMaterialModel
 import com.syahputrareno975.ayolesapp.service.RetrofitService
+import com.syahputrareno975.ayolesapp.ui.activity.certificate_view.CertificateActivity
 import com.syahputrareno975.ayolesapp.ui.activity.exam_classroom.ExamClassRoomActivity
 import com.syahputrareno975.ayolesapp.ui.activity.exam_result.ExamResultActivity
 import com.syahputrareno975.ayolesapp.ui.activity.login.LoginActivity
@@ -255,8 +256,9 @@ class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityC
             see_certificate_button.setTextColor(ContextCompat.getColor(context,R.color.textColorWhite))
             see_certificate_button.setOnClickListener {
 
-                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("${RetrofitService.baseURL}cert/${r.Data.ClassRoomCertificateDetail.HashId}"))
-                startActivity(browserIntent)
+                val intent = Intent(context, CertificateActivity::class.java)
+                intent.putExtra("data",classRoomModel)
+                startActivity(intent)
             }
         }
     }

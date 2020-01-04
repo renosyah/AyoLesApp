@@ -19,6 +19,7 @@ import com.syahputrareno975.ayolesapp.model.classRoomExamResult.AllClassRoomExam
 import com.syahputrareno975.ayolesapp.model.classRoomExamResult.AllClassRoomExamResultResponse
 import com.syahputrareno975.ayolesapp.model.classRoomExamResult.ClassRoomExamResultModel
 import com.syahputrareno975.ayolesapp.service.RetrofitService
+import com.syahputrareno975.ayolesapp.ui.activity.certificate_view.CertificateActivity
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterExamResult
 import kotlinx.android.synthetic.main.activity_exam_result.*
 import javax.inject.Inject
@@ -107,8 +108,9 @@ class ExamResultActivity : AppCompatActivity(), ExamResultActivityContract.View 
     }
 
     override fun onGetOneClassRoomCertificate(s: OneClassRoomCertificateResponse) {
-        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("${RetrofitService.baseURL}cert/${s.Data.ClassRoomCertificateDetail.HashId}"))
-        startActivity(browserIntent)
+        val intent = Intent(context,CertificateActivity::class.java)
+        intent.putExtra("data",classRoomModel)
+        startActivity(intent)
     }
 
     override fun onDestroy() {

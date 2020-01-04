@@ -1,6 +1,7 @@
 package com.syahputrareno975.ayolesapp.di.component
 
 import com.syahputrareno975.ayolesapp.di.module.ActivityModule
+import com.syahputrareno975.ayolesapp.ui.activity.certificate_view.CertificateActivity
 import com.syahputrareno975.ayolesapp.ui.activity.detail_course.DetailCourseActivity
 import com.syahputrareno975.ayolesapp.ui.activity.exam_classroom.ExamClassRoomActivity
 import com.syahputrareno975.ayolesapp.ui.activity.exam_classroom.ExamClassRoomActivityPresenter
@@ -26,4 +27,5 @@ interface ActivityComponent {
     fun inject(materialDetailClassRoomActivity: MaterialDetailClassRoomActivity)
     fun inject(examClassRoomActivity: ExamClassRoomActivity)
     fun inject(examResultActivity: ExamResultActivity)
+    fun inject(certificateActivity: CertificateActivity)
 }
