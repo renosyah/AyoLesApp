@@ -18,6 +18,10 @@ import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCer
 import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCertificateResponse
 import com.syahputrareno975.ayolesapp.model.classRoomProgress.AddClassRoomProgressRequest
 import com.syahputrareno975.ayolesapp.model.classRoomProgress.AddClassRoomProgressResponse
+import com.syahputrareno975.ayolesapp.model.classRoomQualification.ClassRoomQualificationModel.Companion.STATUS_NO_PROGRESS
+import com.syahputrareno975.ayolesapp.model.classRoomQualification.ClassRoomQualificationModel.Companion.STATUS_PASS_EXAM
+import com.syahputrareno975.ayolesapp.model.classRoomQualification.OneClassRoomQualificationRequest
+import com.syahputrareno975.ayolesapp.model.classRoomQualification.OneClassRoomQualificationResponse
 import com.syahputrareno975.ayolesapp.model.courseMaterial.AllCourseMaterialRequest
 import com.syahputrareno975.ayolesapp.model.courseMaterial.AllCourseMaterialResponse
 import com.syahputrareno975.ayolesapp.model.courseMaterial.CourseMaterialModel
@@ -36,6 +40,7 @@ import kotlinx.android.synthetic.main.activity_search_course.*
 import javax.inject.Inject
 
 class MaterialDetailClassRoomActivity : AppCompatActivity(),MaterialDetailClassRoomActivityContract.View {
+
 
     @Inject
     lateinit var presenter: MaterialDetailClassRoomActivityContract.Presenter
@@ -155,7 +160,7 @@ class MaterialDetailClassRoomActivity : AppCompatActivity(),MaterialDetailClassR
         // will show
         exam_button.visibility = if (s.Data.CourseMaterialList.size <= 1) View.VISIBLE else View.GONE
         if (s.Data.CourseMaterialList.size <= 1){
-            presenter.getOneClassRoomCertificate(OneClassRoomCertificateRequest(classRoomModel.Id))
+            presenter.getOneClassRoomQualification(OneClassRoomQualificationRequest(classRoomModel.Id))
         }
 
         // by using loop then break
@@ -195,10 +200,9 @@ class MaterialDetailClassRoomActivity : AppCompatActivity(),MaterialDetailClassR
             }
         }
     }
-
-    override fun onGetOneClassRoomCertificate(r: OneClassRoomCertificateResponse) {
-        exam_button.text = (if (r.Data.ClassRoomCertificateDetail.Id == EmptyUUID.EmptyUUID) "Start Exam" else "Exam Result")
-        if (r.Data.ClassRoomCertificateDetail.Id != EmptyUUID.EmptyUUID) {
+    override fun onGetOneClassRoomQualification(s: OneClassRoomQualificationResponse) {
+        exam_button.text = (if (s.Data.ClassRoomQualificationDetail.Status == STATUS_NO_PROGRESS) "Start Exam" else "Exam Result")
+        if (s.Data.ClassRoomQualificationDetail.Status != STATUS_NO_PROGRESS) {
             exam_button.setOnClickListener {
 
                 // go to exam result

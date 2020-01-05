@@ -42,9 +42,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:gravity="center"
                             android:fontFamily="@string/medium_font"
-                            android:text="Student Profile"
+                            android:gravity="center"
+                            android:text="@string/profile_title"
                             android:textAlignment="center"
                             android:textColor="@color/textColorGray"
                             android:textSize="24sp" />
@@ -118,7 +118,7 @@
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
                         android:fontFamily="@string/medium_font"
-                        android:text="Completed Course"
+                        android:text="@string/profile_completed_course"
                         android:textColor="@color/textColorGray"
                         android:textSize="18sp" />
 
@@ -129,7 +129,6 @@
                         android:nestedScrollingEnabled="false" />
 
                     <TextView
-                        android:fontFamily="@string/medium_font"
                         android:id="@+id/loadmore_textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -138,8 +137,9 @@
                         android:layout_marginRight="20dp"
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
+                        android:fontFamily="@string/medium_font"
                         android:gravity="center"
-                        android:text="Load More"
+                        android:text="@string/profile_load_more"
                         android:textColor="@color/textColorGray"
                         android:textSize="18sp" />
 

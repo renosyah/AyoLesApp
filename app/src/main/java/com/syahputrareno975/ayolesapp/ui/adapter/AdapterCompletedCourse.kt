@@ -44,7 +44,7 @@ class AdapterCompletedCourse : RecyclerView.Adapter<AdapterCompletedCourse.Holde
                 .into(holder.image)
 
         holder.title.text = item.Course.CourseName
-        holder.subtitle.text = "By ${item.Course.Teacher.Name}"
+        holder.subtitle.text = "${context.getString(R.string.by)} ${item.Course.Teacher.Name}"
         if (item.Course.CourseDetails.isNotEmpty()){
             holder.subtitle.text = item.Course.CourseDetails.get(0).OverviewText
         }

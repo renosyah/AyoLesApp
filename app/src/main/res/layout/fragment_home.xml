@@ -36,32 +36,32 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:fontFamily="@string/medium_font"
                             android:id="@+id/search_home_edittext"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
+                            android:hint="@string/home_search_course"
                             android:background="@android:color/white"
                             android:drawableLeft="@android:drawable/ic_menu_search"
-                            android:hint="Search Courses"
+                            android:fontFamily="@string/medium_font"
                             android:imeOptions="actionSearch"
                             android:maxLines="1"
                             android:singleLine="true"
                             android:textSize="14sp" />
 
                         <TextView
-                            android:fontFamily="@string/medium_font"
                             android:id="@+id/go_search_textview"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="1dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginRight="20dp"
+                            android:fontFamily="@string/medium_font"
                             android:gravity="center"
-                            android:text="Go"
                             android:textAlignment="center"
                             android:textSize="20sp"
+                            android:text="@string/text_go_search"
                             tools:visibility="gone" />
 
                     </LinearLayout>

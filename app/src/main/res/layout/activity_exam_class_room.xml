@@ -67,7 +67,7 @@
                     android:background="@color/colorPrimaryLight"
                     android:fontFamily="@string/medium_font"
                     android:padding="10dp"
-                    android:text="Finish My Exam"
+                    android:text="@string/exam_finish"
                     android:textAllCaps="false"
                     android:textColor="@color/textColorWhite"
                     android:textSize="18sp" />

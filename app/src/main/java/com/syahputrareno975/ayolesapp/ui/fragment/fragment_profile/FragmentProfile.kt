@@ -107,9 +107,9 @@ class FragmentProfile : Fragment(),FragmentProfileContract.View {
         logout_imageview.setOnClickListener {
 
             AlertDialog.Builder(ctx)
-                .setTitle("Logout")
-                .setMessage("Are you sure want logout?")
-                .setPositiveButton("Yes") { dialog, which ->
+                .setTitle(getString(R.string.logout))
+                .setMessage(getString(R.string.logout_message))
+                .setPositiveButton(getString(R.string.yes)) { dialog, which ->
 
                     if (SerializableSave(ctx, SerializableSave.userDataFileSessionName).delete()){
                         startActivity(Intent(ctx,LoginActivity::class.java))
@@ -118,7 +118,7 @@ class FragmentProfile : Fragment(),FragmentProfileContract.View {
 
                     dialog.dismiss()
 
-                }.setNegativeButton("No"){dialog, which ->
+                }.setNegativeButton(getString(R.string.no)){dialog, which ->
 
                     dialog.dismiss()
 

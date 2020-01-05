@@ -14,6 +14,7 @@ import com.syahputrareno975.ayolesapp.model.classRoomExamProgress.DeleteClassRoo
 import com.syahputrareno975.ayolesapp.model.classRoomExamResult.AllClassRoomExamResultResponse
 import com.syahputrareno975.ayolesapp.model.classRoomProgress.AddClassRoomProgressResponse
 import com.syahputrareno975.ayolesapp.model.classRoomProgress.AllClassRoomProgressResponse
+import com.syahputrareno975.ayolesapp.model.classRoomQualification.OneClassRoomQualificationResponse
 import com.syahputrareno975.ayolesapp.model.course.AllCourseResponse
 import com.syahputrareno975.ayolesapp.model.courseDetail.AllCourseDetailResponse
 import com.syahputrareno975.ayolesapp.model.courseExam.AllCourseExamResponse
@@ -114,8 +115,8 @@ interface RetrofitService {
     @POST("graphql")
     fun allClassRoomCertificate(@Body query: Query) : Observable<AllClassRoomCertificateResponse>
 
-    @GET("cert/{hash_id}?type=as_text")
-    fun getCertificate(@Path("hash_id") hashId : String) : Observable<String>
+    @POST("graphql")
+    fun oneClassRoomQualification(@Body query: Query) : Observable<OneClassRoomQualificationResponse>
 
     companion object {
 

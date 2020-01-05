@@ -28,6 +28,11 @@ import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCer
 import com.syahputrareno975.ayolesapp.model.classRoomProgress.AllClassRoomProgressRequest
 import com.syahputrareno975.ayolesapp.model.classRoomProgress.AllClassRoomProgressResponse
 import com.syahputrareno975.ayolesapp.model.classRoomProgress.ClassRoomProgressModel
+import com.syahputrareno975.ayolesapp.model.classRoomQualification.ClassRoomQualificationModel.Companion.STATUS_NOT_PASS_EXAM
+import com.syahputrareno975.ayolesapp.model.classRoomQualification.ClassRoomQualificationModel.Companion.STATUS_NO_PROGRESS
+import com.syahputrareno975.ayolesapp.model.classRoomQualification.ClassRoomQualificationModel.Companion.STATUS_PASS_EXAM
+import com.syahputrareno975.ayolesapp.model.classRoomQualification.OneClassRoomQualificationRequest
+import com.syahputrareno975.ayolesapp.model.classRoomQualification.OneClassRoomQualificationResponse
 import com.syahputrareno975.ayolesapp.model.courseDetail.AllCourseDetailRequest
 import com.syahputrareno975.ayolesapp.model.courseDetail.AllCourseDetailResponse
 import com.syahputrareno975.ayolesapp.model.courseMaterial.AllCourseMaterialRequest
@@ -48,6 +53,7 @@ import kotlinx.android.synthetic.main.activity_material_classroom.*
 import javax.inject.Inject
 
 class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityContract.View {
+
 
     @Inject
     lateinit var presenter: MaterialClassRoomActivityContract.Presenter
@@ -143,7 +149,7 @@ class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityC
         reqAllClassRoomProgress.Offset = 0
         reqAllClassRoomProgress.ClassroomId = classRoomModel.Id
 
-        title_examp_texview.text =  "finish ${classRoomModel.Course.CourseName}'s exam to get your certificate"
+        title_examp_texview.text =  getString(R.string.finish_to_get_cert)
 
         loadmore_textview.setOnClickListener {
             reqAllMaterialClassRoom.Offset += limit_load
@@ -161,7 +167,7 @@ class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityC
         })
 
         getAllClassRoomMaterials()
-        presenter.getOneClassRoomCertificate(OneClassRoomCertificateRequest(classRoomModel.Id))
+        presenter.getOneClassRoomQualification(OneClassRoomQualificationRequest(classRoomModel.Id))
     }
 
     fun setImageCourse(){
@@ -224,7 +230,7 @@ class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityC
         listMaterialClassRoom.addAll(s.Data.CourseMaterialList)
         adapterMaterialClassRoom.notifyDataSetChanged()
         checkNoResultFound(false)
-        loadmore_textview.text = if (s.Data.CourseMaterialList.isEmpty()) "" else loadmore_textview.text
+        loadmore_textview.text = if (s.Data.CourseMaterialList.isEmpty()) "" else getString(R.string.load_more_material)
         examp_layout.visibility = if (s.Data.CourseMaterialList.isEmpty() && listMaterialClassRoom.isNotEmpty()) View.VISIBLE else View.GONE
         getClassRoomProgress()
     }
@@ -240,9 +246,14 @@ class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityC
         setDetailsContentBaseOnSelectedImage()
     }
 
-    override fun onGetOneClassRoomCertificate(r: OneClassRoomCertificateResponse) {
-        start_exam_button.setText(if (r.Data.ClassRoomCertificateDetail.Id == EmptyUUID.EmptyUUID) "Start Exam" else "Result")
-        if (r.Data.ClassRoomCertificateDetail.Id != EmptyUUID.EmptyUUID) {
+    override fun onGetOneClassRoomQualification(s: OneClassRoomQualificationResponse) {
+        start_exam_button.setText(
+            if (s.Data.ClassRoomQualificationDetail.Status != STATUS_NO_PROGRESS)
+                getString(R.string.result)
+            else
+                getString(R.string.start_exam)
+        )
+        if (s.Data.ClassRoomQualificationDetail.Status != STATUS_NO_PROGRESS) {
             start_exam_button.setOnClickListener {
 
                 // go to exam result
@@ -256,13 +267,17 @@ class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityC
             see_certificate_button.setTextColor(ContextCompat.getColor(context,R.color.textColorWhite))
             see_certificate_button.setOnClickListener {
 
+                if (s.Data.ClassRoomQualificationDetail.Status == STATUS_NOT_PASS_EXAM){
+                    Toast.makeText(context,getString(R.string.not_qualified),Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
+
                 val intent = Intent(context, CertificateActivity::class.java)
                 intent.putExtra("data",classRoomModel)
                 startActivity(intent)
             }
         }
     }
-
 
 
     override fun onDestroy() {

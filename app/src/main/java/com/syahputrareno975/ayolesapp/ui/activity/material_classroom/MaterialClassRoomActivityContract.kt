@@ -5,6 +5,8 @@ import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCer
 import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCertificateResponse
 import com.syahputrareno975.ayolesapp.model.classRoomProgress.AllClassRoomProgressRequest
 import com.syahputrareno975.ayolesapp.model.classRoomProgress.AllClassRoomProgressResponse
+import com.syahputrareno975.ayolesapp.model.classRoomQualification.OneClassRoomQualificationRequest
+import com.syahputrareno975.ayolesapp.model.classRoomQualification.OneClassRoomQualificationResponse
 import com.syahputrareno975.ayolesapp.model.courseDetail.AllCourseDetailRequest
 import com.syahputrareno975.ayolesapp.model.courseDetail.AllCourseDetailResponse
 import com.syahputrareno975.ayolesapp.model.courseMaterial.AllCourseMaterialRequest
@@ -21,7 +23,7 @@ class MaterialClassRoomActivityContract {
         fun onGetAllClassRoomProgress(s : AllClassRoomProgressResponse)
         fun onGetAllCourseMaterial(s : AllCourseMaterialResponse)
         fun onGetAllCourseDetails(s : AllCourseDetailResponse)
-        fun onGetOneClassRoomCertificate(r : OneClassRoomCertificateResponse)
+        fun onGetOneClassRoomQualification(s : OneClassRoomQualificationResponse)
     }
 
     interface Presenter: BaseContract.Presenter<View> {
@@ -30,6 +32,6 @@ class MaterialClassRoomActivityContract {
         fun getAllClassRoomProgress(r : AllClassRoomProgressRequest)
         fun getAllCourseMaterial(r : AllCourseMaterialRequest)
         fun getAllCourseDetails(r : AllCourseDetailRequest)
-        fun getOneClassRoomCertificate(r : OneClassRoomCertificateRequest)
+        fun getOneClassRoomQualification(r : OneClassRoomQualificationRequest)
     }
 }

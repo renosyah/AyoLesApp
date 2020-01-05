@@ -96,12 +96,12 @@
                 </LinearLayout>
 
                 <TextView
-                    android:fontFamily="@string/medium_font"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:text="Courses Materials"
+                    android:fontFamily="@string/medium_font"
+                    android:text="@string/course_materials"
                     android:textColor="@color/textColorGray"
                     android:textSize="24sp" />
 
@@ -129,7 +129,7 @@
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
                         android:fontFamily="@string/medium_font"
-                        android:text="Courses Exam"
+                        android:text="@string/course_exam"
                         android:textColor="@color/textColorGray"
                         android:textSize="24sp" />
 
@@ -173,7 +173,7 @@
                                     android:layout_marginRight="20dp"
                                     android:background="@color/textColorLightGray"
                                     android:padding="10dp"
-                                    android:text="Certificate"
+                                    android:text="@string/cert_title"
                                     android:textAllCaps="false"
                                     android:textColor="@color/textColorWhite"
                                     android:textSize="18sp" />

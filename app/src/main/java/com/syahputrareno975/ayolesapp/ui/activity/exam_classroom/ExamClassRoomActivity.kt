@@ -1,5 +1,6 @@
 package com.syahputrareno975.ayolesapp.ui.activity.exam_classroom
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
@@ -52,6 +53,7 @@ class ExamClassRoomActivity : AppCompatActivity(),ExamClassRoomActivityContract.
         initWidget()
     }
 
+    @SuppressLint("SetTextI18n")
     fun initWidget(){
         this.context = this@ExamClassRoomActivity
 
@@ -69,14 +71,14 @@ class ExamClassRoomActivity : AppCompatActivity(),ExamClassRoomActivityContract.
         reqAllExamLastProgress.Limit = limit_load
         reqAllExamLastProgress.ClassroomId = classRoomModel.Id
 
-        title_exam_textview.text = "${classRoomModel.Course.CourseName}'s Exam"
+        title_exam_textview.text = " ${getString(R.string.exam_title)} ${classRoomModel.Course.CourseName}"
         not_found.visibility = View.GONE
         finish_exam_button.visibility = View.GONE
         finish_exam_button.setOnClickListener {
 
             // submit exam
             // for final score
-            Toast.makeText(context,if (isAllExamSubmited()) "Exam finish" else "please answer all exam",Toast.LENGTH_SHORT).show()
+            Toast.makeText(context,if (isAllExamSubmited()) getString(R.string.exam_finish) else getString(R.string.please_answer_exam),Toast.LENGTH_SHORT).show()
             if (!isAllExamSubmited()){
                 return@setOnClickListener
             }
@@ -98,7 +100,7 @@ class ExamClassRoomActivity : AppCompatActivity(),ExamClassRoomActivityContract.
     fun requestAllExam(){
         adapterExam = AdapterExam(context,listExam,{courseExamModel, i ->
             if (!listExam.get(i).isAnswered()) {
-                Toast.makeText(context,"Please choose answer!",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.please_choose_answer),Toast.LENGTH_SHORT).show()
                 return@AdapterExam
             }
             if (courseExamModel.getAnswer() != null){
@@ -196,14 +198,14 @@ class ExamClassRoomActivity : AppCompatActivity(),ExamClassRoomActivityContract.
         }
 
         AlertDialog.Builder(context)
-                .setTitle("Quit Exam")
-                .setMessage("Are you sure want to finish and exit ${classRoomModel.Course.CourseName}'s exam?")
-                .setPositiveButton("Yes") { dialog, which ->
+                .setTitle(getString(R.string.quit_exam))
+                .setMessage(getString(R.string.quit_exam_message))
+                .setPositiveButton(getString(R.string.yes)) { dialog, which ->
                     setResult(Activity.RESULT_OK)
                     finish()
                     dialog.dismiss()
 
-                }.setNegativeButton("No"){dialog, which ->
+                }.setNegativeButton(getString(R.string.no)){dialog, which ->
                     dialog.dismiss()
 
                 }.setCancelable(false)

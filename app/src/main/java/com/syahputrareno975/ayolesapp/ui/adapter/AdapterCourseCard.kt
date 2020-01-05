@@ -45,8 +45,8 @@ class AdapterCourseCard : RecyclerView.Adapter<AdapterCourseCard.Holder>{
             onClick.invoke(item,position)
         }
 
-        holder.category_label.text = "Category : ${item.Category.Name}"
-        holder.teach_by.text = "By ${item.Teacher.Name}"
+        holder.category_label.text = "${context.getString(R.string.category)} : ${item.Category.Name}"
+        holder.teach_by.text = "${context.getString(R.string.by)} ${item.Teacher.Name}"
     }
 
     class Holder : RecyclerView.ViewHolder {

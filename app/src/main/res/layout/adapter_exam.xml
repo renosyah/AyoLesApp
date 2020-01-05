@@ -90,7 +90,7 @@
                     android:background="@color/colorPrimaryLight"
                     android:fontFamily="@string/medium_font"
                     android:padding="10dp"
-                    android:text="Submit"
+                    android:text="@string/submit"
                     android:textAllCaps="false"
                     android:textColor="@color/textColorWhite"
                     android:textSize="18sp"

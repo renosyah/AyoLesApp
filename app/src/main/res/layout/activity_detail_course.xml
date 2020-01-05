@@ -99,7 +99,6 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:fontFamily="@string/medium_font"
                     android:id="@+id/class_is_taken"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -107,14 +106,14 @@
                     android:layout_marginTop="30dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="40dp"
+                    android:fontFamily="@string/medium_font"
                     android:gravity="center"
-                    android:text="Student Already Has Taken This class"
+                    android:text="@string/course_taken"
                     android:textAlignment="center"
                     android:textSize="18sp"
                     tools:visibility="gone" />
 
                 <Button
-                    android:fontFamily="@string/medium_font"
                     android:id="@+id/go_to_class_button"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -122,24 +121,25 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="60dp"
                     android:background="@color/colorPrimaryLight"
+                    android:fontFamily="@string/medium_font"
                     android:padding="10dp"
-                    android:text="Go To Class"
+                    android:text="@string/got_to_class"
                     android:textAllCaps="false"
                     android:textColor="@color/textColorWhite"
                     android:textSize="18sp" />
 
                 <Button
-                    android:fontFamily="@string/medium_font"
                     android:id="@+id/add_to_class_button"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
                     android:layout_marginBottom="40dp"
                     android:background="@color/colorPrimaryLight"
+                    android:fontFamily="@string/medium_font"
                     android:padding="10dp"
-                    android:text="Start Class"
+                    android:text="@string/start_class"
                     android:textAllCaps="false"
                     android:textColor="@color/textColorWhite"
                     android:textSize="18sp" />

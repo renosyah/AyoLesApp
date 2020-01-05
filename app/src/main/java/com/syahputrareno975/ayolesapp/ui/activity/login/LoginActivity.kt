@@ -73,7 +73,7 @@ class LoginActivity : AppCompatActivity(),LoginActivityContract.View {
         error_login_message.visibility = View.GONE
         if (email_edittext.text.toString().isEmpty() || password_edittext.text.toString().isEmpty()){
             error_login_message.visibility = View.VISIBLE
-            error_login_message.text = "Please fill all form!"
+            error_login_message.text = getString(R.string.login_please_fill_form)
             return
         }
         presenter.login(

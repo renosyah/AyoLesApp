@@ -7,6 +7,8 @@ import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCer
 import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCertificateResponse
 import com.syahputrareno975.ayolesapp.model.classRoomExamResult.AllClassRoomExamResultRequest
 import com.syahputrareno975.ayolesapp.model.classRoomExamResult.AllClassRoomExamResultResponse
+import com.syahputrareno975.ayolesapp.model.classRoomQualification.OneClassRoomQualificationRequest
+import com.syahputrareno975.ayolesapp.model.classRoomQualification.OneClassRoomQualificationResponse
 
 class ExamResultActivityContract {
     interface View: BaseContract.View {
@@ -18,6 +20,7 @@ class ExamResultActivityContract {
         // add more for request
         fun onGetAllClassRoomExamResult(s : AllClassRoomExamResultResponse)
         fun onGetOneClassRoomCertificate(s : OneClassRoomCertificateResponse)
+        fun onGetOneClassRoomQualification(s : OneClassRoomQualificationResponse)
     }
 
     interface Presenter: BaseContract.Presenter<View> {
@@ -25,5 +28,6 @@ class ExamResultActivityContract {
         // add for request
         fun getAllClassRoomExamResult(r : AllClassRoomExamResultRequest)
         fun getOneClassRoomCertificate(r : OneClassRoomCertificateRequest)
+        fun getOneClassRoomQualification(r : OneClassRoomQualificationRequest)
     }
 }

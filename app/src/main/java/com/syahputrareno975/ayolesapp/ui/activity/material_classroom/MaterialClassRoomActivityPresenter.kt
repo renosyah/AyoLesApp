@@ -4,6 +4,8 @@ import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCer
 import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCertificateResponse
 import com.syahputrareno975.ayolesapp.model.classRoomProgress.AllClassRoomProgressRequest
 import com.syahputrareno975.ayolesapp.model.classRoomProgress.AllClassRoomProgressResponse
+import com.syahputrareno975.ayolesapp.model.classRoomQualification.OneClassRoomQualificationRequest
+import com.syahputrareno975.ayolesapp.model.classRoomQualification.OneClassRoomQualificationResponse
 import com.syahputrareno975.ayolesapp.model.courseDetail.AllCourseDetailRequest
 import com.syahputrareno975.ayolesapp.model.courseDetail.AllCourseDetailResponse
 import com.syahputrareno975.ayolesapp.model.courseMaterial.AllCourseMaterialRequest
@@ -20,20 +22,20 @@ class MaterialClassRoomActivityPresenter: MaterialClassRoomActivityContract.Pres
     private val api : RetrofitService = RetrofitService.create()
     private lateinit var view: MaterialClassRoomActivityContract.View
 
-    override fun getOneClassRoomCertificate(r: OneClassRoomCertificateRequest) {
+    override fun getOneClassRoomQualification(r: OneClassRoomQualificationRequest) {
         view.showProgress(true)
-        val subscribe = api.oneClassRoomCertificate(Query(r.toSchema()))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({result : OneClassRoomCertificateResponse? ->
-                    view.showProgress(false)
-                    if (result != null){
-                        view.onGetOneClassRoomCertificate(result)
-                    }
-                },{t : Throwable ->
-                    view.showProgress(false)
-                    view.showError(t.message!!)
-                })
+        val subscribe = api.oneClassRoomQualification(Query(r.toSchema()))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({result : OneClassRoomQualificationResponse? ->
+                view.showProgress(false)
+                if (result != null){
+                    view.onGetOneClassRoomQualification(result)
+                }
+            },{t : Throwable ->
+                view.showProgress(false)
+                view.showError(t.message!!)
+            })
 
         subscriptions.add(subscribe)
     }

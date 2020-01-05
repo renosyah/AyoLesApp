@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -19,12 +20,12 @@
             app:srcCompat="@drawable/notfound" />
 
         <TextView
-            android:textColor="@color/textColorLightGray"
-            android:fontFamily="@string/medium_font"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No results found"
-            android:textSize="24sp" />
+            android:fontFamily="@string/medium_font"
+            android:textColor="@color/textColorLightGray"
+            android:textSize="24sp"
+            android:text="@string/not_found_text" />
 
     </LinearLayout>
 

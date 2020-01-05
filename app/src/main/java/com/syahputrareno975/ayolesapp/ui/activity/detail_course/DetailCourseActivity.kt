@@ -74,7 +74,7 @@ class DetailCourseActivity : AppCompatActivity(),DetailCourseActivityContract.Vi
         reqAllCourseDetails.Limit = limit_load
         reqAllCourseDetails.CourseId = courseData.Id
 
-        course_qualification_textview.text = CourseQualificationModel().toString()
+        course_qualification_textview.text = CourseQualificationModel().toString(context)
 
         back_imageview.setOnClickListener {
             finish()
@@ -162,7 +162,7 @@ class DetailCourseActivity : AppCompatActivity(),DetailCourseActivityContract.Vi
     }
 
     override fun onGetOneCourseQualification(s: OneCourseQualificationResponse) {
-        course_qualification_textview.text = s.Data.CourseQualificationDetail.toString()
+        course_qualification_textview.text = s.Data.CourseQualificationDetail.toString(context)
     }
 
     override fun onDestroy() {

@@ -25,12 +25,12 @@
             app:srcCompat="@drawable/back" />
 
         <TextView
-            android:fontFamily="@string/medium_font"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="@string/medium_font"
             android:gravity="center"
-            android:text="Update Profile"
+            android:text="@string/update_profile_title"
             android:textAlignment="center"
             android:textColor="@color/textColorWhite"
             android:textSize="20sp" />
@@ -91,7 +91,7 @@
                         android:layout_marginBottom="30dp"
                         android:fontFamily="@string/light_font"
                         android:gravity="center"
-                        android:text="Update your profile here, whenever you like"
+                        android:text="@string/update_profile_message"
                         android:textColor="@color/textColorBlack"
                         android:textSize="18sp" />
 
@@ -109,7 +109,7 @@
                             android:layout_marginTop="20dp"
                             android:ems="10"
                             android:fontFamily="@string/light_font"
-                            android:hint="Update Name"
+                            android:hint="@string/update_profile_name"
                             android:inputType="textPersonName"
                             android:padding="10dp"
                             android:textColor="@color/textColorBlack"
@@ -131,7 +131,7 @@
                             android:layout_marginTop="20dp"
                             android:ems="10"
                             android:fontFamily="@string/light_font"
-                            android:hint="Update Email"
+                            android:hint="@string/update_profile_email"
                             android:inputType="textEmailAddress"
                             android:padding="10dp"
                             android:textColor="@color/textColorBlack"
@@ -154,7 +154,7 @@
                             android:layout_marginTop="20dp"
                             android:ems="10"
                             android:fontFamily="@string/light_font"
-                            android:hint="New Password"
+                            android:hint="@string/update_profile_password"
                             android:inputType="textPassword"
                             android:padding="10dp"
                             android:textColor="@color/textColorBlack"
@@ -181,7 +181,7 @@
                         android:layout_marginTop="30dp"
                         android:background="@color/colorPrimaryLight"
                         android:padding="10dp"
-                        android:text="Update"
+                        android:text="@string/update_profile_button"
                         android:textAllCaps="false"
                         android:textColor="@color/textColorWhite"
                         android:textSize="18sp" />

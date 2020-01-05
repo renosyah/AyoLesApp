@@ -42,7 +42,7 @@ class AdapterExam : RecyclerView.Adapter<AdapterExam.Holder> {
         val item = list.get(position)
 
         holder.submit_button.visibility = if (item.IsSubmited) View.GONE else View.VISIBLE
-        holder.title_exam.text = "Number ${(position + 1)}"
+        holder.title_exam.text = "${context.getString(R.string.number)} ${(position + 1)}"
         holder.exam_text.text = item.Text
         Picasso.get()
                 .load("${RetrofitService.baseURL}${item.ImageURL}")

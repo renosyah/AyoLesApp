@@ -22,6 +22,7 @@ import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCer
 import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCertificateResponse
 import com.syahputrareno975.ayolesapp.service.RetrofitService
 import kotlinx.android.synthetic.main.activity_certificate.*
+import kotlinx.android.synthetic.main.adapter_simple_text.view.*
 import javax.inject.Inject
 
 
@@ -45,7 +46,7 @@ class CertificateActivity : AppCompatActivity(),CertificateActivityContract.View
 
         classRoomModel = intent.getSerializableExtra("data") as ClassRoomModel
 
-        title_certificate_textview.text = "${classRoomModel.Course.CourseName}'s Certificate"
+        title_certificate_textview.text = "${classRoomModel.Course.CourseName} ${getString(R.string.cert_title)}"
         back_imageview.setOnClickListener {
             finish()
         }
@@ -66,6 +67,8 @@ class CertificateActivity : AppCompatActivity(),CertificateActivityContract.View
         certificate_webview.settings.javaScriptEnabled = true
         certificate_webview.settings.loadWithOverviewMode = true
         certificate_webview.settings.useWideViewPort = true
+        certificate_webview.settings.builtInZoomControls = true
+        certificate_webview.settings.displayZoomControls = false
         certificate_webview.webViewClient = object : WebViewClient(){
             override fun onPageFinished(view: WebView?, url: String?) {
                 loading_web.visibility = View.GONE
@@ -88,22 +91,8 @@ class CertificateActivity : AppCompatActivity(),CertificateActivityContract.View
 
         } else {
 
-            AlertDialog.Builder(context)
-                .setTitle("Cannot Print")
-                .setMessage("Sorry, your device is not support for print this certificate directly, would you like to open and print it via browser?")
-                .setPositiveButton("Yes") { dialog, which ->
-
-                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("$urlCert?print=yes"))
-                    startActivity(browserIntent)
-
-                    dialog.dismiss()
-
-                }.setNegativeButton("No"){dialog, which ->
-                    dialog.dismiss()
-
-                }.setCancelable(false)
-                .create()
-                .show()
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("$urlCert?print=yes"))
+            startActivity(browserIntent)
         }
     }
     override fun showProgress(show: Boolean) {
@@ -116,6 +105,7 @@ class CertificateActivity : AppCompatActivity(),CertificateActivityContract.View
 
     override fun onGetOneClassRoomCertificate(s: OneClassRoomCertificateResponse) {
         urlCert = "${RetrofitService.baseURL}cert/${s.Data.ClassRoomCertificateDetail.HashId}"
+        print_certificate.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) getString(R.string.print_cert) else getString(R.string.open_cert)
         print_certificate.setOnClickListener {
            createWebPrintJob(certificate_webview)
         }

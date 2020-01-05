@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +19,10 @@ import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCer
 import com.syahputrareno975.ayolesapp.model.classRoomExamResult.AllClassRoomExamResultRequest
 import com.syahputrareno975.ayolesapp.model.classRoomExamResult.AllClassRoomExamResultResponse
 import com.syahputrareno975.ayolesapp.model.classRoomExamResult.ClassRoomExamResultModel
+import com.syahputrareno975.ayolesapp.model.classRoomQualification.ClassRoomQualificationModel.Companion.STATUS_NOT_PASS_EXAM
+import com.syahputrareno975.ayolesapp.model.classRoomQualification.ClassRoomQualificationModel.Companion.STATUS_PASS_EXAM
+import com.syahputrareno975.ayolesapp.model.classRoomQualification.OneClassRoomQualificationRequest
+import com.syahputrareno975.ayolesapp.model.classRoomQualification.OneClassRoomQualificationResponse
 import com.syahputrareno975.ayolesapp.service.RetrofitService
 import com.syahputrareno975.ayolesapp.ui.activity.certificate_view.CertificateActivity
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterExamResult
@@ -57,12 +62,12 @@ class ExamResultActivity : AppCompatActivity(), ExamResultActivityContract.View 
         reqAllExamResult.LimitAnswer = 4
         reqAllExamResult.ClassRoomId = classRoomModel.Id
 
-        title_exam_result_textview.text = "${classRoomModel.Course.CourseName}'s Exam Result"
+        title_exam_result_textview.text = "${getString(R.string.exam_result_title)} ${classRoomModel.Course.CourseName}"
 
         request_certificate_button.setOnClickListener {
             // request score
             // and cert
-            presenter.getOneClassRoomCertificate(OneClassRoomCertificateRequest(classRoomModel.Id))
+            presenter.getOneClassRoomQualification(OneClassRoomQualificationRequest(classRoomModel.Id))
         }
 
         exam_result_nestedscrollview.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
@@ -111,6 +116,16 @@ class ExamResultActivity : AppCompatActivity(), ExamResultActivityContract.View 
         val intent = Intent(context,CertificateActivity::class.java)
         intent.putExtra("data",classRoomModel)
         startActivity(intent)
+    }
+    override fun onGetOneClassRoomQualification(s: OneClassRoomQualificationResponse) {
+        when {
+            s.Data.ClassRoomQualificationDetail.Status == STATUS_PASS_EXAM ->
+                presenter.getOneClassRoomCertificate(OneClassRoomCertificateRequest(classRoomModel.Id))
+            s.Data.ClassRoomQualificationDetail.Status == STATUS_NOT_PASS_EXAM ->
+                Toast.makeText(context,getString(R.string.not_qualified),Toast.LENGTH_LONG).show()
+            else ->
+                Toast.makeText(context,getString(R.string.please_finish_exam),Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun onDestroy() {

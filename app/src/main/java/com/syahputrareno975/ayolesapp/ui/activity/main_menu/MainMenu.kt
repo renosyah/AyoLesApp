@@ -51,7 +51,7 @@ class MainMenu : AppCompatActivity() {
 
     override fun onBackPressed() {
         if (!isExit){
-            Toast.makeText(context,"Press again to exit",Toast.LENGTH_SHORT).show()
+            Toast.makeText(context,getString(R.string.press_to_exit),Toast.LENGTH_SHORT).show()
             isExit = true
             return
         }

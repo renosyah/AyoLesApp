@@ -37,13 +37,13 @@
 
                         <EditText
                             android:id="@+id/search_class_edittext"
-                            android:fontFamily="@string/medium_font"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_margin="5dp"
+                            android:hint="@string/class_search_class"
                             android:background="@android:color/white"
                             android:drawableLeft="@android:drawable/ic_menu_search"
-                            android:hint="Search Class"
+                            android:fontFamily="@string/medium_font"
                             android:imeOptions="actionSearch"
                             android:maxLines="1"
                             android:singleLine="true"

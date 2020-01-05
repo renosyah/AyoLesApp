@@ -42,14 +42,14 @@
                 android:orientation="vertical"/>
 
             <Button
-                android:fontFamily="@string/medium_font"
                 android:id="@+id/open_button"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_gravity="right"
                 android:background="@color/colorPrimaryLight"
+                android:fontFamily="@string/medium_font"
                 android:padding="10dp"
-                android:text="Open"
+                android:text="@string/open"
                 android:textAllCaps="false"
                 android:textColor="@color/textColorWhite"
                 android:textSize="18sp" />

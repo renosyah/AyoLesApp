@@ -47,7 +47,7 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="20dp"
-                    tools:visibility="gone">
+                    tools:visibility="visible">
 
 
                     <TextView
@@ -56,9 +56,9 @@
                         android:layout_marginBottom="60dp"
                         android:fontFamily="@string/medium_font"
                         android:gravity="center"
-                        android:text="Discover All Knowlege You Can Gain!"
                         android:textColor="@color/textColorWhite"
-                        android:textSize="24sp" />
+                        android:textSize="24sp"
+                        android:text="@string/landing_message" />
 
                     <Button
                         android:id="@+id/open_login_button"
@@ -67,10 +67,10 @@
                         android:background="@color/colorPrimaryLight"
                         android:fontFamily="@string/medium_font"
                         android:padding="10dp"
-                        android:text="Login With Email"
                         android:textAllCaps="false"
                         android:textColor="@color/textColorWhite"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:text="@string/landing_button_login_with_email" />
 
 
                     <LinearLayout
@@ -85,7 +85,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@string/light_font"
                             android:gravity="center"
-                            android:text="New Student? "
+                            android:text="@string/landing_new_student"
                             android:textColor="@color/textColorWhite"
                             android:textSize="18sp" />
 
@@ -95,7 +95,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@string/medium_font"
                             android:gravity="center"
-                            android:text=" Sigh up"
+                            android:text="@string/landing_sigh_up"
                             android:textColor="@color/textColorWhite"
                             android:textSize="18sp" />
 
@@ -111,7 +111,7 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="20dp"
-                    tools:visibility="visible">
+                    tools:visibility="gone">
 
 
                     <TextView
@@ -120,7 +120,7 @@
                         android:layout_marginBottom="30dp"
                         android:fontFamily="@string/medium_font"
                         android:gravity="center"
-                        android:text="See what we can learn today"
+                        android:text="@string/login_message"
                         android:textColor="@color/textColorWhite"
                         android:textSize="18sp" />
 
@@ -190,7 +190,7 @@
                         android:background="@color/colorPrimaryLight"
                         android:fontFamily="@string/medium_font"
                         android:padding="10dp"
-                        android:text="Login"
+                        android:text="@string/login_button_text"
                         android:textAllCaps="false"
                         android:textColor="@color/textColorWhite"
                         android:textSize="18sp" />
@@ -201,7 +201,7 @@
                         android:layout_marginTop="30dp"
                         android:fontFamily="@string/light_font"
                         android:gravity="center"
-                        android:text="Forget Password? "
+                        android:text="@string/login_forget_password"
                         android:textColor="@color/textColorWhite"
                         android:textSize="18sp" />
 
