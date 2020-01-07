@@ -38,6 +38,8 @@ ayoles is a simple online course app
 ![GitHub Logo](/img/5_1.jpg) ![GitHub Logo](/img/5_4.jpg) ![GitHub Logo](/img/5_5.jpg)
 
 
+certificate example in pdf can be view in [Here](https://github.com/renosyah/AyoLesApp/pdf/Data Science_certificate.PDF)
+
 
 
 * Profile
