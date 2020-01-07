@@ -32,7 +32,7 @@ ayoles is a simple online course app
 
 * Course Exam
 
-![GitHub Logo](/img/5_1.jpg) ![GitHub Logo](/img/5_2.jpg) ![GitHub Logo](/img/5_3.jpg)
+![GitHub Logo](/img/5_1.jpg) ![GitHub Logo](/img/5_4.jpg) ![GitHub Logo](/img/5_5.jpg)
 
 
 
