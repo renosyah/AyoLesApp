@@ -12,7 +12,7 @@
     <string name="register_button">Registrasi</string>
     <string name="register_input_email">Email</string>
     <string name="register_input_name">Nama Lengkap</string>
-    <string name="register_input_password">Input Password</string>
+    <string name="register_input_password">Tetapkan Password</string>
     <string name="register_message">Hallo, Murid Baru</string>
     <string name="register_please_fill_form">Mohon isi semua form!</string>
     <string name="register_title">Registrasi</string>
