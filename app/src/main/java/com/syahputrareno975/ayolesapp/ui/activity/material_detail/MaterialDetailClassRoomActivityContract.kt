@@ -1,8 +1,6 @@
 package com.syahputrareno975.ayolesapp.ui.activity.material_detail
 
 import com.syahputrareno975.ayolesapp.base.BaseContract
-import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCertificateRequest
-import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCertificateResponse
 import com.syahputrareno975.ayolesapp.model.classRoomProgress.AddClassRoomProgressRequest
 import com.syahputrareno975.ayolesapp.model.classRoomProgress.AddClassRoomProgressResponse
 import com.syahputrareno975.ayolesapp.model.classRoomQualification.OneClassRoomQualificationRequest

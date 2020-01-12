@@ -16,6 +16,14 @@
         tools:visibility="visible">
 
 
+        <ImageView
+            android:id="@+id/back_imageview"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            app:srcCompat="@drawable/back" />
+
         <TextView
             android:id="@+id/title_exam_result_textview"
             android:layout_width="match_parent"
@@ -27,6 +35,14 @@
             android:textAlignment="center"
             android:textColor="@color/textColorWhite"
             android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            tools:visibility="visible" />
 
     </LinearLayout>
 

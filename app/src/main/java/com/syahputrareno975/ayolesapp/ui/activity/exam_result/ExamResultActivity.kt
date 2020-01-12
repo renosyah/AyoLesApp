@@ -64,6 +64,10 @@ class ExamResultActivity : AppCompatActivity(), ExamResultActivityContract.View 
 
         title_exam_result_textview.text = "${getString(R.string.exam_result_title)} ${classRoomModel.Course.CourseName}"
 
+        back_imageview.setOnClickListener {
+            finish()
+        }
+
         request_certificate_button.setOnClickListener {
             // request score
             // and cert

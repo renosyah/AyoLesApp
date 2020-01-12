@@ -2,7 +2,6 @@ package com.syahputrareno975.ayolesapp.ui.activity.certificate_view
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -46,7 +45,7 @@ class CertificateActivity : AppCompatActivity(),CertificateActivityContract.View
 
         classRoomModel = intent.getSerializableExtra("data") as ClassRoomModel
 
-        title_certificate_textview.text = "${classRoomModel.Course.CourseName} ${getString(R.string.cert_title)}"
+        title_certificate_textview.text = "${getString(R.string.cert_title)} : ${classRoomModel.Course.CourseName}"
         back_imageview.setOnClickListener {
             finish()
         }

@@ -73,4 +73,8 @@
     <string name="previous">Sebelumnya</string>
     <string name="course_exam">Ujian</string>
     <string name="course_materials">Materi Kursus</string>
+    <string name="forget_message_1">Coba ingat kembali dimana anda meletakkannya</string>
+    <string name="forget_message_2">Anda sangat tidak bertanggung jawab</string>
+    <string name="forget_message_3">Apakah anda sudah mulai menua?</string>
+    <string name="okay">Okey</string>
 </resources>

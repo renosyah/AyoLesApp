@@ -85,4 +85,17 @@
     <string name="course_materials">Course Materials</string>
     <string name="course_exam">Course Exam</string>
 
+    <string name="forget_message_1">Try remember where the last you put it</string>
+    <string name="forget_message_2">You are very irresponsible</string>
+    <string name="forget_message_3">are you getting older already?</string>
+
+
+    <string-array name="messages_forget_password">
+        <item>@string/forget_message_1</item>
+        <item>@string/forget_message_2</item>
+        <item>@string/forget_message_3</item>
+    </string-array>
+
+    <string name="okay">Okay</string>
+
 </resources>

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Point
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.syahputrareno975.ayolesapp.R
 import com.syahputrareno975.ayolesapp.di.component.DaggerActivityComponent
@@ -15,8 +16,8 @@ import com.syahputrareno975.ayolesapp.ui.activity.main_menu.MainMenu
 import com.syahputrareno975.ayolesapp.ui.activity.register.RegisterActivity
 import com.syahputrareno975.ayolesapp.util.SerializableSave
 import kotlinx.android.synthetic.main.activity_login.*
+import java.util.*
 import javax.inject.Inject
-
 
 class LoginActivity : AppCompatActivity(),LoginActivityContract.View {
 
@@ -50,6 +51,21 @@ class LoginActivity : AppCompatActivity(),LoginActivityContract.View {
         sigh_up_textview.setOnClickListener {
             startActivity(Intent(context,RegisterActivity::class.java))
             finish()
+        }
+
+        forget_password_textview.setOnClickListener {
+
+            val list = resources.getStringArray(R.array.messages_forget_password)
+
+            AlertDialog.Builder(context)
+                .setTitle(getString(R.string.login_forget_password))
+                .setMessage(list[(Random().nextInt(list.size))])
+                .setPositiveButton(getString(R.string.okay)) { dialog, which ->
+                    dialog.dismiss()
+                }
+                .create()
+                .show()
+
         }
 
 

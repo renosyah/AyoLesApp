@@ -201,7 +201,7 @@ class MaterialDetailClassRoomActivity : AppCompatActivity(),MaterialDetailClassR
         }
     }
     override fun onGetOneClassRoomQualification(s: OneClassRoomQualificationResponse) {
-        exam_button.text = (if (s.Data.ClassRoomQualificationDetail.Status == STATUS_NO_PROGRESS) "Start Exam" else "Exam Result")
+        exam_button.text = (if (s.Data.ClassRoomQualificationDetail.Status == STATUS_NO_PROGRESS) getString(R.string.start_exam) else getString(R.string.result))
         if (s.Data.ClassRoomQualificationDetail.Status != STATUS_NO_PROGRESS) {
             exam_button.setOnClickListener {
 

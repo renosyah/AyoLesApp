@@ -1,16 +1,13 @@
 package com.syahputrareno975.ayolesapp.ui.fragment.fragment_profile
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.Toast
-import androidx.core.widget.NestedScrollView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.syahputrareno975.ayolesapp.R
@@ -28,9 +25,7 @@ import com.syahputrareno975.ayolesapp.model.student.StudentModel
 import com.syahputrareno975.ayolesapp.ui.activity.exam_result.ExamResultActivity
 import com.syahputrareno975.ayolesapp.ui.activity.login.LoginActivity
 import com.syahputrareno975.ayolesapp.ui.activity.update_profile.UpdateProfileActivity
-import com.syahputrareno975.ayolesapp.ui.adapter.AdapterClassRoom
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterCompletedCourse
-import com.syahputrareno975.ayolesapp.ui.fragment.fragment_class.FragmentClassContract
 import com.syahputrareno975.ayolesapp.util.SerializableSave
 import kotlinx.android.synthetic.main.fragment_profile.*
 import javax.inject.Inject

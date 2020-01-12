@@ -40,7 +40,7 @@
     <string name="open">Open</string>
     <string name="result">Result</string>
     <string name="submit">Submit</string>
-    <string name="cert_title" translatable="false">Certificate</string>
+    <string name="cert_title">Certificate</string>
     <string name="open_cert">Open Certificate URL</string>
     <string name="print_cert">Print Certificate</string>
     <string name="course_taken">Student Already Has Taken This class</string>
@@ -73,4 +73,8 @@
     <string name="previous">Previous</string>
     <string name="course_exam">Course Exam</string>
     <string name="course_materials">Course Materials</string>
+    <string name="forget_message_1">Try remember where the last you put it</string>
+    <string name="forget_message_2">You are very irresponsible</string>
+    <string name="forget_message_3">are you getting older already?</string>
+    <string name="okay">Okay</string>
 </resources>
