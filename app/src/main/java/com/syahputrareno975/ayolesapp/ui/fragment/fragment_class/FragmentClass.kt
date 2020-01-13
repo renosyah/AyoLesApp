@@ -138,7 +138,7 @@ class FragmentClass : Fragment(),FragmentClassContract.View {
         adapterCategory = AdapterCategory(ctx,categoryList) { categoryModel, i ->
             listClassRoom.clear()
             reqAllClass.Offset = 0
-            reqAllClass.SearchBy = "course.category_id::STRING"
+            reqAllClass.SearchBy = "course.category_id::TEXT"
             reqAllClass.SearchValue = categoryModel.Id
             presenter.getAllClass(reqAllClass)
         }
