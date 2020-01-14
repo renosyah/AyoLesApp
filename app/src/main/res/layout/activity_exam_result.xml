@@ -63,7 +63,15 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/exam_result_recycleview"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    tools:visibility="gone" />
+
+                <include
+                    android:id="@+id/loading_data_exam_result"
+                    layout="@layout/loading_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    tools:visibility="visible" />
 
                 <include
                     android:id="@+id/not_found"

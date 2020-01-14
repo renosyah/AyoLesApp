@@ -58,13 +58,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_marginBottom="10dp"
+                    tools:visibility="gone" />
+
+                <include
+                    android:id="@+id/loading_data_category"
+                    layout="@layout/loading_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    tools:visibility="visible" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/classes_recycleview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false" />
+                    android:nestedScrollingEnabled="false"
+                    tools:visibility="gone" />
+
+                <include
+                    android:id="@+id/loading_data_class"
+                    layout="@layout/loading_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    tools:visibility="visible" />
 
                 <include
                     android:id="@+id/not_found"

@@ -34,8 +34,6 @@ import com.syahputrareno975.ayolesapp.ui.activity.search_course.SearchCourseActi
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterBanner
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterCategory
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterVerticalCourse
-import com.syahputrareno975.ayolesapp.util.SerializableSave
-import kotlinx.android.synthetic.main.fragment_class.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.not_found
 import javax.inject.Inject
@@ -88,10 +86,7 @@ class FragmentHome : Fragment(),FragmentHomeContract.View {
         presenter.attach(this)
         presenter.subscribe()
 
-        if (SerializableSave(ctx,SerializableSave.bannerDataFileCacheName).load() != null){
-            val bannerCache = SerializableSave(ctx,SerializableSave.bannerDataFileCacheName).load() as AllBannerResponse
-            bannerList.addAll(bannerCache.Data.BannerList)
-        }
+        not_found.visibility = View.GONE
 
         reqAllCategory.Limit = limit_load_category
         reqAllCategoryForCourse.Limit = limit_load_course
@@ -100,7 +95,7 @@ class FragmentHome : Fragment(),FragmentHomeContract.View {
             if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight) {
                 // pagination if user reach scroll to bottom on course
                 reqAllCategoryForCourse.Offset += limit_load_course
-                presenter.getAllCategoryForCourse(reqAllCategoryForCourse)
+                presenter.getAllCategoryForCourse(reqAllCategoryForCourse,false)
             }
         })
 
@@ -150,7 +145,7 @@ class FragmentHome : Fragment(),FragmentHomeContract.View {
         }
         course_recycleview.adapter = adapterVerticalCourse
         course_recycleview.layoutManager = LinearLayoutManager(ctx,LinearLayoutManager.VERTICAL,false)
-        presenter.getAllCategoryForCourse(reqAllCategoryForCourse)
+        presenter.getAllCategoryForCourse(reqAllCategoryForCourse,true)
     }
 
     fun populateHorizontalCourses(){
@@ -158,7 +153,7 @@ class FragmentHome : Fragment(),FragmentHomeContract.View {
         for (i in 0..(verticalCourses.size-1)){
             val req = AllCourseRequest()
             req.CategoryId = verticalCourses.get(i).Id
-            presenter.getAllCourses(req,i)
+            presenter.getAllCourses(req,i,false)
         }
 
     }
@@ -180,12 +175,12 @@ class FragmentHome : Fragment(),FragmentHomeContract.View {
                 if (dx > 0 && (visibleItemCount + pastVisiblesItems) >= totalItemCount){
                     // pagination if user reach scroll to right on category
                     reqAllCategory.Offset += limit_load_category
-                    presenter.getAllCategory(reqAllCategory)
+                    presenter.getAllCategory(reqAllCategory,false)
                 }
             }
         })
 
-        presenter.getAllCategory(reqAllCategory)
+        presenter.getAllCategory(reqAllCategory,true)
     }
 
     fun getAllBanner(){
@@ -211,27 +206,57 @@ class FragmentHome : Fragment(),FragmentHomeContract.View {
             }
         })
 
-        presenter.getAllBanner(AllBannerRequest())
+        presenter.getAllBanner(AllBannerRequest(),true)
     }
     fun checkNoResultFound(forceShow : Boolean){
         not_found.visibility = if (verticalCourses.isEmpty() || forceShow) View.VISIBLE else View.GONE
         course_recycleview.visibility = if (verticalCourses.isEmpty() || forceShow) View.GONE else View.VISIBLE
         banner_recycleview.visibility = if (bannerList.isEmpty() || forceShow) View.GONE else View.VISIBLE
     }
-    override fun showProgress(show: Boolean) {
-        not_found.visibility = View.GONE
+
+    override fun showProgressOnGetAllBanner(show: Boolean) {
+        loading_data_banner.visibility = if (show)View.VISIBLE else View.GONE
+        banner_recycleview.visibility = if (show) View.GONE else View.VISIBLE
     }
 
-    override fun showError(error: String) {
+    override fun showErrorOnGetAllBanner(error: String) {
+        loading_data_banner.visibility = View.GONE
+        banner_recycleview.visibility = View.GONE
+    }
+
+    override fun showProgressOnGetAllCategory(show: Boolean) {
+        loading_data_category.visibility = if (show) View.VISIBLE else View.GONE
+        category_recycleview.visibility = if (show) View.GONE else View.VISIBLE
+    }
+
+    override fun showErrorOnGetAllCategory(error: String) {
+        loading_data_category.visibility = View.GONE
+        category_recycleview.visibility = View.GONE
+    }
+
+    override fun showProgressOnGetAllCategoryForCourse(show: Boolean) {
+        loading_data_course.visibility = if (show) View.VISIBLE else View.GONE
+        course_recycleview.visibility = if (show) View.GONE else View.VISIBLE
+    }
+
+    override fun showErrorOnGetAllCategoryForCourse(error: String) {
+        loading_data_course.visibility = View.GONE
         checkNoResultFound(true)
     }
 
+    override fun showProgressOnGetAllCourses(show: Boolean) {
+        // course for each vertical recycle view course
+    }
+
+    override fun showErrorOnGetAllCourses(error: String) {
+        // course for each vertical recycle view course
+    }
+
+
     override fun onGetAllBanner(s: AllBannerResponse) {
-        if (SerializableSave(ctx,SerializableSave.bannerDataFileCacheName).save(s)){
             bannerList.clear()
             bannerList.addAll(s.Data.BannerList)
             adapterBanner.notifyDataSetChanged()
-        }
     }
 
     override fun onGetAllCategory(s: AllCategoryResponse) {

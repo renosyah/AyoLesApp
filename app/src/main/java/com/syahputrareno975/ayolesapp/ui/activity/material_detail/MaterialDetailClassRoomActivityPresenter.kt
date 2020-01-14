@@ -20,94 +20,125 @@ class MaterialDetailClassRoomActivityPresenter : MaterialDetailClassRoomActivity
     private val api : RetrofitService = RetrofitService.create()
     private lateinit var view:  MaterialDetailClassRoomActivityContract.View
 
-    override fun getOneClassRoomQualification(r: OneClassRoomQualificationRequest) {
-        view.showProgress(true)
+    override fun getOneClassRoomQualification(r: OneClassRoomQualificationRequest,enableLoading : Boolean) {
+        if (enableLoading) {
+            view.showProgressOnGetOneClassRoomQualification(true)
+        }
         val subscribe = api.oneClassRoomQualification(Query(r.toSchema()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result : OneClassRoomQualificationResponse? ->
-                view.showProgress(false)
+                if (enableLoading) {
+                    view.showProgressOnGetOneClassRoomQualification(false)
+                }
                 if (result != null){
+                    if (result.Errors.isNotEmpty()){
+                        var message = ""
+                        for (i in result.Errors){
+                            message += i.Message
+                        }
+                        view.showErrorOnGetOneClassRoomQualification(message)
+                    }
                     view.onGetOneClassRoomQualification(result)
                 }
             },{t : Throwable ->
-                view.showProgress(false)
-                view.showError(t.message!!)
+                if (enableLoading) {
+                    view.showProgressOnGetOneClassRoomQualification(false)
+                }
+                view.showErrorOnGetOneClassRoomQualification(t.message!!)
             })
 
         subscriptions.add(subscribe)
     }
 
-    override fun getAllCourseMaterial(r: AllCourseMaterialRequest) {
-        view.showProgress(true)
+    override fun getAllCourseMaterial(r: AllCourseMaterialRequest,enableLoading : Boolean) {
+        if (enableLoading) {
+            view.showProgressOnGetAllCourseMaterial(true)
+        }
         val subscribe = api.allCourseMaterial(Query(r.toSchema()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result : AllCourseMaterialResponse? ->
-                view.showProgress(false)
+                if (enableLoading) {
+                    view.showProgressOnGetAllCourseMaterial(false)
+                }
                 if (result != null){
                     if (result.Errors.isNotEmpty()){
                         var message = ""
                         for (i in result.Errors){
                             message += i.Message
                         }
-                        view.showError(message)
+                        view.showErrorOnGetAllCourseMaterial(message)
                     }
                     view.onGetAllCourseMaterial(result)
                 }
             },{t : Throwable ->
-                view.showProgress(false)
-                view.showError(t.message!!)
+                if (enableLoading) {
+                    view.showProgressOnGetAllCourseMaterial(false)
+                }
+                view.showErrorOnGetAllCourseMaterial(t.message!!)
             })
 
         subscriptions.add(subscribe)
     }
 
-    override fun addCourseMaterialProgress(r: AddClassRoomProgressRequest,navCode: Int) {
-        view.showProgress(true)
+    override fun addCourseMaterialProgress(r: AddClassRoomProgressRequest,navCode: Int,enableLoading : Boolean) {
+        if (enableLoading) {
+            view.showProgressOnAddCourseMaterialProgress(true)
+        }
         val subscribe = api.addClassRoomProgress(Query(r.toSchema()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result : AddClassRoomProgressResponse? ->
-                view.showProgress(false)
+                if (enableLoading) {
+                    view.showProgressOnAddCourseMaterialProgress(false)
+                }
                 if (result != null){
                     if (result.Errors.isNotEmpty()){
                         var message = ""
                         for (i in result.Errors){
                             message += i.Message
                         }
-                        view.showError(message)
+                        view.showErrorOnAddCourseMaterialProgress(message)
                     }
                     view.onAddCourseMaterialProgress(result,navCode)
                 }
             },{t : Throwable ->
-                view.showProgress(false)
-                view.showError(t.message!!)
+                if (enableLoading) {
+                    view.showProgressOnAddCourseMaterialProgress(false)
+                }
+                view.showErrorOnAddCourseMaterialProgress(t.message!!)
             })
 
         subscriptions.add(subscribe)
     }
 
-    override fun getAllCourseMaterialDetail(r: AllCourseMaterialDetailRequest) {
-        view.showProgress(true)
+    override fun getAllCourseMaterialDetail(r: AllCourseMaterialDetailRequest,enableLoading : Boolean) {
+        if (enableLoading) {
+            view.showProgressOnGetAllCourseMaterialDetail(true)
+        }
         val subscribe = api.allCourseMaterialDetail(Query(r.toSchema()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result : AllCourseMaterialDetailResponse? ->
-                view.showProgress(false)
+                if (enableLoading) {
+                    view.showProgressOnGetAllCourseMaterialDetail(false)
+                }
                 if (result != null){
                     if (result.Errors.isNotEmpty()){
                         var message = ""
                         for (i in result.Errors){
                             message += i.Message
                         }
-                        view.showError(message)
+                        view.showErrorOnGetAllCourseMaterialDetail(message)
                     }
                     view.onGetAllCourseMaterialDetail(result)
                 }
             },{t : Throwable ->
-                view.showProgress(false)
-                view.showError(t.message!!)
+                if (enableLoading) {
+                    view.showProgressOnGetAllCourseMaterialDetail(false)
+                }
+                view.showErrorOnGetAllCourseMaterialDetail(t.message!!)
             })
 
         subscriptions.add(subscribe)

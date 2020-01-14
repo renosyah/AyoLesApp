@@ -17,51 +17,63 @@ class UpdateProfileActivityPresenter  :UpdateProfileActivityContract.Presenter {
     private val api : RetrofitService = RetrofitService.create()
     private lateinit var view: UpdateProfileActivityContract.View
 
-    override fun getOneStudent(r: OneStudentRequest) {
-        view.showProgress(true)
+    override fun getOneStudent(r: OneStudentRequest,enableLoading : Boolean) {
+        if (enableLoading) {
+            view.showProgressOnGetOneStudent(true)
+        }
         val subscribe = api.oneStudent(Query(r.toSchema()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result : OneStudentResponse? ->
-                view.showProgress(false)
+                if (enableLoading) {
+                    view.showProgressOnGetOneStudent(false)
+                }
                 if (result != null){
                     if (result.Errors.isNotEmpty()){
                         var message = ""
                         for (i in result.Errors){
                             message += i.Message
                         }
-                        view.showError(message)
+                        view.showErrorOnGetOneStudent(message)
                     }
                     view.onGetOneStudent(result)
                 }
             },{t : Throwable ->
-                view.showProgress(false)
-                view.showError(t.message!!)
+                if (enableLoading) {
+                    view.showProgressOnGetOneStudent(false)
+                }
+                view.showErrorOnGetOneStudent(t.message!!)
             })
 
         subscriptions.add(subscribe)
     }
 
-    override fun updateOneStudent(r: UpdateRequest) {
-        view.showProgress(true)
+    override fun updateOneStudent(r: UpdateRequest,enableLoading : Boolean) {
+        if (enableLoading) {
+            view.showProgressOnOneStudentUpdated(true)
+        }
         val subscribe = api.update(Query(r.toSchema()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result : UpdateResponse? ->
-                view.showProgress(false)
+                if (enableLoading) {
+                    view.showProgressOnOneStudentUpdated(false)
+                }
                 if (result != null){
                     if (result.Errors.isNotEmpty()){
                         var message = ""
                         for (i in result.Errors){
                             message += i.Message
                         }
-                        view.showError(message)
+                        view.showErrorOnOneStudentUpdated(message)
                     }
                     view.onOneStudentUpdated(result)
                 }
             },{t : Throwable ->
-                view.showProgress(false)
-                view.showError(t.message!!)
+                if (enableLoading) {
+                    view.showProgressOnOneStudentUpdated(false)
+                }
+                view.showErrorOnOneStudentUpdated(t.message!!)
             })
 
         subscriptions.add(subscribe)

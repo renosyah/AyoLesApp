@@ -64,9 +64,17 @@
                     android:id="@+id/image_course_recycleview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false">
+                    android:nestedScrollingEnabled="false"
+                    tools:visibility="gone">
 
                 </androidx.recyclerview.widget.RecyclerView>
+
+                <include
+                    android:id="@+id/loading_data_image_course"
+                    layout="@layout/loading_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    tools:visibility="visible" />
 
                 <TextView
                     android:fontFamily="@string/medium_font"
@@ -109,9 +117,17 @@
                     android:id="@+id/material_classroom_recycleview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false">
+                    android:nestedScrollingEnabled="false"
+                    tools:visibility="gone">
 
                 </androidx.recyclerview.widget.RecyclerView>
+
+                <include
+                    android:id="@+id/loading_data_material_classroom"
+                    layout="@layout/loading_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    tools:visibility="visible" />
 
                 <LinearLayout
                     android:id="@+id/examp_layout"

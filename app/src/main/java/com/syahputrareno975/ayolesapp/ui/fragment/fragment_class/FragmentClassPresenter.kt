@@ -18,52 +18,65 @@ class FragmentClassPresenter : FragmentClassContract.Presenter {
     private val api : RetrofitService = RetrofitService.create()
     private lateinit var view: FragmentClassContract.View
 
-    override fun getAllCategory(r: AllCategoryRequest) {
-        //view.showProgress(true)
+    override fun getAllCategory(r: AllCategoryRequest,enableLoading : Boolean) {
+        if (enableLoading){
+            view.showProgressOnGetAllCategory(true)
+        }
+
         val subscribe = api.allCategory(Query(r.toSchema()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result : AllCategoryResponse? ->
-                //view.showProgress(false)
+                if (enableLoading) {
+                    view.showProgressOnGetAllCategory(false)
+                }
                 if (result != null){
                     if (result.Errors.isNotEmpty()){
                         var message = ""
                         for (i in result.Errors){
                             message += i.Message
                         }
-                        view.showError(message)
+                        view.showErrorOnGetAllCategory(message)
                     }
                     view.onGetAllCategory(result)
                 }
             },{t : Throwable ->
-                //view.showProgress(false)
-                view.showError(t.message!!)
+                if (enableLoading) {
+                    view.showProgressOnGetAllCategory(false)
+                }
+                view.showErrorOnGetAllCategory(t.message!!)
             })
 
         subscriptions.add(subscribe)
     }
 
 
-    override fun getAllClass(r: AllClassRoomRequest) {
-        view.showProgress(true)
+    override fun getAllClass(r: AllClassRoomRequest,enableLoading : Boolean) {
+        if (enableLoading){
+            view.showProgressOnGetAllClass(true)
+        }
         val subscribe = api.allClassRoom(Query(r.toSchema()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result :AllClassRoomResponse? ->
-                view.showProgress(false)
+                if (enableLoading) {
+                    view.showProgressOnGetAllClass(false)
+                }
                 if (result != null){
                     if (result.Errors.isNotEmpty()){
                         var message = ""
                         for (i in result.Errors){
                             message += i.Message
                         }
-                        view.showError(message)
+                        view.showErrorOnGetAllCategory(message)
                     }
                     view.onGetAllClass(result)
                 }
             },{t : Throwable ->
-                view.showProgress(false)
-                view.showError(t.message!!)
+                if (enableLoading) {
+                    view.showProgressOnGetAllClass(false)
+                }
+                view.showErrorOnGetAllClass(t.message!!)
             })
 
         subscriptions.add(subscribe)

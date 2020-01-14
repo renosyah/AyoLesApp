@@ -53,7 +53,7 @@ class RegisterActivity : AppCompatActivity(),RegisterActivityContract.View {
                     register_name_edittext.text.toString(),
                     register_email_edittext.text.toString(),
                     register_password_edittext.text.toString()
-                )
+                ),true
             )
         }
 
@@ -74,12 +74,12 @@ class RegisterActivity : AppCompatActivity(),RegisterActivityContract.View {
         params.height = size.y
     }
 
-    override fun showProgress(show: Boolean) {
+    override fun showProgressOnRegister(show: Boolean) {
         layout_loading.visibility = if (show) View.VISIBLE else View.GONE
         layout_register.visibility = if (show) View.GONE else View.VISIBLE
     }
 
-    override fun showError(error: String) {
+    override fun showErrorOnRegister(error: String) {
         error_message_textview.visibility = View.VISIBLE
         error_message_textview.text = error
     }

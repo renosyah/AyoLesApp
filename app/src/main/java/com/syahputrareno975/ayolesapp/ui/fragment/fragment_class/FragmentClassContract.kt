@@ -11,19 +11,21 @@ import com.syahputrareno975.ayolesapp.model.course.AllCourseResponse
 class FragmentClassContract {
     interface View: BaseContract.View {
 
-        // mandatory response
-        fun showProgress(show: Boolean)
-        fun showError(error: String)
-
         // add more for request
         fun onGetAllClass(s : AllClassRoomResponse)
+        fun showProgressOnGetAllClass(show: Boolean)
+        fun showErrorOnGetAllClass(error: String)
+
         fun onGetAllCategory(s : AllCategoryResponse)
+        fun showProgressOnGetAllCategory(show: Boolean)
+        fun showErrorOnGetAllCategory(error: String)
+
     }
 
     interface Presenter: BaseContract.Presenter<View> {
 
         // add for request
-        fun getAllClass(r : AllClassRoomRequest)
-        fun getAllCategory(r : AllCategoryRequest)
+        fun getAllClass(r : AllClassRoomRequest,enableLoading : Boolean)
+        fun getAllCategory(r : AllCategoryRequest,enableLoading : Boolean)
     }
 }

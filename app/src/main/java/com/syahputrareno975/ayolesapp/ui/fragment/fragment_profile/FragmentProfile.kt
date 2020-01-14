@@ -87,10 +87,12 @@ class FragmentProfile : Fragment(),FragmentProfileContract.View {
         reqAllCert.Limit = limit_load_class
         reqAllCert.StudentId = studentSession.Id
 
+        not_found.visibility = View.GONE
+
         loadmore_textview.setOnClickListener {
             reqAllCompletedClass.Offset += limit_load_class
             reqAllCert.Offset += limit_load_class
-            presenter.getAllClass(reqAllCompletedClass)
+            presenter.getAllClass(reqAllCompletedClass,false)
         }
 
         profile_setting_imageview.setOnClickListener {
@@ -140,8 +142,8 @@ class FragmentProfile : Fragment(),FragmentProfileContract.View {
         complete_course_recycleview.adapter = adapterClassRoomComplete
         complete_course_recycleview.layoutManager = LinearLayoutManager(ctx,LinearLayoutManager.VERTICAL,false)
 
-        presenter.getOneStudent(OneStudentRequest(studentSession.Id))
-        presenter.getAllClass(reqAllCompletedClass)
+        presenter.getOneStudent(OneStudentRequest(studentSession.Id),true)
+        presenter.getAllClass(reqAllCompletedClass,true)
     }
 
     fun checkCompleteClass(){
@@ -155,11 +157,34 @@ class FragmentProfile : Fragment(),FragmentProfileContract.View {
         adapterClassRoomComplete.notifyDataSetChanged()
     }
 
-    override fun showProgress(show: Boolean) {
+    fun checkNoResultFound(forceShow : Boolean){
+        not_found.visibility = if (listClassRoomComplete.isEmpty() || forceShow) View.VISIBLE else View.GONE
+        layout_completed_course.visibility = if (listClassRoomComplete.isEmpty() || forceShow) View.GONE else View.VISIBLE
+    }
+
+    override fun showProgressOnGetAllClass(show: Boolean) {
+        loading_data_class.visibility = if (show) View.VISIBLE else View.GONE
+        layout_completed_course.visibility = if (show) View.GONE else View.VISIBLE
+    }
+
+    override fun showErrorOnGetAllClass(error: String) {
+        loading_data_class.visibility = View.GONE
+        checkNoResultFound(true)
+    }
+
+    override fun showProgressOnGetOneStudent(show: Boolean) {
 
     }
 
-    override fun showError(error: String) {
+    override fun showErrorOnGetOneStudent(error: String) {
+
+    }
+
+    override fun showProgressOnGetAllClassRoomCertificate(show: Boolean) {
+
+    }
+
+    override fun showErrorOnGetAllClassRoomCertificate(error: String) {
 
     }
 
@@ -173,7 +198,7 @@ class FragmentProfile : Fragment(),FragmentProfileContract.View {
         layout_completed_course.visibility = if (listClassRoomComplete.isEmpty()) View.GONE else View.VISIBLE
         adapterClassRoomComplete.notifyDataSetChanged()
         loadmore_textview.visibility = if (s.Data.ClassRoomList.isEmpty()) View.GONE else View.VISIBLE
-        presenter.getAllClassRoomCertificate(reqAllCert)
+        presenter.getAllClassRoomCertificate(reqAllCert,false)
     }
 
     override fun onGetAllClassRoomCertificate(s: AllClassRoomCertificateResponse) {

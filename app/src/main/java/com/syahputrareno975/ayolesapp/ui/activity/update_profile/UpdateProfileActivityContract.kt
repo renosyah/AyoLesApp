@@ -9,19 +9,20 @@ import com.syahputrareno975.ayolesapp.model.student.UpdateResponse
 class UpdateProfileActivityContract {
     interface View: BaseContract.View {
 
-        // mandatory response
-        fun showProgress(show: Boolean)
-        fun showError(error: String)
-
         // add more for request
         fun onGetOneStudent(s : OneStudentResponse)
+        fun showProgressOnGetOneStudent(show: Boolean)
+        fun showErrorOnGetOneStudent(error: String)
+
         fun onOneStudentUpdated(s : UpdateResponse)
+        fun showProgressOnOneStudentUpdated(show: Boolean)
+        fun showErrorOnOneStudentUpdated(error: String)
     }
 
     interface Presenter: BaseContract.Presenter<View> {
 
         // add for request
-        fun getOneStudent(r : OneStudentRequest)
-        fun updateOneStudent(r : UpdateRequest)
+        fun getOneStudent(r : OneStudentRequest,enableLoading : Boolean)
+        fun updateOneStudent(r : UpdateRequest,enableLoading : Boolean)
     }
 }

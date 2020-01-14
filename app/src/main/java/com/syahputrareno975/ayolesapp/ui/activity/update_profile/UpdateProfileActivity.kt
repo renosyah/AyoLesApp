@@ -67,7 +67,7 @@ class UpdateProfileActivity : AppCompatActivity(),UpdateProfileActivityContract.
     }
 
     fun getOneStudent(){
-        presenter.getOneStudent(OneStudentRequest(studentData.Id))
+        presenter.getOneStudent(OneStudentRequest(studentData.Id),true)
     }
 
     fun updateStudentData(){
@@ -82,16 +82,26 @@ class UpdateProfileActivity : AppCompatActivity(),UpdateProfileActivityContract.
                 else studentData.Email,
                 if (update_password_edittext.text.toString().trim().isNotEmpty())
                     update_password_edittext.text.toString()
-                else studentData.Password)
+                else studentData.Password),
+            true
         )
     }
 
-    override fun showProgress(show: Boolean) {
+
+    override fun showProgressOnGetOneStudent(show: Boolean) {
+
+    }
+
+    override fun showErrorOnGetOneStudent(error: String) {
+
+    }
+
+    override fun showProgressOnOneStudentUpdated(show: Boolean) {
         layout_loading_update_profile.visibility = if (show) View.VISIBLE else View.GONE
         layout_edit_profile.visibility = if (show) View.GONE else View.VISIBLE
     }
 
-    override fun showError(error: String) {
+    override fun showErrorOnOneStudentUpdated(error: String) {
         error_texview.visibility = View.VISIBLE
         error_texview.text = error
     }

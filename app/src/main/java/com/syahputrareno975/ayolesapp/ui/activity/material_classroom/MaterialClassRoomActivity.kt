@@ -97,6 +97,8 @@ class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityC
         reqAllCourseDetails.Offset = 0
         reqAllCourseDetails.CourseId = classRoomModel.Course.Id
 
+        not_found.visibility = View.GONE
+
         title_course_material.text = classRoomModel.Course.CourseName
 
         back_imageview.setOnClickListener {
@@ -118,11 +120,11 @@ class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityC
     }
 
     fun getClassRoomProgress(){
-        presenter.getAllClassRoomProgress(reqAllClassRoomProgress)
+        presenter.getAllClassRoomProgress(reqAllClassRoomProgress,false)
     }
 
     fun getAllClassRoomMaterials(){
-        presenter.getAllCourseMaterial(reqAllMaterialClassRoom)
+        presenter.getAllCourseMaterial(reqAllMaterialClassRoom,true)
     }
 
     fun setAdapterMaterial(){
@@ -154,7 +156,7 @@ class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityC
         loadmore_textview.setOnClickListener {
             reqAllMaterialClassRoom.Offset += limit_load
             reqAllClassRoomProgress.Offset += limit_load
-            presenter.getAllCourseMaterial(reqAllMaterialClassRoom)
+            presenter.getAllCourseMaterial(reqAllMaterialClassRoom,false)
         }
 
         material_classroom_nestedscrollview.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
@@ -162,12 +164,12 @@ class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityC
                 // pagination if user reach scroll to bottom on course
                 reqAllMaterialClassRoom.Offset += limit_load
                 reqAllClassRoomProgress.Offset += limit_load
-                presenter.getAllCourseMaterial(reqAllMaterialClassRoom)
+                presenter.getAllCourseMaterial(reqAllMaterialClassRoom,false)
             }
         })
 
         getAllClassRoomMaterials()
-        presenter.getOneClassRoomQualification(OneClassRoomQualificationRequest(classRoomModel.Id))
+        presenter.getOneClassRoomQualification(OneClassRoomQualificationRequest(classRoomModel.Id),false)
     }
 
     fun setImageCourse(){
@@ -181,7 +183,7 @@ class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityC
 
         classRoomModel.Course.CourseDetails.clear()
 
-        presenter.getAllCourseDetails(reqAllCourseDetails)
+        presenter.getAllCourseDetails(reqAllCourseDetails,true)
     }
 
     fun setDetailsContentBaseOnSelectedImage(){
@@ -217,13 +219,42 @@ class MaterialClassRoomActivity : AppCompatActivity(),MaterialClassRoomActivityC
         adapterMaterialClassRoom.notifyDataSetChanged()
     }
 
+    override fun showProgressOnGetAllCourseMaterial(show: Boolean) {
+        loading_data_material_classroom.visibility = if (show) View.VISIBLE else View.GONE
+        material_classroom_recycleview.visibility = if (show) View.GONE else View.VISIBLE
+        examp_layout.visibility = if (show) View.GONE else View.VISIBLE
+    }
 
-    override fun showProgress(show: Boolean) {
+    override fun showErrorOnGetAllCourseMaterial(error: String) {
+        loading_data_material_classroom.visibility = View.GONE
+        material_classroom_recycleview.visibility = View.GONE
+        checkNoResultFound(true)
+    }
+
+    override fun showProgressOnGetAllCourseDetails(show: Boolean) {
+        loading_data_image_course.visibility = if (show) View.VISIBLE else View.GONE
+        image_course_recycleview.visibility = if (show) View.GONE else View.VISIBLE
+    }
+
+    override fun showErrorOnGetAllCourseDetails(error: String) {
+        loading_data_image_course.visibility = View.GONE
+        image_course_recycleview.visibility = View.GONE
+    }
+
+    override fun showProgressOnGetAllClassRoomProgress(show: Boolean) {
 
     }
 
-    override fun showError(error: String) {
-        checkNoResultFound(true)
+    override fun showErrorOnGetAllClassRoomProgress(error: String) {
+
+    }
+
+    override fun showProgressOnGetOneClassRoomQualification(show: Boolean) {
+
+    }
+
+    override fun showErrorOnGetOneClassRoomQualification(error: String) {
+
     }
 
     override fun onGetAllCourseMaterial(s: AllCourseMaterialResponse) {

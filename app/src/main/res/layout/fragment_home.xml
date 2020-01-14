@@ -73,7 +73,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp" />
+                    android:layout_marginRight="10dp"
+                    tools:visibility="gone" />
+
+                <include
+                    android:id="@+id/loading_data_banner"
+                    layout="@layout/loading_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    tools:visibility="visible" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/category_recycleview"
@@ -81,14 +89,30 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_marginBottom="10dp"
+                    tools:visibility="gone" />
+
+                <include
+                    android:id="@+id/loading_data_category"
+                    layout="@layout/loading_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    tools:visibility="visible" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/course_recycleview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:nestedScrollingEnabled="false" />
+                    android:nestedScrollingEnabled="false"
+                    tools:visibility="gone" />
+
+                <include
+                    android:id="@+id/loading_data_course"
+                    layout="@layout/loading_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    tools:visibility="visible" />
 
                 <include
                     android:id="@+id/not_found"

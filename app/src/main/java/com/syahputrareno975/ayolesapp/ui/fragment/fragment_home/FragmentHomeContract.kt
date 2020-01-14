@@ -12,23 +12,31 @@ import com.syahputrareno975.ayolesapp.model.course.AllCourseResponse
 class FragmentHomeContract {
     interface View: BaseContract.View {
 
-        // mandatory response
-        fun showProgress(show: Boolean)
-        fun showError(error: String)
-
         // add more for response
         fun onGetAllBanner(s : AllBannerResponse)
+        fun showProgressOnGetAllBanner(show: Boolean)
+        fun showErrorOnGetAllBanner(error: String)
+
         fun onGetAllCategory(s : AllCategoryResponse)
+        fun showProgressOnGetAllCategory(show: Boolean)
+        fun showErrorOnGetAllCategory(error: String)
+
         fun onGetAllCategoryForCourse(s : AllCategoryResponse)
+        fun showProgressOnGetAllCategoryForCourse(show: Boolean)
+        fun showErrorOnGetAllCategoryForCourse(error: String)
+
         fun onGetAllCourses(s : AllCourseResponse,position : Int)
+        fun showProgressOnGetAllCourses(show: Boolean)
+        fun showErrorOnGetAllCourses(error: String)
+
     }
 
     interface Presenter: BaseContract.Presenter<View> {
 
         // add for request
-        fun getAllBanner(r : AllBannerRequest)
-        fun getAllCategory(r : AllCategoryRequest)
-        fun getAllCategoryForCourse(r : AllCategoryRequest)
-        fun getAllCourses(r : AllCourseRequest,position : Int)
+        fun getAllBanner(r : AllBannerRequest,enableLoading : Boolean)
+        fun getAllCategory(r : AllCategoryRequest,enableLoading : Boolean)
+        fun getAllCategoryForCourse(r : AllCategoryRequest,enableLoading : Boolean)
+        fun getAllCourses(r : AllCourseRequest,position : Int,enableLoading : Boolean)
     }
 }

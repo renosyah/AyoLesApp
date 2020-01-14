@@ -13,21 +13,25 @@ import com.syahputrareno975.ayolesapp.model.classRoomQualification.OneClassRoomQ
 class ExamResultActivityContract {
     interface View: BaseContract.View {
 
-        // mandatory response
-        fun showProgress(show: Boolean)
-        fun showError(error: String)
-
         // add more for request
         fun onGetAllClassRoomExamResult(s : AllClassRoomExamResultResponse)
+        fun showProgressOnGetAllClassRoomExamResult(show: Boolean)
+        fun showErrorOnGetAllClassRoomExamResult(error: String)
+
         fun onGetOneClassRoomCertificate(s : OneClassRoomCertificateResponse)
+        fun showProgressOnGetOneClassRoomCertificate(show: Boolean)
+        fun showErrorOnGetOneClassRoomCertificate(error: String)
+
         fun onGetOneClassRoomQualification(s : OneClassRoomQualificationResponse)
+        fun showProgressOnGetOneClassRoomQualification(show: Boolean)
+        fun showErrorOnGetOneClassRoomQualification(error: String)
     }
 
     interface Presenter: BaseContract.Presenter<View> {
 
         // add for request
-        fun getAllClassRoomExamResult(r : AllClassRoomExamResultRequest)
-        fun getOneClassRoomCertificate(r : OneClassRoomCertificateRequest)
-        fun getOneClassRoomQualification(r : OneClassRoomQualificationRequest)
+        fun getAllClassRoomExamResult(r : AllClassRoomExamResultRequest,enableLoading:Boolean)
+        fun getOneClassRoomCertificate(r : OneClassRoomCertificateRequest,enableLoading:Boolean)
+        fun getOneClassRoomQualification(r : OneClassRoomQualificationRequest,enableLoading:Boolean)
     }
 }

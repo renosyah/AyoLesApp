@@ -63,9 +63,17 @@
                     android:id="@+id/material_detail_recycleview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false">
+                    android:nestedScrollingEnabled="false"
+                    tools:visibility="gone">
 
                 </androidx.recyclerview.widget.RecyclerView>
+
+                <include
+                    android:id="@+id/loading_data_material_detail"
+                    layout="@layout/loading_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="260dp"
+                    tools:visibility="visible" />
 
                 <include
                     android:id="@+id/not_found"
@@ -82,7 +90,7 @@
                     android:layout_marginBottom="60dp"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    tools:visibility="visible">
+                    tools:visibility="gone">
 
                     <Button
                         android:id="@+id/previous_button"

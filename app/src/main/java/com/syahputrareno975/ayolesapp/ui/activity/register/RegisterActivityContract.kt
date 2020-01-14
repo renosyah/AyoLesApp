@@ -7,19 +7,16 @@ import com.syahputrareno975.ayolesapp.model.student.RegisterResponse
 class RegisterActivityContract {
     interface View : BaseContract.View {
 
-        // mandatory response
-        fun showProgress(show: Boolean)
-
-        fun showError(error: String)
-
         // add more for request
         fun onRegister(s : RegisterResponse)
+        fun showProgressOnRegister(show: Boolean)
+        fun showErrorOnRegister(error: String)
 
     }
 
     interface Presenter : BaseContract.Presenter<View> {
 
         // add for request
-        fun register(r : RegisterRequest)
+        fun register(r : RegisterRequest,enableLoading : Boolean)
     }
 }

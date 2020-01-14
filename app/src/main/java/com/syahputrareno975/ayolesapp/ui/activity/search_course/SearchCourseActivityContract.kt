@@ -9,19 +9,20 @@ import com.syahputrareno975.ayolesapp.model.course.AllCourseResponse
 class SearchCourseActivityContract {
     interface View: BaseContract.View {
 
-        // mandatory response
-        fun showProgress(show: Boolean)
-        fun showError(error: String)
-
         // add more for request
         fun onGetAllCourses(s : AllCourseResponse)
+        fun showProgressOnGetAllCourses(show: Boolean)
+        fun showErrorOnGetAllCourses(error: String)
+
         fun onGetAllCategory(s : AllCategoryResponse)
+        fun showProgressOnGetAllCategory(show: Boolean)
+        fun showErrorOnGetAllCategory(error: String)
     }
 
     interface Presenter: BaseContract.Presenter<View> {
 
         // add for request
-        fun getAllCourses(r : AllCourseRequest)
-        fun getAllCategory(r : AllCategoryRequest)
+        fun getAllCourses(r : AllCourseRequest,enableLoading : Boolean)
+        fun getAllCategory(r : AllCategoryRequest,enableLoading : Boolean)
     }
 }

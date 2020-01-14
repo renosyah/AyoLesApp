@@ -17,51 +17,63 @@ class SearchCourseActivityPresenter : SearchCourseActivityContract.Presenter {
     private val api : RetrofitService = RetrofitService.create()
     private lateinit var view: SearchCourseActivityContract.View
 
-    override fun getAllCourses(r: AllCourseRequest) {
-        view.showProgress(true)
+    override fun getAllCourses(r: AllCourseRequest,enableLoading : Boolean) {
+        if (enableLoading) {
+            view.showProgressOnGetAllCourses(true)
+        }
         val subscribe = api.allCourses(Query(r.toSchema()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result : AllCourseResponse? ->
-                view.showProgress(false)
+                if (enableLoading) {
+                    view.showProgressOnGetAllCourses(false)
+                }
                 if (result != null){
                     if (result.Errors.isNotEmpty()){
                         var message = ""
                         for (i in result.Errors){
                             message += i.Message
                         }
-                        view.showError(message)
+                        view.showErrorOnGetAllCourses(message)
                     }
                     view.onGetAllCourses(result)
                 }
             },{t : Throwable ->
-                view.showProgress(false)
-                view.showError(t.message!!)
+                if (enableLoading) {
+                    view.showProgressOnGetAllCourses(false)
+                }
+                view.showErrorOnGetAllCourses(t.message!!)
             })
 
         subscriptions.add(subscribe)
     }
 
-    override fun getAllCategory(r: AllCategoryRequest) {
-        view.showProgress(true)
+    override fun getAllCategory(r: AllCategoryRequest,enableLoading : Boolean) {
+        if (enableLoading) {
+            view.showProgressOnGetAllCategory(true)
+        }
         val subscribe = api.allCategory(Query(r.toSchema()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result : AllCategoryResponse? ->
-                view.showProgress(false)
+                if (enableLoading) {
+                    view.showProgressOnGetAllCategory(false)
+                }
                 if (result != null){
                     if (result.Errors.isNotEmpty()){
                         var message = ""
                         for (i in result.Errors){
                             message += i.Message
                         }
-                        view.showError(message)
+                        view.showErrorOnGetAllCategory(message)
                     }
                     view.onGetAllCategory(result)
                 }
             },{t : Throwable ->
-                view.showProgress(false)
-                view.showError(t.message!!)
+                if (enableLoading) {
+                    view.showProgressOnGetAllCategory(false)
+                }
+                view.showErrorOnGetAllCategory(t.message!!)
             })
 
         subscriptions.add(subscribe)

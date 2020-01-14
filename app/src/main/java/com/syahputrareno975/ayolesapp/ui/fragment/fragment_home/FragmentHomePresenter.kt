@@ -20,101 +20,125 @@ class FragmentHomePresenter : FragmentHomeContract.Presenter {
     private val api : RetrofitService = RetrofitService.create()
     private lateinit var view: FragmentHomeContract.View
 
-    override fun getAllCategoryForCourse(r: AllCategoryRequest) {
-        view.showProgress(true)
+    override fun getAllCategoryForCourse(r: AllCategoryRequest,enableLoading : Boolean) {
+        if (enableLoading){
+            view.showProgressOnGetAllCategoryForCourse(true)
+        }
         val subscribe = api.allCategory(Query(r.toSchema()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result : AllCategoryResponse? ->
-                view.showProgress(false)
+                if (enableLoading) {
+                    view.showProgressOnGetAllCategoryForCourse(false)
+                }
                 if (result != null){
                     if (result.Errors.isNotEmpty()){
                         var message = ""
                         for (i in result.Errors){
                             message += i.Message
                         }
-                        view.showError(message)
+                        view.showErrorOnGetAllCategoryForCourse(message)
                     }
                     view.onGetAllCategoryForCourse(result)
                 }
             },{t : Throwable ->
-                view.showProgress(false)
-                view.showError(t.message!!)
+                if (enableLoading) {
+                    view.showProgressOnGetAllCategoryForCourse(false)
+                }
+                view.showErrorOnGetAllCategoryForCourse(t.message!!)
             })
 
         subscriptions.add(subscribe)
     }
 
-    override fun getAllCourses(r: AllCourseRequest,position : Int) {
-        view.showProgress(true)
+    override fun getAllCourses(r: AllCourseRequest,position : Int,enableLoading : Boolean) {
+        if (enableLoading) {
+            view.showProgressOnGetAllCourses(true)
+        }
         val subscribe = api.allCourses(Query(r.toSchema()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result : AllCourseResponse? ->
-                view.showProgress(false)
+                if (enableLoading) {
+                    view.showProgressOnGetAllCourses(false)
+                }
                 if (result != null){
                     if (result.Errors.isNotEmpty()){
                         var message = ""
                         for (i in result.Errors){
                             message += i.Message
                         }
-                        view.showError(message)
+                        view.showErrorOnGetAllCourses(message)
                     }
                     view.onGetAllCourses(result,position)
                 }
             },{t : Throwable ->
-                view.showProgress(false)
-                view.showError(t.message!!)
+                if (enableLoading) {
+                    view.showProgressOnGetAllCourses(false)
+                }
+                view.showErrorOnGetAllCourses(t.message!!)
             })
 
         subscriptions.add(subscribe)
     }
 
-    override fun getAllCategory(r: AllCategoryRequest) {
-        view.showProgress(true)
+    override fun getAllCategory(r: AllCategoryRequest,enableLoading : Boolean) {
+        if (enableLoading) {
+            view.showProgressOnGetAllCategory(true)
+        }
         val subscribe = api.allCategory(Query(r.toSchema()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result : AllCategoryResponse? ->
-                view.showProgress(false)
+                if (enableLoading) {
+                    view.showProgressOnGetAllCategory(false)
+                }
                 if (result != null){
                     if (result.Errors.isNotEmpty()){
                         var message = ""
                         for (i in result.Errors){
                             message += i.Message
                         }
-                        view.showError(message)
+                        view.showErrorOnGetAllCategory(message)
                     }
                     view.onGetAllCategory(result)
                 }
             },{t : Throwable ->
-                view.showProgress(false)
-                view.showError(t.message!!)
+                if (enableLoading) {
+                    view.showProgressOnGetAllCategory(false)
+                }
+                view.showErrorOnGetAllCategory(t.message!!)
             })
 
         subscriptions.add(subscribe)
     }
 
-    override fun getAllBanner(r: AllBannerRequest) {
-        view.showProgress(true)
+    override fun getAllBanner(r: AllBannerRequest,enableLoading : Boolean) {
+        if (enableLoading) {
+            view.showProgressOnGetAllBanner(true)
+        }
         val subscribe = api.allBanner(Query(r.toSchema()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result : AllBannerResponse? ->
-                view.showProgress(false)
+                if (enableLoading) {
+                    view.showProgressOnGetAllBanner(false)
+                }
                 if (result != null) {
                     if (result.Errors.isNotEmpty()) {
                         var message = ""
                         for (i in result.Errors) {
                             message += i.Message + "\n"
                         }
-                        view.showError(message)
+                        view.showErrorOnGetAllBanner(message)
                     }
                     view.onGetAllBanner(result)
                 }
             },{ t : Throwable ->
-                view.showProgress(false)
-                view.showError(t.message!!)
+                if (enableLoading) {
+                    view.showProgressOnGetAllBanner(false)
+                }
+                view.showErrorOnGetAllBanner(t.message!!)
             })
 
         subscriptions.add(subscribe)

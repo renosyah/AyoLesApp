@@ -78,7 +78,7 @@ class SearchCourseActivity : AppCompatActivity(),SearchCourseActivityContract.Vi
                 listCourses.clear()
                 reqAllCourse.Offset = 0
                 reqAllCourse.SearchValue = search_course_edittext.text.toString()
-                presenter.getAllCourses(reqAllCourse)
+                presenter.getAllCourses(reqAllCourse,false)
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
@@ -87,9 +87,12 @@ class SearchCourseActivity : AppCompatActivity(),SearchCourseActivityContract.Vi
 
             }
         })
+
+        not_found.visibility = View.GONE
+
         search_course_edittext.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                presenter.getAllCourses(reqAllCourse)
+                presenter.getAllCourses(reqAllCourse,false)
                 return@setOnEditorActionListener true
             }
             return@setOnEditorActionListener false
@@ -98,7 +101,7 @@ class SearchCourseActivity : AppCompatActivity(),SearchCourseActivityContract.Vi
                 if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight) {
                     // pagination if user reach scroll to bottom on course
                     reqAllCourse.Offset += limit_load
-                    presenter.getAllCourses(reqAllCourse)
+                    presenter.getAllCourses(reqAllCourse,false)
                 }
             })
 
@@ -114,7 +117,7 @@ class SearchCourseActivity : AppCompatActivity(),SearchCourseActivityContract.Vi
         }
         course_recycleview.adapter = adapterCourse
         course_recycleview.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
-        presenter.getAllCourses(reqAllCourse)
+        presenter.getAllCourses(reqAllCourse,true)
 
     }
 
@@ -123,11 +126,11 @@ class SearchCourseActivity : AppCompatActivity(),SearchCourseActivityContract.Vi
             listCourses.clear()
             reqAllCourse.Offset = 0
             reqAllCourse.CategoryId = categoryModel.Id
-            presenter.getAllCourses(reqAllCourse)
+            presenter.getAllCourses(reqAllCourse,false)
         }
         category_recycleview.adapter = adapterCategory
         category_recycleview.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
-        presenter.getAllCategory(reqAllCategory)
+        presenter.getAllCategory(reqAllCategory,true)
     }
 
     fun showTagedCategory(){
@@ -144,12 +147,24 @@ class SearchCourseActivity : AppCompatActivity(),SearchCourseActivityContract.Vi
         course_recycleview.visibility = if (listCourses.isEmpty() || forceShow) View.GONE else View.VISIBLE
     }
 
-    override fun showProgress(show: Boolean) {
-        not_found.visibility = View.GONE
+    override fun showProgressOnGetAllCourses(show: Boolean) {
+        loading_data_search_course.visibility = if (show) View.VISIBLE else View.GONE
+        course_recycleview.visibility = if (show) View.GONE else View.VISIBLE
     }
 
-    override fun showError(error: String) {
+    override fun showErrorOnGetAllCourses(error: String) {
+        loading_data_search_course.visibility = View.GONE
         checkNoResultFound(true)
+    }
+
+    override fun showProgressOnGetAllCategory(show: Boolean) {
+        loading_data_category.visibility = if (show) View.VISIBLE else View.GONE
+        category_recycleview.visibility = if (show) View.GONE else View.VISIBLE
+    }
+
+    override fun showErrorOnGetAllCategory(error: String) {
+        loading_data_category.visibility = View.GONE
+        category_recycleview.visibility = View.GONE
     }
 
     override fun onGetAllCourses(s: AllCourseResponse) {

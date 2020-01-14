@@ -87,11 +87,14 @@ class MaterialDetailClassRoomActivity : AppCompatActivity(),MaterialDetailClassR
             onBackPressed()
         }
 
+        not_found.visibility = View.GONE
+        layout_progress.visibility = View.GONE
+
         exam_button.setOnClickListener {
-            presenter.addCourseMaterialProgress(AddClassRoomProgressRequest(classRoomModel.Id,courseMaterial.Id), CODE_EXAM)
+            presenter.addCourseMaterialProgress(AddClassRoomProgressRequest(classRoomModel.Id,courseMaterial.Id), CODE_EXAM,false)
         }
 
-        presenter.getAllCourseMaterial(reqAllMaterial)
+        presenter.getAllCourseMaterial(reqAllMaterial,true)
     }
 
     fun setLayout(){
@@ -109,19 +112,19 @@ class MaterialDetailClassRoomActivity : AppCompatActivity(),MaterialDetailClassR
             if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight) {
                 // pagination if user reach scroll to bottom on course
                 reqAllMaterialDetail.Offset += limit_load
-                presenter.getAllCourseMaterialDetail(reqAllMaterialDetail)
+                presenter.getAllCourseMaterialDetail(reqAllMaterialDetail,false)
             }
         })
 
         previous_button.visibility = if (reqAllMaterial.Offset - 1 < 0) View.INVISIBLE else View.VISIBLE
         previous_button.setOnClickListener {
             // save progress
-            presenter.addCourseMaterialProgress(AddClassRoomProgressRequest(classRoomModel.Id,courseMaterial.Id), CODE_PREVIOUS)
+            presenter.addCourseMaterialProgress(AddClassRoomProgressRequest(classRoomModel.Id,courseMaterial.Id), CODE_PREVIOUS,false)
         }
 
         next_button.setOnClickListener {
             // save progress
-            presenter.addCourseMaterialProgress(AddClassRoomProgressRequest(classRoomModel.Id,courseMaterial.Id), CODE_NEXT)
+            presenter.addCourseMaterialProgress(AddClassRoomProgressRequest(classRoomModel.Id,courseMaterial.Id), CODE_NEXT,false)
         }
 
         getAllMaterialDetail()
@@ -134,7 +137,7 @@ class MaterialDetailClassRoomActivity : AppCompatActivity(),MaterialDetailClassR
         }
         material_detail_recycleview.adapter = adapterMaterialDetail
         material_detail_recycleview.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
-        presenter.getAllCourseMaterialDetail(reqAllMaterialDetail)
+        presenter.getAllCourseMaterialDetail(reqAllMaterialDetail,true)
     }
 
     fun checkNoResultFound(forceShow : Boolean){
@@ -143,13 +146,44 @@ class MaterialDetailClassRoomActivity : AppCompatActivity(),MaterialDetailClassR
         layout_progress.visibility = if (listMaterialDetail.isEmpty() || forceShow) View.GONE else View.VISIBLE
     }
 
-    override fun showProgress(show: Boolean) {
-        not_found.visibility = View.GONE
+    override fun showProgressOnGetAllCourseMaterialDetail(show: Boolean) {
+        loading_data_material_detail.visibility = if (show) View.VISIBLE  else View.GONE
+        material_detail_recycleview.visibility = if (show) View.GONE else View.VISIBLE
+        layout_progress.visibility = if (show) View.GONE else View.VISIBLE
     }
 
-    override fun showError(error: String) {
+    override fun showErrorOnGetAllCourseMaterialDetail(error: String) {
+        loading_data_material_detail.visibility = View.GONE
         checkNoResultFound(true)
     }
+
+    override fun showProgressOnGetAllCourseMaterial(show: Boolean) {
+
+    }
+
+    override fun showErrorOnGetAllCourseMaterial(error: String) {
+        loading_data_material_detail.visibility = View.GONE
+        material_detail_recycleview.visibility = View.GONE
+        checkNoResultFound(true)
+    }
+
+    override fun showProgressOnAddCourseMaterialProgress(show: Boolean) {
+
+    }
+
+    override fun showErrorOnAddCourseMaterialProgress(error: String) {
+
+    }
+
+    override fun showProgressOnGetOneClassRoomQualification(show: Boolean) {
+
+    }
+
+    override fun showErrorOnGetOneClassRoomQualification(error: String) {
+
+    }
+
+
 
     override fun onGetAllCourseMaterial(s: AllCourseMaterialResponse) {
         // if data size got 1 instead 2
@@ -160,7 +194,7 @@ class MaterialDetailClassRoomActivity : AppCompatActivity(),MaterialDetailClassR
         // will show
         exam_button.visibility = if (s.Data.CourseMaterialList.size <= 1) View.VISIBLE else View.GONE
         if (s.Data.CourseMaterialList.size <= 1){
-            presenter.getOneClassRoomQualification(OneClassRoomQualificationRequest(classRoomModel.Id))
+            presenter.getOneClassRoomQualification(OneClassRoomQualificationRequest(classRoomModel.Id),false)
         }
 
         // by using loop then break
@@ -184,11 +218,11 @@ class MaterialDetailClassRoomActivity : AppCompatActivity(),MaterialDetailClassR
         when (navCode){
             CODE_NEXT -> {
                 reqAllMaterial.Offset += limit_load_material
-                presenter.getAllCourseMaterial(reqAllMaterial)
+                presenter.getAllCourseMaterial(reqAllMaterial,false)
             }
             CODE_PREVIOUS -> {
                 reqAllMaterial.Offset -= limit_load_material
-                presenter.getAllCourseMaterial(reqAllMaterial)
+                presenter.getAllCourseMaterial(reqAllMaterial,false)
             }
             CODE_EXAM -> {
 

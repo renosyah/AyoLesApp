@@ -14,26 +14,32 @@ class RegisterActivityPresenter: RegisterActivityContract.Presenter {
     private val api : RetrofitService = RetrofitService.create()
     private lateinit var view: RegisterActivityContract.View
 
-    override fun register(r: RegisterRequest) {
-        view.showProgress(true)
+    override fun register(r: RegisterRequest,enableLoading : Boolean) {
+        if (enableLoading) {
+            view.showProgressOnRegister(true)
+        }
         val subscribe = api.register(Query(r.toSchema()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result : RegisterResponse? ->
-                view.showProgress(false)
+                if (enableLoading) {
+                    view.showProgressOnRegister(false)
+                }
                 if (result != null){
                     if (result.Errors.isNotEmpty()){
                         var message = ""
                         for (i in result.Errors){
                             message += i.Message
                         }
-                        view.showError(message)
+                        view.showErrorOnRegister(message)
                     }
                     view.onRegister(result)
                 }
             },{t : Throwable ->
-                view.showProgress(false)
-                view.showError(t.message!!)
+                if (enableLoading) {
+                    view.showProgressOnRegister(false)
+                }
+                view.showErrorOnRegister(t.message!!)
             })
 
         subscriptions.add(subscribe)

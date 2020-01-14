@@ -89,13 +89,15 @@ class FragmentClass : Fragment(),FragmentClassContract.View {
             studentSession = SerializableSave(ctx,SerializableSave.userDataFileSessionName).load() as StudentModel
         }
 
+        not_found.visibility = View.GONE
+
         search_class_edittext.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 clearTagedCategory()
                 listClassRoom.clear()
                 reqAllClass.Offset = 0
                 reqAllClass.SearchValue = search_class_edittext.text.toString()
-                presenter.getAllClass(reqAllClass)
+                presenter.getAllClass(reqAllClass,false)
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -113,7 +115,7 @@ class FragmentClass : Fragment(),FragmentClassContract.View {
             if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight) {
                 // pagination with nested scrollview if scrolled to bottom
                 reqAllClass.Offset += limit_load_class
-                presenter.getAllClass(reqAllClass)
+                presenter.getAllClass(reqAllClass,false)
             }
         })
 
@@ -131,7 +133,7 @@ class FragmentClass : Fragment(),FragmentClassContract.View {
         classes_recycleview.layoutManager = LinearLayoutManager(ctx,LinearLayoutManager.VERTICAL,false)
 
         reqAllClass.StudentId = studentSession.Id
-        presenter.getAllClass(reqAllClass)
+        presenter.getAllClass(reqAllClass,true)
     }
 
     fun getAllCategory(){
@@ -140,7 +142,7 @@ class FragmentClass : Fragment(),FragmentClassContract.View {
             reqAllClass.Offset = 0
             reqAllClass.SearchBy = "course.category_id::TEXT"
             reqAllClass.SearchValue = categoryModel.Id
-            presenter.getAllClass(reqAllClass)
+            presenter.getAllClass(reqAllClass,false)
         }
         category_classes_recycleview.adapter = adapterCategory
         category_classes_recycleview.layoutManager = LinearLayoutManager(ctx,LinearLayoutManager.HORIZONTAL,false)
@@ -153,12 +155,12 @@ class FragmentClass : Fragment(),FragmentClassContract.View {
                 if (dx > 0 && (visibleItemCount + pastVisiblesItems) >= totalItemCount){
                     // pagination if user reach scroll to right on category
                     reqAllCategory.Offset += limit_load_category
-                    presenter.getAllCategory(reqAllCategory)
+                    presenter.getAllCategory(reqAllCategory,false)
                 }
             }
         })
 
-        presenter.getAllCategory(reqAllCategory)
+        presenter.getAllCategory(reqAllCategory,true)
     }
 
     fun checkNoResultFound(forceShow : Boolean){
@@ -171,12 +173,25 @@ class FragmentClass : Fragment(),FragmentClassContract.View {
         }
         adapterCategory.notifyDataSetChanged()
     }
-    override fun showProgress(show: Boolean) {
-        not_found.visibility = View.GONE
+
+    override fun showProgressOnGetAllClass(show: Boolean) {
+        loading_data_class.visibility = if (show) View.VISIBLE else View.GONE
+        classes_recycleview.visibility = if (show)  View.GONE else View.VISIBLE
     }
 
-    override fun showError(error: String) {
+    override fun showProgressOnGetAllCategory(show: Boolean) {
+        loading_data_category.visibility = if (show) View.VISIBLE else View.GONE
+        category_classes_recycleview.visibility = if (show) View.GONE else View.VISIBLE
+    }
+
+    override fun showErrorOnGetAllClass(error: String) {
+        loading_data_class.visibility = View.GONE
         checkNoResultFound(true)
+    }
+
+    override fun showErrorOnGetAllCategory(error: String) {
+        loading_data_category.visibility = View.GONE
+        category_classes_recycleview.visibility = View.GONE
     }
 
     override fun onGetAllClass(s: AllClassRoomResponse) {

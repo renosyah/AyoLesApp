@@ -22,76 +22,94 @@ class ExamResultActivityPresenter : ExamResultActivityContract.Presenter {
     private val api : RetrofitService = RetrofitService.create()
     private lateinit var view: ExamResultActivityContract.View
 
-    override fun getOneClassRoomQualification(r: OneClassRoomQualificationRequest) {
-        view.showProgress(true)
+    override fun getOneClassRoomQualification(r: OneClassRoomQualificationRequest,enableLoading:Boolean) {
+        if (enableLoading) {
+            view.showProgressOnGetOneClassRoomQualification(true)
+        }
         val subscribe = api.oneClassRoomQualification(Query(r.toSchema()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result :OneClassRoomQualificationResponse? ->
-                view.showProgress(false)
+                if (enableLoading) {
+                    view.showProgressOnGetOneClassRoomQualification(false)
+                }
                 if (result != null){
                     if (result.Errors.isNotEmpty()){
                         var message = ""
                         for (i in result.Errors){
                             message += i.Message
                         }
-                        view.showError(message)
+                        view.showErrorOnGetOneClassRoomQualification(message)
                     }
                     view.onGetOneClassRoomQualification(result)
                 }
             },{t : Throwable ->
-                view.showProgress(false)
-                view.showError(t.message!!)
+                if (enableLoading) {
+                    view.showProgressOnGetOneClassRoomQualification(false)
+                }
+                view.showErrorOnGetOneClassRoomQualification(t.message!!)
             })
 
         subscriptions.add(subscribe)
     }
 
-    override fun getOneClassRoomCertificate(r: OneClassRoomCertificateRequest) {
-        view.showProgress(true)
+    override fun getOneClassRoomCertificate(r: OneClassRoomCertificateRequest,enableLoading:Boolean) {
+        if (enableLoading) {
+            view.showProgressOnGetOneClassRoomCertificate(true)
+        }
         val subscribe = api.oneClassRoomCertificate(Query(r.toSchema()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({result :OneClassRoomCertificateResponse? ->
-                    view.showProgress(false)
+                    if (enableLoading) {
+                        view.showProgressOnGetOneClassRoomCertificate(false)
+                    }
                     if (result != null){
                         if (result.Errors.isNotEmpty()){
                             var message = ""
                             for (i in result.Errors){
                                 message += i.Message
                             }
-                            view.showError(message)
+                            view.showErrorOnGetOneClassRoomCertificate(message)
                         }
                         view.onGetOneClassRoomCertificate(result)
                     }
                 },{t : Throwable ->
-                    view.showProgress(false)
-                    view.showError(t.message!!)
+                    if (enableLoading) {
+                        view.showProgressOnGetOneClassRoomCertificate(false)
+                    }
+                    view.showErrorOnGetOneClassRoomCertificate(t.message!!)
                 })
 
         subscriptions.add(subscribe)
     }
 
-    override fun getAllClassRoomExamResult(r: AllClassRoomExamResultRequest) {
-        view.showProgress(true)
+    override fun getAllClassRoomExamResult(r: AllClassRoomExamResultRequest,enableLoading:Boolean) {
+        if (enableLoading) {
+            view.showProgressOnGetAllClassRoomExamResult(true)
+        }
         val subscribe = api.allClassRoomExamResult(Query(r.toSchema()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({result :AllClassRoomExamResultResponse? ->
-                    view.showProgress(false)
+                    if (enableLoading) {
+                        view.showProgressOnGetAllClassRoomExamResult(false)
+                    }
                     if (result != null){
                         if (result.Errors.isNotEmpty()){
                             var message = ""
                             for (i in result.Errors){
                                 message += i.Message
                             }
-                            view.showError(message)
+                            view.showErrorOnGetAllClassRoomExamResult(message)
                         }
                         view.onGetAllClassRoomExamResult(result)
                     }
                 },{t : Throwable ->
-                    view.showProgress(false)
-                    view.showError(t.message!!)
+                    if (enableLoading) {
+                        view.showProgressOnGetAllClassRoomExamResult(false)
+                    }
+                    view.showErrorOnGetAllClassRoomExamResult(t.message!!)
                 })
 
         subscriptions.add(subscribe)

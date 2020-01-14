@@ -68,17 +68,19 @@ class ExamResultActivity : AppCompatActivity(), ExamResultActivityContract.View 
             finish()
         }
 
+        not_found.visibility = View.GONE
+
         request_certificate_button.setOnClickListener {
             // request score
             // and cert
-            presenter.getOneClassRoomQualification(OneClassRoomQualificationRequest(classRoomModel.Id))
+            presenter.getOneClassRoomQualification(OneClassRoomQualificationRequest(classRoomModel.Id),false)
         }
 
         exam_result_nestedscrollview.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
             if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight) {
                 // pagination if user reach scroll to bottom on course
                 reqAllExamResult.Offset += limit_load
-                presenter.getAllClassRoomExamResult(reqAllExamResult)
+                presenter.getAllClassRoomExamResult(reqAllExamResult,false)
             }
         })
 
@@ -94,7 +96,7 @@ class ExamResultActivity : AppCompatActivity(), ExamResultActivityContract.View 
         exam_result_recycleview.adapter = adapterExamResult
         exam_result_recycleview.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
 
-        presenter.getAllClassRoomExamResult(reqAllExamResult)
+        presenter.getAllClassRoomExamResult(reqAllExamResult,true)
     }
 
     fun checkNoResultFound(forceShow : Boolean){
@@ -102,12 +104,32 @@ class ExamResultActivity : AppCompatActivity(), ExamResultActivityContract.View 
         exam_result_recycleview.visibility = if (listExamResult.isEmpty() || forceShow) View.GONE else View.VISIBLE
     }
 
-    override fun showProgress(show: Boolean) {
+    override fun showProgressOnGetAllClassRoomExamResult(show: Boolean) {
+        loading_data_exam_result.visibility = if (show) View.VISIBLE else View.GONE
+        exam_result_recycleview.visibility = if (show) View.GONE else View.VISIBLE
+        request_certificate_button.visibility = if (show) View.GONE else View.VISIBLE
+    }
+
+    override fun showErrorOnGetAllClassRoomExamResult(error: String) {
+        loading_data_exam_result.visibility = View.GONE
+        request_certificate_button.visibility = View.GONE
+        checkNoResultFound(true)
+    }
+
+    override fun showProgressOnGetOneClassRoomCertificate(show: Boolean) {
 
     }
 
-    override fun showError(error: String) {
-        checkNoResultFound(true)
+    override fun showErrorOnGetOneClassRoomCertificate(error: String) {
+
+    }
+
+    override fun showProgressOnGetOneClassRoomQualification(show: Boolean) {
+
+    }
+
+    override fun showErrorOnGetOneClassRoomQualification(error: String) {
+
     }
 
     override fun onGetAllClassRoomExamResult(s: AllClassRoomExamResultResponse) {
@@ -121,10 +143,11 @@ class ExamResultActivity : AppCompatActivity(), ExamResultActivityContract.View 
         intent.putExtra("data",classRoomModel)
         startActivity(intent)
     }
+
     override fun onGetOneClassRoomQualification(s: OneClassRoomQualificationResponse) {
         when {
             s.Data.ClassRoomQualificationDetail.Status == STATUS_PASS_EXAM ->
-                presenter.getOneClassRoomCertificate(OneClassRoomCertificateRequest(classRoomModel.Id))
+                presenter.getOneClassRoomCertificate(OneClassRoomCertificateRequest(classRoomModel.Id),false)
             s.Data.ClassRoomQualificationDetail.Status == STATUS_NOT_PASS_EXAM ->
                 Toast.makeText(context,getString(R.string.not_qualified),Toast.LENGTH_LONG).show()
             else ->

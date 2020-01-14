@@ -15,23 +15,30 @@ import com.syahputrareno975.ayolesapp.model.courseMaterial.AllCourseMaterialResp
 class MaterialClassRoomActivityContract {
     interface View: BaseContract.View {
 
-        // mandatory response
-        fun showProgress(show: Boolean)
-        fun showError(error: String)
-
         // add more for request
         fun onGetAllClassRoomProgress(s : AllClassRoomProgressResponse)
+        fun showProgressOnGetAllClassRoomProgress(show: Boolean)
+        fun showErrorOnGetAllClassRoomProgress(error: String)
+
         fun onGetAllCourseMaterial(s : AllCourseMaterialResponse)
+        fun showProgressOnGetAllCourseMaterial(show: Boolean)
+        fun showErrorOnGetAllCourseMaterial(error: String)
+
         fun onGetAllCourseDetails(s : AllCourseDetailResponse)
+        fun showProgressOnGetAllCourseDetails(show: Boolean)
+        fun showErrorOnGetAllCourseDetails(error: String)
+
         fun onGetOneClassRoomQualification(s : OneClassRoomQualificationResponse)
+        fun showProgressOnGetOneClassRoomQualification(show: Boolean)
+        fun showErrorOnGetOneClassRoomQualification(error: String)
     }
 
     interface Presenter: BaseContract.Presenter<View> {
 
         // add for request
-        fun getAllClassRoomProgress(r : AllClassRoomProgressRequest)
-        fun getAllCourseMaterial(r : AllCourseMaterialRequest)
-        fun getAllCourseDetails(r : AllCourseDetailRequest)
-        fun getOneClassRoomQualification(r : OneClassRoomQualificationRequest)
+        fun getAllClassRoomProgress(r : AllClassRoomProgressRequest,enableLoading :Boolean)
+        fun getAllCourseMaterial(r : AllCourseMaterialRequest,enableLoading :Boolean)
+        fun getAllCourseDetails(r : AllCourseDetailRequest,enableLoading :Boolean)
+        fun getOneClassRoomQualification(r : OneClassRoomQualificationRequest,enableLoading :Boolean)
     }
 }
