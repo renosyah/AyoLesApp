@@ -14,23 +14,31 @@ import com.syahputrareno975.ayolesapp.model.courseQualification.OneCourseQualifi
 class DetailCourseActivityContract {
     interface View: BaseContract.View {
 
-        // mandatory response
-        fun showProgress(show: Boolean)
-        fun showError(error: String)
-
         // add more for request
         fun onGetAllCourseDetails(r : AllCourseDetailResponse)
+        fun showProgressOnGetAllCourseDetails(show: Boolean)
+        fun showErrorOnGetAllCourseDetails(error: String)
+
         fun onAddClassRoom(s : AddClassRoomResponse)
+        fun showProgressOnAddClassRoom(show: Boolean)
+        fun showErrorOnAddClassRoom(error: String)
+
         fun onGetOneClassRoomById(s : OneClassByIdRoomResponse)
+        fun showProgressOnGetOneClassRoomById(show: Boolean)
+        fun showErrorOnGetOneClassRoomById(error: String)
+
         fun onGetOneCourseQualification(s : OneCourseQualificationResponse)
+        fun showProgressOnGetOneCourseQualification(show: Boolean)
+        fun showErrorOnGetOneCourseQualification(error: String)
+
     }
 
     interface Presenter: BaseContract.Presenter<View> {
 
         // add for request
-        fun getAllCourseDetails(r : AllCourseDetailRequest)
-        fun addClassRoom(r : AddClassRoomRequest)
-        fun getOneClassRoomById(r : OneClassByIdRoomRequest)
-        fun getOneCourseQualification(r : OneCourseQualificationRequest)
+        fun getAllCourseDetails(r : AllCourseDetailRequest,enableLoading :Boolean)
+        fun addClassRoom(r : AddClassRoomRequest,enableLoading :Boolean)
+        fun getOneClassRoomById(r : OneClassByIdRoomRequest,enableLoading :Boolean)
+        fun getOneCourseQualification(r : OneCourseQualificationRequest,enableLoading :Boolean)
     }
 }

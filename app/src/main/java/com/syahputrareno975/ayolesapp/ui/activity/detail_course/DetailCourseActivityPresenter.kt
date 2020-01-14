@@ -21,101 +21,125 @@ class DetailCourseActivityPresenter : DetailCourseActivityContract.Presenter {
     private val api : RetrofitService = RetrofitService.create()
     private lateinit var view: DetailCourseActivityContract.View
 
-    override fun getOneCourseQualification(r: OneCourseQualificationRequest) {
-        view.showProgress(true)
+    override fun getOneCourseQualification(r: OneCourseQualificationRequest,enableLoading :Boolean) {
+        if (enableLoading) {
+            view.showProgressOnGetOneCourseQualification(true)
+        }
         val subscribe = api.oneCourseQualification(Query(r.toSchema()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({result : OneCourseQualificationResponse? ->
-                    view.showProgress(false)
+                    if (enableLoading) {
+                        view.showProgressOnGetOneCourseQualification(false)
+                    }
                     if (result != null){
                         if (result.Errors.isNotEmpty()){
                             var message = ""
                             for (i in result.Errors){
                                 message += i.Message
                             }
-                            view.showError(message)
+                            view.showErrorOnGetOneCourseQualification(message)
                         }
                         view.onGetOneCourseQualification(result)
                     }
                 },{t : Throwable ->
-                    view.showProgress(false)
-                    view.showError(t.message!!)
+                    if (enableLoading) {
+                        view.showProgressOnGetOneCourseQualification(false)
+                    }
+                    view.showErrorOnGetOneCourseQualification(t.message!!)
                 })
 
         subscriptions.add(subscribe)
     }
 
-    override fun getAllCourseDetails(r: AllCourseDetailRequest) {
-        view.showProgress(true)
+    override fun getAllCourseDetails(r: AllCourseDetailRequest,enableLoading :Boolean) {
+        if (enableLoading) {
+            view.showProgressOnGetAllCourseDetails(true)
+        }
         val subscribe = api.allCourseDetails(Query(r.toSchema()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result : AllCourseDetailResponse? ->
-                view.showProgress(false)
+                if (enableLoading) {
+                    view.showProgressOnGetAllCourseDetails(false)
+                }
                 if (result != null){
                     if (result.Errors.isNotEmpty()){
                         var message = ""
                         for (i in result.Errors){
                             message += i.Message
                         }
-                        view.showError(message)
+                        view.showErrorOnGetAllCourseDetails(message)
                     }
                     view.onGetAllCourseDetails(result)
                 }
             },{t : Throwable ->
-                view.showProgress(false)
-                view.showError(t.message!!)
+                if (enableLoading) {
+                    view.showProgressOnGetAllCourseDetails(false)
+                }
+                view.showErrorOnGetAllCourseDetails(t.message!!)
             })
 
         subscriptions.add(subscribe)
     }
 
-    override fun getOneClassRoomById(r: OneClassByIdRoomRequest) {
-        view.showProgress(true)
+    override fun getOneClassRoomById(r: OneClassByIdRoomRequest,enableLoading :Boolean) {
+        if (enableLoading) {
+            view.showProgressOnGetOneClassRoomById(true)
+        }
         val subscribe = api.oneClassRoomById(Query(r.toSchema()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result : OneClassByIdRoomResponse? ->
-                view.showProgress(false)
+                if (enableLoading) {
+                    view.showProgressOnGetOneClassRoomById(false)
+                }
                 if (result != null){
                     if (result.Errors.isNotEmpty()){
                         var message = ""
                         for (i in result.Errors){
                             message += i.Message
                         }
-                        view.showError(message)
+                        view.showErrorOnGetOneClassRoomById(message)
                     }
                     view.onGetOneClassRoomById(result)
                 }
             },{t : Throwable ->
-                view.showProgress(false)
-                view.showError(t.message!!)
+                if (enableLoading) {
+                    view.showProgressOnGetOneClassRoomById(false)
+                }
+                view.showErrorOnGetOneClassRoomById(t.message!!)
             })
 
         subscriptions.add(subscribe)
     }
 
-    override fun addClassRoom(r: AddClassRoomRequest) {
-        view.showProgress(true)
+    override fun addClassRoom(r: AddClassRoomRequest,enableLoading :Boolean) {
+        if (enableLoading) {
+            view.showProgressOnAddClassRoom(true)
+        }
         val subscribe = api.addClassRoom(Query(r.toSchema()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result : AddClassRoomResponse? ->
-                view.showProgress(false)
+                if (enableLoading) {
+                    view.showProgressOnAddClassRoom(false)
+                }
                 if (result != null){
                     if (result.Errors.isNotEmpty()){
                         var message = ""
                         for (i in result.Errors){
                             message += i.Message
                         }
-                        view.showError(message)
+                        view.showErrorOnAddClassRoom(message)
                     }
                     view.onAddClassRoom(result)
                 }
             },{t : Throwable ->
-                view.showProgress(false)
-                view.showError(t.message!!)
+                if (enableLoading) {
+                    view.showProgressOnAddClassRoom(false)
+                }
+                view.showErrorOnAddClassRoom(t.message!!)
             })
 
         subscriptions.add(subscribe)

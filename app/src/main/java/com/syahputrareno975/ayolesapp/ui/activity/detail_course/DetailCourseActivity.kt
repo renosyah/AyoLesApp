@@ -75,13 +75,14 @@ class DetailCourseActivity : AppCompatActivity(),DetailCourseActivityContract.Vi
         reqAllCourseDetails.CourseId = courseData.Id
 
         course_qualification_textview.text = CourseQualificationModel().toString(context)
+        course_qualification_textview.visibility = View.GONE
 
         back_imageview.setOnClickListener {
             finish()
         }
 
         add_to_class_button.setOnClickListener {
-            presenter.addClassRoom(AddClassRoomRequest(courseData.Id,studentSession.Id))
+            presenter.addClassRoom(AddClassRoomRequest(courseData.Id,studentSession.Id),false)
         }
 
 
@@ -90,7 +91,7 @@ class DetailCourseActivity : AppCompatActivity(),DetailCourseActivityContract.Vi
 
         //fake_toolbar.background.alpha = 125
 
-        presenter.getOneClassRoomById(OneClassByIdRoomRequest(courseData.Id,studentSession.Id))
+        presenter.getOneClassRoomById(OneClassByIdRoomRequest(courseData.Id,studentSession.Id),false)
         class_is_taken.visibility = View.GONE
         go_to_class_button.visibility = View.GONE
         add_to_class_button.visibility = View.GONE
@@ -106,7 +107,7 @@ class DetailCourseActivity : AppCompatActivity(),DetailCourseActivityContract.Vi
         setDetailsContentBaseOnSelectedImage()
 
         courseData.CourseDetails.clear()
-        presenter.getAllCourseDetails(reqAllCourseDetails)
+        presenter.getAllCourseDetails(reqAllCourseDetails,true)
     }
 
     fun setDetailsContentBaseOnSelectedImage(){
@@ -125,11 +126,39 @@ class DetailCourseActivity : AppCompatActivity(),DetailCourseActivityContract.Vi
         description_textview.text = courseData.CourseDetails.get(pos).DescriptionText
     }
 
-    override fun showProgress(show: Boolean) {
+    override fun showProgressOnGetAllCourseDetails(show: Boolean) {
+        loading_data_image_course.visibility = if (show) View.VISIBLE else View.GONE
+        image_course_recycleview.visibility = if (show) View.GONE else View.VISIBLE
+    }
+
+    override fun showErrorOnGetAllCourseDetails(error: String) {
+        loading_data_image_course.visibility = View.GONE
+        image_course_recycleview.visibility = View.GONE
+    }
+
+    override fun showProgressOnGetOneCourseQualification(show: Boolean) {
+        loading_data_image_course_qualification.visibility = if (show) View.VISIBLE else View.GONE
+        course_qualification_textview.visibility = if (show) View.GONE else View.VISIBLE
+    }
+
+    override fun showErrorOnGetOneCourseQualification(error: String) {
+        loading_data_image_course_qualification.visibility = View.GONE
+        course_qualification_textview.visibility = View.GONE
+    }
+
+    override fun showProgressOnAddClassRoom(show: Boolean) {
 
     }
 
-    override fun showError(error: String) {
+    override fun showErrorOnAddClassRoom(error: String) {
+
+    }
+
+    override fun showProgressOnGetOneClassRoomById(show: Boolean) {
+
+    }
+
+    override fun showErrorOnGetOneClassRoomById(error: String) {
 
     }
 
@@ -137,7 +166,7 @@ class DetailCourseActivity : AppCompatActivity(),DetailCourseActivityContract.Vi
         add_to_class_button.visibility = View.GONE
         class_is_taken.visibility = View.VISIBLE
         go_to_class_button.visibility = View.VISIBLE
-        presenter.getOneClassRoomById(OneClassByIdRoomRequest(courseData.Id,studentSession.Id))
+        presenter.getOneClassRoomById(OneClassByIdRoomRequest(courseData.Id,studentSession.Id),false)
     }
 
     override fun onGetOneClassRoomById(s: OneClassByIdRoomResponse) {
@@ -158,7 +187,7 @@ class DetailCourseActivity : AppCompatActivity(),DetailCourseActivityContract.Vi
         courseData.CourseDetails.addAll(r.Data.CourseDetailList)
         adapterImageDetailCourse.notifyDataSetChanged()
         setDetailsContentBaseOnSelectedImage()
-        presenter.getOneCourseQualification(OneCourseQualificationRequest("",courseData.Id))
+        presenter.getOneCourseQualification(OneCourseQualificationRequest("",courseData.Id),true)
     }
 
     override fun onGetOneCourseQualification(s: OneCourseQualificationResponse) {

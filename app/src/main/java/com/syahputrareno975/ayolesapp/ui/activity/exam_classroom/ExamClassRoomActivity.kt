@@ -74,6 +74,7 @@ class ExamClassRoomActivity : AppCompatActivity(),ExamClassRoomActivityContract.
         title_exam_textview.text = " ${getString(R.string.exam_title)} ${classRoomModel.Course.CourseName}"
         not_found.visibility = View.GONE
         finish_exam_button.visibility = View.GONE
+
         finish_exam_button.setOnClickListener {
 
             // submit exam
@@ -82,7 +83,7 @@ class ExamClassRoomActivity : AppCompatActivity(),ExamClassRoomActivityContract.
             if (!isAllExamSubmited()){
                 return@setOnClickListener
             }
-            presenter.addClassRoomCertificate(AddClassRoomCertificateRequest(classRoomModel.Id))
+            presenter.addClassRoomCertificate(AddClassRoomCertificateRequest(classRoomModel.Id),false)
         }
 
         exam_nestedscrollview.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
@@ -90,7 +91,7 @@ class ExamClassRoomActivity : AppCompatActivity(),ExamClassRoomActivityContract.
                 // pagination if user reach scroll to bottom on course
                 reqAllExam.Offset += limit_load
                 reqAllExamLastProgress.Offset += limit_load
-                presenter.getAllExam(reqAllExam)
+                presenter.getAllExam(reqAllExam,false)
             }
         })
 
@@ -105,7 +106,7 @@ class ExamClassRoomActivity : AppCompatActivity(),ExamClassRoomActivityContract.
             }
             if (courseExamModel.getAnswer() != null){
                 val answer = courseExamModel.getAnswer()
-                presenter.addClassRoomExamProgress(AddClassRoomExamProgressRequest(classRoomModel.Id,courseExamModel.Id, answer!!.Id),i)
+                presenter.addClassRoomExamProgress(AddClassRoomExamProgressRequest(classRoomModel.Id,courseExamModel.Id, answer!!.Id),i,false)
             }
 
         },{courseExamAnswerModel,posExamp, posAnswer ->
@@ -120,7 +121,8 @@ class ExamClassRoomActivity : AppCompatActivity(),ExamClassRoomActivityContract.
         })
         exam_recycleview.adapter = adapterExam
         exam_recycleview.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
-        presenter.getAllExam(reqAllExam)
+
+        presenter.getAllExam(reqAllExam,true)
     }
 
     fun isAllExamSubmited() : Boolean {
@@ -154,21 +156,47 @@ class ExamClassRoomActivity : AppCompatActivity(),ExamClassRoomActivityContract.
         adapterExam.notifyDataSetChanged()
     }
 
-    override fun showProgress(show: Boolean) {
-
+    override fun showProgressOnGetAllExam(show: Boolean) {
+        loading_data_exam.visibility = if (show) View.VISIBLE else View.GONE
+        exam_recycleview.visibility = if (show) View.GONE else View.VISIBLE
     }
 
-    override fun showError(error: String) {
+    override fun showErrorOnGetAllExam(error: String) {
+        loading_data_exam.visibility = View.GONE
         checkNoResultFound(true)
-        Toast.makeText(context,error,Toast.LENGTH_LONG).show()
     }
+
+    override fun showProgressOnAddClassRoomExamProgress(show: Boolean) {
+
+    }
+
+    override fun showErrorOnAddClassRoomExamProgress(error: String) {
+
+    }
+
+    override fun showProgressOnGetAllClassRoomExamProgress(show: Boolean) {
+
+    }
+
+    override fun showErrorOnGetAllClassRoomExamProgress(error: String) {
+
+    }
+
+    override fun showProgressOnAddClassRoomCertificate(show: Boolean) {
+
+    }
+
+    override fun showErrorOnAddClassRoomCertificate(error: String) {
+
+    }
+
 
     override fun onGetAllExam(s: AllCourseExamResponse) {
         listExam.addAll(s.Data.CourseExamList)
         finish_exam_button.visibility = if (s.Data.CourseExamList.isEmpty() && isAllExamSubmited()) View.VISIBLE else View.GONE
         adapterExam.notifyDataSetChanged()
         checkNoResultFound(false)
-        presenter.getAllClassRoomExamProgress(reqAllExamLastProgress)
+        presenter.getAllClassRoomExamProgress(reqAllExamLastProgress,false)
     }
 
     override fun onAddClassRoomExamProgress(s: AddClassRoomExamProgressResponse,posExampSubmited : Int) {

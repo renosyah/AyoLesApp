@@ -47,7 +47,15 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/exam_recycleview"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    tools:visibility="gone" />
+
+                <include
+                    android:id="@+id/loading_data_exam"
+                    layout="@layout/loading_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    tools:visibility="visible" />
 
                 <include
                     android:id="@+id/not_found"
@@ -70,7 +78,8 @@
                     android:text="@string/exam_finish"
                     android:textAllCaps="false"
                     android:textColor="@color/textColorWhite"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    tools:visibility="gone" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

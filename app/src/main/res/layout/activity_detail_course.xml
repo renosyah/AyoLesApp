@@ -62,9 +62,17 @@
                     android:id="@+id/image_course_recycleview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false" >
+                    android:nestedScrollingEnabled="false"
+                    tools:visibility="gone">
 
                 </androidx.recyclerview.widget.RecyclerView>
+
+                <include
+                    android:id="@+id/loading_data_image_course"
+                    layout="@layout/loading_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    tools:visibility="visible" />
 
                 <TextView
                     android:id="@+id/overview_textview"
@@ -96,7 +104,18 @@
                     android:fontFamily="@string/light_font"
                     android:text="Lorem\nipsum\ndolor\nsit\namet"
                     android:textColor="@color/textColorGray"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:visibility="gone" />
+
+                <include
+                    android:id="@+id/loading_data_image_course_qualification"
+                    layout="@layout/loading_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="20dp"
+                    tools:visibility="visible" />
 
                 <TextView
                     android:id="@+id/class_is_taken"

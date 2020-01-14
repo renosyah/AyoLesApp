@@ -89,11 +89,15 @@ class UpdateProfileActivity : AppCompatActivity(),UpdateProfileActivityContract.
 
 
     override fun showProgressOnGetOneStudent(show: Boolean) {
-
+        layout_loading_update_profile.visibility = if (show) View.VISIBLE else View.GONE
+        layout_edit_profile.visibility = if (show) View.GONE else View.VISIBLE
     }
 
     override fun showErrorOnGetOneStudent(error: String) {
-
+        layout_loading_update_profile.visibility = View.GONE
+        layout_edit_profile.visibility = View.VISIBLE
+        error_texview.visibility = View.VISIBLE
+        error_texview.text = error
     }
 
     override fun showProgressOnOneStudentUpdated(show: Boolean) {
@@ -102,6 +106,8 @@ class UpdateProfileActivity : AppCompatActivity(),UpdateProfileActivityContract.
     }
 
     override fun showErrorOnOneStudentUpdated(error: String) {
+        layout_loading_update_profile.visibility = View.GONE
+        layout_edit_profile.visibility = View.VISIBLE
         error_texview.visibility = View.VISIBLE
         error_texview.text = error
     }

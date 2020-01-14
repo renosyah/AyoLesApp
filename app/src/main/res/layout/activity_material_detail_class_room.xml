@@ -25,13 +25,12 @@
             app:srcCompat="@drawable/back" />
 
         <TextView
-            android:fontFamily="@string/medium_font"
             android:id="@+id/title_textview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="@string/medium_font"
             android:gravity="center"
-            android:text="Chapter 1 : Introduction"
             android:textAlignment="center"
             android:textColor="@color/textColorWhite"
             android:textSize="20sp" />

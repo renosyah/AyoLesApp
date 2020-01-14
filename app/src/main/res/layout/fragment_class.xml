@@ -79,7 +79,7 @@
                     android:id="@+id/loading_data_class"
                     layout="@layout/loading_data"
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
+                    android:layout_height="320dp"
                     tools:visibility="visible" />
 
                 <include
