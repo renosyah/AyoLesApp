@@ -35,10 +35,13 @@ class AdapterHorizontalCourse : RecyclerView.Adapter<AdapterHorizontalCourse.Hol
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val item = list.get(position)
-        Picasso.get()
-            .load("${RetrofitService.baseURL}${item.ImageUrl}")
-            .resize(200,150)
-            .into(holder.image)
+
+        if (item.ImageUrl != "") {
+            Picasso.get()
+                .load("${item.ImageUrl}")
+                .resize(200, 150)
+                .into(holder.image)
+        }
 
         holder.name.text = "${item.CourseName}"
         holder.enroll.setOnClickListener {

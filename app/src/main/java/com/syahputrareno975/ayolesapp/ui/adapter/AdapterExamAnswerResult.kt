@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.syahputrareno975.ayolesapp.R
 import com.syahputrareno975.ayolesapp.model.courseExamAnswer.CourseExamAnswerModel
-import com.syahputrareno975.ayolesapp.service.RetrofitService
 import com.syahputrareno975.ayolesapp.util.Abc
 
 class AdapterExamAnswerResult: RecyclerView.Adapter<AdapterExamAnswerResult.Holder> {
@@ -43,9 +42,12 @@ class AdapterExamAnswerResult: RecyclerView.Adapter<AdapterExamAnswerResult.Hold
 
         holder.answer_label.text = if (position <= Abc.Abcs.size) Abc.Abcs.get(position) else "-"
         holder.answer_text.text = item.Text
-        Picasso.get()
-                .load("${RetrofitService.baseURL}${item.ImageURL}")
+
+        if (item.ImageURL != "") {
+            Picasso.get()
+                .load("${item.ImageURL}")
                 .into(holder.answer_image)
+        }
 
         holder.layout_answer.setBackgroundColor(ContextCompat.getColor(context,
                 if (item.Id == studentAnswerID)

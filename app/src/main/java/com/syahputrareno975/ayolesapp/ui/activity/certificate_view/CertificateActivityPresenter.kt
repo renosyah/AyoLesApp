@@ -16,26 +16,32 @@ class CertificateActivityPresenter : CertificateActivityContract.Presenter {
     private val api : RetrofitService = RetrofitService.create()
     private lateinit var view: CertificateActivityContract.View
 
-    override fun getOneClassRoomCertificate(r: OneClassRoomCertificateRequest) {
-        view.showProgress(true)
+    override fun getOneClassRoomCertificate(r: OneClassRoomCertificateRequest,enableLoading:Boolean) {
+        if (enableLoading) {
+            view.showProgressOnGetOneClassRoomCertificate(true)
+        }
         val subscribe = api.oneClassRoomCertificate(Query(r.toSchema()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result : OneClassRoomCertificateResponse? ->
-                view.showProgress(false)
+                if (enableLoading) {
+                    view.showProgressOnGetOneClassRoomCertificate(false)
+                }
                 if (result != null){
                     if (result.Errors.isNotEmpty()){
                         var message = ""
                         for (i in result.Errors){
                             message += i.Message
                         }
-                        view.showError(message)
+                        view.showErrorOnGetOneClassRoomCertificate(message)
                     }
                     view.onGetOneClassRoomCertificate(result)
                 }
             },{t : Throwable ->
-                view.showProgress(false)
-                view.showError(t.message!!)
+                if (enableLoading) {
+                    view.showProgressOnGetOneClassRoomCertificate(false)
+                }
+                view.showErrorOnGetOneClassRoomCertificate(t.message!!)
             })
 
         subscriptions.add(subscribe)

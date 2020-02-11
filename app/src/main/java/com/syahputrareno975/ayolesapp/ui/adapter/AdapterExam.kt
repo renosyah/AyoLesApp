@@ -15,7 +15,6 @@ import com.syahputrareno975.ayolesapp.R
 import com.syahputrareno975.ayolesapp.model.courseExam.CourseExamModel
 import com.syahputrareno975.ayolesapp.model.courseExamAnswer.CourseExamAnswerModel
 import com.syahputrareno975.ayolesapp.service.RetrofitService
-import kotlinx.android.synthetic.main.adapter_exam.view.*
 
 class AdapterExam : RecyclerView.Adapter<AdapterExam.Holder> {
 
@@ -44,9 +43,12 @@ class AdapterExam : RecyclerView.Adapter<AdapterExam.Holder> {
         holder.submit_button.visibility = if (item.IsSubmited) View.GONE else View.VISIBLE
         holder.title_exam.text = "${context.getString(R.string.number)} ${(position + 1)}"
         holder.exam_text.text = item.Text
-        Picasso.get()
-                .load("${RetrofitService.baseURL}${item.ImageURL}")
+
+        if (item.ImageURL != "") {
+            Picasso.get()
+                .load("${item.ImageURL}")
                 .into(holder.exam_image)
+        }
 
         when (item.TypeExam){
             CourseExamModel.TYPE_TEXT -> {

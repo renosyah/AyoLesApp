@@ -33,9 +33,11 @@ class AdapterImageDetailCourse : RecyclerView.Adapter<AdapterImageDetailCourse.H
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val item = list.get(position)
 
-        Picasso.get()
-            .load("${RetrofitService.baseURL}${item.ImageUrl}")
-            .into(holder.image)
+        if (item.ImageUrl != "") {
+            Picasso.get()
+                .load("${item.ImageUrl}")
+                .into(holder.image)
+        }
     }
 
 

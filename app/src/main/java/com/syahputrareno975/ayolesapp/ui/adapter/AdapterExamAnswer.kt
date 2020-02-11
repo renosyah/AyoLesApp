@@ -43,9 +43,12 @@ class AdapterExamAnswer : RecyclerView.Adapter<AdapterExamAnswer.Holder> {
 
         holder.answer_label.text = if (position <= Abcs.size) Abcs.get(position) else "-"
         holder.answer_text.text = item.Text
-        Picasso.get()
-                .load("${RetrofitService.baseURL}${item.ImageURL}")
+
+        if (item.ImageURL != "") {
+            Picasso.get()
+                .load("${item.ImageURL}")
                 .into(holder.answer_image)
+        }
 
         holder.layout_answer.setBackgroundColor(ContextCompat.getColor(context,
                 if (item.IsSelected)

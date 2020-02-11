@@ -193,18 +193,18 @@ class FragmentHome : Fragment(),FragmentHomeContract.View {
         val snapHelper = PagerSnapHelper()
         snapHelper.attachToRecyclerView(banner_recycleview)
 
-        val mainHandler = Handler(Looper.getMainLooper())
-        mainHandler.post(object : Runnable {
-            override fun run() {
-                if (banner_recycleview == null)
-                    return
-
-                bannerPos = if (bannerPos == bannerList.size) 0 else bannerPos
-                banner_recycleview.smoothScrollToPosition(bannerPos)
-                bannerPos++
-                mainHandler.postDelayed(this, 5000)
-            }
-        })
+//        val mainHandler = Handler(Looper.getMainLooper())
+//        mainHandler.post(object : Runnable {
+//            override fun run() {
+//                if (banner_recycleview == null)
+//                    return
+//
+//                bannerPos = if (bannerPos == bannerList.size) 0 else bannerPos
+//                banner_recycleview.smoothScrollToPosition(bannerPos)
+//                bannerPos++
+//                mainHandler.postDelayed(this, 5000)
+//            }
+//        })
 
         presenter.getAllBanner(AllBannerRequest(),true)
     }

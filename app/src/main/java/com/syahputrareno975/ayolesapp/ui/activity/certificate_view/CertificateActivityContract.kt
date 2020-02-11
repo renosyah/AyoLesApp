@@ -7,17 +7,15 @@ import com.syahputrareno975.ayolesapp.model.classRoomCertificate.OneClassRoomCer
 class CertificateActivityContract {
     interface View: BaseContract.View {
 
-        // mandatory response
-        fun showProgress(show: Boolean)
-        fun showError(error: String)
-
         // add more for request
         fun onGetOneClassRoomCertificate(s : OneClassRoomCertificateResponse)
+        fun showProgressOnGetOneClassRoomCertificate(show: Boolean)
+        fun showErrorOnGetOneClassRoomCertificate(error: String)
     }
 
     interface Presenter: BaseContract.Presenter<View> {
 
         // add for request
-        fun getOneClassRoomCertificate(r : OneClassRoomCertificateRequest)
+        fun getOneClassRoomCertificate(r : OneClassRoomCertificateRequest,enableLoading:Boolean)
     }
 }

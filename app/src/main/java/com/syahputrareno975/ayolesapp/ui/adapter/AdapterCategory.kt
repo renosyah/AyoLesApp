@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.syahputrareno975.ayolesapp.R
 import com.syahputrareno975.ayolesapp.model.category.CategoryModel
-import kotlinx.android.synthetic.main.adapter_category.view.*
 
 class AdapterCategory : RecyclerView.Adapter<AdapterCategory.Holder>{
 

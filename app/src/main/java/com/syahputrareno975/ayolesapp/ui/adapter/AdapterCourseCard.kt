@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.syahputrareno975.ayolesapp.R
 import com.syahputrareno975.ayolesapp.model.course.CourseModel
-import com.syahputrareno975.ayolesapp.service.RetrofitService
 
 class AdapterCourseCard : RecyclerView.Adapter<AdapterCourseCard.Holder>{
 
@@ -36,9 +35,12 @@ class AdapterCourseCard : RecyclerView.Adapter<AdapterCourseCard.Holder>{
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val item = list.get(position)
-        Picasso.get()
-            .load("${RetrofitService.baseURL}${item.ImageUrl}")
-            .into(holder.image)
+
+        if (item.ImageUrl != "") {
+            Picasso.get()
+                .load("${item.ImageUrl}")
+                .into(holder.image)
+        }
 
         holder.name.text = "${item.CourseName}"
         holder.enroll.setOnClickListener {

@@ -83,6 +83,8 @@ class FragmentClass : Fragment(),FragmentClassContract.View {
         presenter.subscribe()
 
         reqAllClass.Limit = limit_load_class
+        reqAllClass.OrderDir = "desc"
+        reqAllClass.OrderBy = "classroom.create_at"
         reqAllCategory.Limit = limit_load_category
 
         if (SerializableSave(ctx,SerializableSave.userDataFileSessionName).load() != null){

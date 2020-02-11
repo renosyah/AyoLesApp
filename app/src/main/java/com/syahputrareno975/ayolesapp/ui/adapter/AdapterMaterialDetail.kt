@@ -42,9 +42,11 @@ class AdapterMaterialDetail : RecyclerView.Adapter<AdapterMaterialDetail.Holder>
         holder.title.text = item.Title
         holder.content.text = item.Content
 
-        Picasso.get()
-            .load("${RetrofitService.baseURL}${item.ImageUrl}")
-            .into(holder.image)
+        if (item.ImageUrl != "") {
+            Picasso.get()
+                .load("${item.ImageUrl}")
+                .into(holder.image)
+        }
     }
 
     class Holder : RecyclerView.ViewHolder {

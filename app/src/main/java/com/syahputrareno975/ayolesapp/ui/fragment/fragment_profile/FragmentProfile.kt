@@ -199,6 +199,7 @@ class FragmentProfile : Fragment(),FragmentProfileContract.View {
         adapterClassRoomComplete.notifyDataSetChanged()
         loadmore_textview.visibility = if (s.Data.ClassRoomList.isEmpty()) View.GONE else View.VISIBLE
         presenter.getAllClassRoomCertificate(reqAllCert,false)
+        checkNoResultFound(false)
     }
 
     override fun onGetAllClassRoomCertificate(s: AllClassRoomCertificateResponse) {

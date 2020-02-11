@@ -40,9 +40,12 @@ class AdapterExamResult: RecyclerView.Adapter<AdapterExamResult.Holder> {
         holder.submit_button.visibility = View.GONE
         holder.title_exam.text = "${context.getString(R.string.number)} ${(position + 1)}"
         holder.exam_text.text = item.Text
-        Picasso.get()
-                .load("${RetrofitService.baseURL}${item.ImageURL}")
+
+        if (item.ImageURL != "") {
+            Picasso.get()
+                .load("${item.ImageURL}")
                 .into(holder.exam_image)
+        }
 
         when (item.TypeExam) {
             CourseExamModel.TYPE_TEXT -> {

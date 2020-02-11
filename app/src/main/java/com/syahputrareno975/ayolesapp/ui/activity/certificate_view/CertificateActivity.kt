@@ -56,9 +56,10 @@ class CertificateActivity : AppCompatActivity(),CertificateActivityContract.View
 
         loading_web.visibility = View.VISIBLE
         certificate_webview.visibility = View.GONE
+        print_certificate.visibility = View.GONE
 
         settingWebview()
-        presenter.getOneClassRoomCertificate(OneClassRoomCertificateRequest(classRoomModel.Id))
+        presenter.getOneClassRoomCertificate(OneClassRoomCertificateRequest(classRoomModel.Id),true)
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -71,6 +72,7 @@ class CertificateActivity : AppCompatActivity(),CertificateActivityContract.View
         certificate_webview.webViewClient = object : WebViewClient(){
             override fun onPageFinished(view: WebView?, url: String?) {
                 loading_web.visibility = View.GONE
+                print_certificate.visibility = View.VISIBLE
                 certificate_webview.visibility = View.VISIBLE
                 super.onPageFinished(view, url)
             }
@@ -94,12 +96,15 @@ class CertificateActivity : AppCompatActivity(),CertificateActivityContract.View
             startActivity(browserIntent)
         }
     }
-    override fun showProgress(show: Boolean) {
+
+    override fun showProgressOnGetOneClassRoomCertificate(show: Boolean) {
 
     }
 
-    override fun showError(error: String) {
-
+    override fun showErrorOnGetOneClassRoomCertificate(error: String) {
+        print_certificate.visibility = View.GONE
+        certificate_webview.visibility = View.GONE
+        loading_web.visibility = View.GONE
     }
 
     override fun onGetOneClassRoomCertificate(s: OneClassRoomCertificateResponse) {

@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.syahputrareno975.ayolesapp.R
 import com.syahputrareno975.ayolesapp.model.banner.BannerModel
-import com.syahputrareno975.ayolesapp.service.RetrofitService.Companion.baseURL
 
 class AdapterBanner : RecyclerView.Adapter<AdapterBanner.Holder> {
 
@@ -34,10 +33,11 @@ class AdapterBanner : RecyclerView.Adapter<AdapterBanner.Holder> {
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val item = list.get(position)
 
-        Picasso.get()
-            .load("${baseURL}${item.ImageUrl}")
-            .into(holder.image)
-
+        if (item.ImageUrl != "") {
+            Picasso.get()
+                .load("${item.ImageUrl}")
+                .into(holder.image)
+        }
     }
 
     class Holder : RecyclerView.ViewHolder {

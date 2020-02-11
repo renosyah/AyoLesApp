@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -12,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.syahputrareno975.ayolesapp.R
 import com.syahputrareno975.ayolesapp.model.classRoom.ClassRoomModel
-import com.syahputrareno975.ayolesapp.service.RetrofitService
-import kotlinx.android.synthetic.main.adapter_classroom.view.*
 
 class AdapterClassRoom  : RecyclerView.Adapter<AdapterClassRoom.Holder> {
 
@@ -38,9 +35,11 @@ class AdapterClassRoom  : RecyclerView.Adapter<AdapterClassRoom.Holder> {
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val item = list.get(position)
 
-        Picasso.get()
-            .load("${RetrofitService.baseURL}${item.Course.ImageUrl}")
-            .into(holder.image)
+        if (item.Course.ImageUrl != "") {
+            Picasso.get()
+                .load("${item.Course.ImageUrl}")
+                .into(holder.image)
+        }
 
         holder.title.text = item.Course.CourseName
         holder.subtitle.text = "By ${item.Course.Teacher.Name}"
