@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
@@ -52,12 +53,12 @@ class AdapterHorizontalCourse : RecyclerView.Adapter<AdapterHorizontalCourse.Hol
     class Holder : RecyclerView.ViewHolder {
         lateinit var image : ImageView
         lateinit var name : TextView
-        lateinit var enroll : Button
+        lateinit var enroll : LinearLayout
 
         constructor(itemView: View) : super(itemView) {
             this.image = itemView.findViewById(R.id.image_course)
             this.name = itemView.findViewById(R.id.course_name)
-            this.enroll = itemView.findViewById(R.id.enroll_button)
+            this.enroll = itemView.findViewById(R.id.couse_layout_linearlayout)
         }
     }
 }

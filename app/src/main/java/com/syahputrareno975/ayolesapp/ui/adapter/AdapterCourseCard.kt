@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.syahputrareno975.ayolesapp.R
@@ -56,12 +57,12 @@ class AdapterCourseCard : RecyclerView.Adapter<AdapterCourseCard.Holder>{
         lateinit var name : TextView
         lateinit var category_label : TextView
         lateinit var teach_by : TextView
-        lateinit var enroll : Button
+        lateinit var enroll : CardView
 
         constructor(itemView: View) : super(itemView) {
             this.image = itemView.findViewById(R.id.image_course_imageview)
             this.name = itemView.findViewById(R.id.course_name_textview)
-            this.enroll = itemView.findViewById(R.id.enroll_button)
+            this.enroll = itemView.findViewById(R.id.couse_layout_linearlayout)
             this.category_label = itemView.findViewById(R.id.category_label_textview)
             this.teach_by = itemView.findViewById(R.id.teach_by_textview)
         }
