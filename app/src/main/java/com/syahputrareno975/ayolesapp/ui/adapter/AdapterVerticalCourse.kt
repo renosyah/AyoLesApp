@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.syahputrareno975.ayolesapp.R
 import com.syahputrareno975.ayolesapp.model.category.CategoryModel
 import com.syahputrareno975.ayolesapp.model.course.CourseModel
 import com.syahputrareno975.ayolesapp.model.course.VerticalCourseModel
 import kotlinx.android.synthetic.main.adapter_vertical_course.view.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class AdapterVerticalCourse : RecyclerView.Adapter<AdapterVerticalCourse.Holder> {
 
@@ -43,6 +45,10 @@ class AdapterVerticalCourse : RecyclerView.Adapter<AdapterVerticalCourse.Holder>
         }
         holder.list_course.adapter = adapter
         holder.list_course.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+
+        val snapHelper = PagerSnapHelper()
+        if (holder.list_course.onFlingListener == null) snapHelper.attachToRecyclerView(holder.list_course)
+
         adapter.notifyDataSetChanged()
     }
 

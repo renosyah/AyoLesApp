@@ -4,18 +4,13 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:orientation="vertical"></LinearLayout>
-
     <TextView
         android:fontFamily="@string/medium_font"
         android:id="@+id/title_category_course_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
-        android:layout_margin="5dp"
+        android:layout_margin="10dp"
         android:textColor="@color/textColorGray"
         android:text="Science"/>
 
@@ -23,8 +18,15 @@
         android:id="@+id/horizontal_course_recycleview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:clipToPadding="false"
         android:nestedScrollingEnabled="false">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:orientation="vertical"></LinearLayout>
 
 </LinearLayout>
