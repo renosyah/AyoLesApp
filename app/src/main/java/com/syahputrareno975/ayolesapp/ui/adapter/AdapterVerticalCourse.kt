@@ -46,9 +46,6 @@ class AdapterVerticalCourse : RecyclerView.Adapter<AdapterVerticalCourse.Holder>
         holder.list_course.adapter = adapter
         holder.list_course.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
 
-        val snapHelper = PagerSnapHelper()
-        if (holder.list_course.onFlingListener == null) snapHelper.attachToRecyclerView(holder.list_course)
-
         adapter.notifyDataSetChanged()
     }
 
