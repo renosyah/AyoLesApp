@@ -184,7 +184,6 @@ class FragmentHome : Fragment(),FragmentHomeContract.View {
     }
 
     fun getAllBanner(){
-        var bannerPos = 0
         adapterBanner = AdapterBanner(ctx,bannerList) { bannerModel, i ->
 
         }
@@ -192,19 +191,6 @@ class FragmentHome : Fragment(),FragmentHomeContract.View {
         banner_recycleview.layoutManager = LinearLayoutManager(ctx,LinearLayoutManager.HORIZONTAL,false)
         val snapHelper = PagerSnapHelper()
         snapHelper.attachToRecyclerView(banner_recycleview)
-
-//        val mainHandler = Handler(Looper.getMainLooper())
-//        mainHandler.post(object : Runnable {
-//            override fun run() {
-//                if (banner_recycleview == null)
-//                    return
-//
-//                bannerPos = if (bannerPos == bannerList.size) 0 else bannerPos
-//                banner_recycleview.smoothScrollToPosition(bannerPos)
-//                bannerPos++
-//                mainHandler.postDelayed(this, 5000)
-//            }
-//        })
 
         presenter.getAllBanner(AllBannerRequest(),true)
     }
