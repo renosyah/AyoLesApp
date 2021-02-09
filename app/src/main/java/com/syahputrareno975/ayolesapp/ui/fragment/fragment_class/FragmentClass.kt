@@ -97,6 +97,7 @@ class FragmentClass : Fragment(),FragmentClassContract.View {
             override fun afterTextChanged(s: Editable?) {
                 clearTagedCategory()
                 listClassRoom.clear()
+                reqAllClass.OrderBy = "classroom.create_at"
                 reqAllClass.Offset = 0
                 reqAllClass.SearchValue = search_class_edittext.text.toString()
                 presenter.getAllClass(reqAllClass,false)

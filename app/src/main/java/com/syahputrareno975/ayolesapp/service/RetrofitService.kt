@@ -120,7 +120,7 @@ interface RetrofitService {
 
     companion object {
 
-        val baseURL = "https://warm-wave-76942.herokuapp.com/"
+        val baseURL = "https://ayoles-core.herokuapp.com/"
 
         fun create() : RetrofitService {
             val retrofit = Retrofit.Builder()
