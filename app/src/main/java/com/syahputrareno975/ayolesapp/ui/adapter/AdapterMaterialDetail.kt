@@ -40,7 +40,7 @@ class AdapterMaterialDetail : RecyclerView.Adapter<AdapterMaterialDetail.Holder>
         holder.layout_image.visibility = if (item.TypeMaterial == 1) View.VISIBLE else View.GONE
 
         holder.title.text = item.Title
-        holder.content.text = item.Content
+        holder.content.text = item.Content.replace("\\n", "\n")
 
         if (item.ImageUrl != "") {
             Picasso.get()
