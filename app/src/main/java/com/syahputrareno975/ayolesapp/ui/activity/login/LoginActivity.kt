@@ -47,6 +47,7 @@ class LoginActivity : AppCompatActivity(),LoginActivityContract.View {
             login()
         }
 
+        sigh_up_layout.visibility = View.GONE
 
         sigh_up_textview.setOnClickListener {
             startActivity(Intent(context,RegisterActivity::class.java))
@@ -87,18 +88,18 @@ class LoginActivity : AppCompatActivity(),LoginActivityContract.View {
 
     fun login(){
         error_login_message.visibility = View.GONE
-        if (email_edittext.text.toString().isEmpty() || password_edittext.text.toString().isEmpty()){
+        if (nis_edittext.text.toString().isEmpty() || password_edittext.text.toString().isEmpty()){
             error_login_message.visibility = View.VISIBLE
             error_login_message.text = getString(R.string.login_please_fill_form)
             return
         }
         presenter.login(
             LoginRequest(
-                email_edittext.text.toString(),
+                nis_edittext.text.toString(),
                 password_edittext.text.toString()
             )
         )
-        email_edittext.setText("")
+        nis_edittext.setText("")
         password_edittext.setText("")
     }
 

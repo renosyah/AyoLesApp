@@ -17,7 +17,7 @@ class OneStudentRequest : BaseModel {
                 "{\n" +
                 "id,\n" +
                 "name,\n" +
-                "email\n" +
+                "nis\n" +
                 "}\n" +
                 "}"
     }

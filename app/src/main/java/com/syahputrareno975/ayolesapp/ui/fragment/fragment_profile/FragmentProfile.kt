@@ -77,7 +77,7 @@ class FragmentProfile : Fragment(),FragmentProfileContract.View {
         }
 
         student_name_textview.text = studentSession.Name
-        student_email_textview.text = studentSession.Email
+        student_email_textview.text = studentSession.Nis
 
         reqAllCompletedClass.Offset = 0
         reqAllCompletedClass.Limit = limit_load_class
@@ -95,10 +95,12 @@ class FragmentProfile : Fragment(),FragmentProfileContract.View {
             presenter.getAllClass(reqAllCompletedClass,false)
         }
 
+        profile_setting_imageview.visibility = View.INVISIBLE
+
         profile_setting_imageview.setOnClickListener {
-            val intent = Intent(ctx,UpdateProfileActivity::class.java)
-            intent.putExtra("data",studentSession)
-            startActivityForResult(intent,100)
+//            val intent = Intent(ctx,UpdateProfileActivity::class.java)
+//            intent.putExtra("data",studentSession)
+//            startActivityForResult(intent,100)
         }
 
         logout_imageview.setOnClickListener {
@@ -190,7 +192,7 @@ class FragmentProfile : Fragment(),FragmentProfileContract.View {
 
     override fun onGetOneStudent(s: OneStudentResponse) {
         student_name_textview.text = s.Data.StudentDetail.Name
-        student_email_textview.text = s.Data.StudentDetail.Email
+        student_email_textview.text = s.Data.StudentDetail.Nis
     }
 
     override fun onGetAllClass(s: AllClassRoomResponse) {

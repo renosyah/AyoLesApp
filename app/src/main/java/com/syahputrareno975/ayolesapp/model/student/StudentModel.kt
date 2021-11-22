@@ -12,18 +12,18 @@ class StudentModel : BaseModel {
     @SerializedName("name")
     var Name : String = ""
 
-    @SerializedName("email")
-    var Email : String = ""
+    @SerializedName("nis")
+    var Nis : String = ""
 
     @SerializedName("password")
     var Password : String = ""
 
     constructor()
 
-    constructor(Id: String, Name: String, Email: String, Password: String) {
+    constructor(Id: String, Name: String, Nis: String, Password: String) {
         this.Id = Id
         this.Name = Name
-        this.Email = Email
+        this.Nis = Nis
         this.Password = Password
     }
 

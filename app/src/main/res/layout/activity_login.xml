@@ -16,7 +16,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/main_login_layout"
@@ -56,9 +56,9 @@
                         android:layout_marginBottom="60dp"
                         android:fontFamily="@string/medium_font"
                         android:gravity="center"
+                        android:text="@string/landing_message"
                         android:textColor="@color/textColorWhite"
-                        android:textSize="24sp"
-                        android:text="@string/landing_message" />
+                        android:textSize="24sp" />
 
                     <Button
                         android:id="@+id/open_login_button"
@@ -67,18 +67,20 @@
                         android:background="@color/colorPrimaryLight"
                         android:fontFamily="@string/medium_font"
                         android:padding="10dp"
+                        android:text="@string/landing_button_login_with_email"
                         android:textAllCaps="false"
                         android:textColor="@color/textColorWhite"
-                        android:textSize="18sp"
-                        android:text="@string/landing_button_login_with_email" />
+                        android:textSize="18sp" />
 
 
                     <LinearLayout
+                        android:id="@+id/sigh_up_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30dp"
                         android:gravity="center_horizontal"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        tools:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -111,7 +113,7 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="20dp"
-                    tools:visibility="gone">
+                    tools:visibility="invisible">
 
 
                     <TextView
@@ -132,13 +134,13 @@
                         android:textColorHint="@color/textColorLightGray">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/email_edittext"
+                            android:id="@+id/nis_edittext"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"
                             android:ems="10"
                             android:fontFamily="sans-serif-light"
-                            android:hint="Email"
+                            android:hint="Nis"
                             android:inputType="textEmailAddress"
                             android:padding="10dp"
                             android:textColor="@color/textColorWhite"

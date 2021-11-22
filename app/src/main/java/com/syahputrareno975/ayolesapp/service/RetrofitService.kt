@@ -120,7 +120,7 @@ interface RetrofitService {
 
     companion object {
 
-        val baseURL = "https://ayoles-core.herokuapp.com/"
+        val baseURL = "http://192.168.100.62:8080/"
 
         fun create() : RetrofitService {
             val retrofit = Retrofit.Builder()

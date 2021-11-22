@@ -2,7 +2,7 @@
     <string name="app_name">Lets Course</string>
 
     <string name="landing_message">Discover All Knowledge You Can Gain!</string>
-    <string name="landing_button_login_with_email">Login With Email</string>
+    <string name="landing_button_login_with_email">Login With Nis</string>
     <string name="landing_new_student">New Student? </string>
     <string name="landing_sigh_up"> Sigh up</string>
 
@@ -14,7 +14,7 @@
     <string name="register_title">Sigh up</string>
     <string name="register_message">Hello, new student</string>
     <string name="register_input_name">FullName</string>
-    <string name="register_input_email">Email</string>
+    <string name="register_input_email">Nis</string>
     <string name="register_input_password">Password</string>
     <string name="register_please_fill_form">Please Fill All Form!</string>
     <string name="register_button">Apply</string>
@@ -35,7 +35,7 @@
     <string name="update_profile_title">Update Profile</string>
     <string name="update_profile_message">Update your profile here, whenever you like</string>
     <string name="update_profile_name">Update Name</string>
-    <string name="update_profile_email">Update Email</string>
+    <string name="update_profile_email">Update Nis</string>
     <string name="update_profile_password">New Password</string>
     <string name="update_profile_button">Update</string>
 

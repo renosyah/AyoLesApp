@@ -124,7 +124,7 @@
                         android:textColorHint="@color/textColorLightGray">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/register_email_edittext"
+                            android:id="@+id/register_nis_edittext"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"

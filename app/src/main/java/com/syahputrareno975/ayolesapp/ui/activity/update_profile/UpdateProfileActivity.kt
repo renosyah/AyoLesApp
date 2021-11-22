@@ -42,7 +42,7 @@ class UpdateProfileActivity : AppCompatActivity(),UpdateProfileActivityContract.
         presenter.subscribe()
 
         update_name_edittext.setText(studentData.Name)
-        update_email_edittext.setText(studentData.Email)
+        update_nis_edittext.setText(studentData.Nis)
 
         update_button.setOnClickListener {
             updateStudentData()
@@ -77,9 +77,9 @@ class UpdateProfileActivity : AppCompatActivity(),UpdateProfileActivityContract.
                 if ( update_name_edittext.text.toString().trim().isNotEmpty())
                     update_name_edittext.text.toString()
                 else studentData.Name,
-                if (update_email_edittext.text.toString().trim().isNotEmpty())
-                    update_email_edittext.text.toString()
-                else studentData.Email,
+                if (update_nis_edittext.text.toString().trim().isNotEmpty())
+                    update_nis_edittext.text.toString()
+                else studentData.Nis,
                 if (update_password_edittext.text.toString().trim().isNotEmpty())
                     update_password_edittext.text.toString()
                 else studentData.Password),
@@ -114,7 +114,7 @@ class UpdateProfileActivity : AppCompatActivity(),UpdateProfileActivityContract.
 
     override fun onGetOneStudent(s: OneStudentResponse) {
         update_name_edittext.setText(s.Data.StudentDetail.Name)
-        update_email_edittext.setText(s.Data.StudentDetail.Email)
+        update_nis_edittext.setText(s.Data.StudentDetail.Nis)
     }
 
     override fun onOneStudentUpdated(s: UpdateResponse) {

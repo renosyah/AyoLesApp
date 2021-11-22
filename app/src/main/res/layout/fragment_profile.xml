@@ -36,7 +36,8 @@
                             android:layout_gravity="center"
                             android:padding="5dp"
                             app:srcCompat="@drawable/setting"
-                            tools:srcCompat="@drawable/setting" />
+                            tools:srcCompat="@drawable/setting"
+                            tools:visibility="invisible" />
 
                         <TextView
                             android:layout_width="match_parent"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Ayo Kursus</string>
-    <string name="landing_button_login_with_email">Masuk Dengan Email</string>
+    <string name="landing_button_login_with_email">Masuk Dengan Nis</string>
     <string name="landing_message">Temukan Semua Pengetahuan Yang Bisa Kamu Dapat!</string>
     <string name="landing_new_student">Murid Baru?</string>
     <string name="landing_sigh_up">" Registrasi"</string>
@@ -10,7 +10,7 @@
     <string name="login_message">Lihat apa yang bisa kita pelajari hari ini</string>
     <string name="login_please_fill_form">Mohon isi semua form!</string>
     <string name="register_button">Registrasi</string>
-    <string name="register_input_email">Email</string>
+    <string name="register_input_email">Nis</string>
     <string name="register_input_name">Nama Lengkap</string>
     <string name="register_input_password">Tetapkan Password</string>
     <string name="register_message">Hallo, Murid Baru</string>
@@ -24,7 +24,7 @@
     <string name="home_search_course">Cari Kursus</string>
     <string name="class_search_class">Cari Kelas</string>
     <string name="update_profile_button">Ubah</string>
-    <string name="update_profile_email">Ubah Email</string>
+    <string name="update_profile_email">Ubah Nis</string>
     <string name="update_profile_message">Ubah biodata kamu disini, kapanpun kamu mau</string>
     <string name="update_profile_name">Ubah Nama</string>
     <string name="update_profile_password">Password Baru</string>

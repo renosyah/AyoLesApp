@@ -43,7 +43,7 @@ class RegisterActivity : AppCompatActivity(),RegisterActivityContract.View {
         initDisplay()
 
         register_button.setOnClickListener {
-            if (register_name_edittext.text.toString().isEmpty() || register_email_edittext.text.toString().isEmpty() || register_password_edittext.text.toString().isEmpty()){
+            if (register_name_edittext.text.toString().isEmpty() || register_nis_edittext.text.toString().isEmpty() || register_password_edittext.text.toString().isEmpty()){
                 error_message_textview.visibility = View.VISIBLE
                 error_message_textview.text = getString(R.string.register_please_fill_form)
                 return@setOnClickListener
@@ -51,7 +51,7 @@ class RegisterActivity : AppCompatActivity(),RegisterActivityContract.View {
             presenter.register(
                 RegisterRequest(
                     register_name_edittext.text.toString(),
-                    register_email_edittext.text.toString(),
+                    register_nis_edittext.text.toString(),
                     register_password_edittext.text.toString()
                 ),true
             )
