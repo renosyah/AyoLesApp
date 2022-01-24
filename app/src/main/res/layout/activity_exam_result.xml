@@ -80,21 +80,117 @@
                     android:layout_height="match_parent"
                     tools:visibility="gone" />
 
-                <Button
-                    android:id="@+id/request_certificate_button"
+                <LinearLayout
+                    android:id="@+id/linear_layout_request_cert"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="40dp"
-                    android:background="@color/colorPrimaryLight"
-                    android:fontFamily="@string/medium_font"
-                    android:padding="10dp"
-                    android:text="@string/request_cert"
-                    android:textAllCaps="false"
-                    android:textColor="@color/textColorWhite"
-                    android:textSize="18sp" />
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="25dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@string/medium_font"
+                        android:gravity="center"
+                        android:text="@string/exam_result_detail"
+                        android:textColor="@color/textColorBlack"
+                        android:textSize="20sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:fontFamily="@string/medium_font"
+                            android:text="@string/total_exam_answered"
+                            android:textColor="@color/textColorBlack"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/textview_total_exam"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:fontFamily="@string/medium_font"
+                            android:text="0"
+                            android:textColor="@color/textColorBlack"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@string/medium_font"
+                            android:text="@string/total_correct_answered_exam"
+                            android:textColor="@color/textColorBlack"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/textview_total_correct_answered_exam"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@string/medium_font"
+                            android:text="0"
+                            android:textColor="@color/textColorBlack"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical" />
+
+                    <TextView
+                        android:id="@+id/textview_exam_score"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@string/medium_font"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/textColorBlack"
+                        android:textSize="32sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical" />
+
+                    <Button
+                        android:id="@+id/request_certificate_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:background="@color/colorPrimaryLight"
+                        android:fontFamily="@string/medium_font"
+                        android:padding="10dp"
+                        android:text="@string/request_cert"
+                        android:textAllCaps="false"
+                        android:textColor="@color/textColorWhite"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

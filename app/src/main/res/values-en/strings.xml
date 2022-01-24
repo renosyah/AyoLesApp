@@ -77,4 +77,7 @@
     <string name="forget_message_2">You are very irresponsible</string>
     <string name="forget_message_3">are you getting older already?</string>
     <string name="okay">Okay</string>
+    <string name="exam_result_detail">Detail Result Exam</string>
+    <string name="total_correct_answered_exam">"Total Correct Answer : "</string>
+    <string name="total_exam_answered">"Total Exam Answered : "</string>
 </resources>

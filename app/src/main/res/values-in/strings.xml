@@ -77,4 +77,7 @@
     <string name="forget_message_2">Anda sangat tidak bertanggung jawab</string>
     <string name="forget_message_3">Apakah anda sudah mulai menua?</string>
     <string name="okay">Okey</string>
+    <string name="exam_result_detail">Hasil Penilaian Ujian</string>
+    <string name="total_correct_answered_exam">"Total Jawaban Benar : "</string>
+    <string name="total_exam_answered">"Total Soal Dijawab : "</string>
 </resources>

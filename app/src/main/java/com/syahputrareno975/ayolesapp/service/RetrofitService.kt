@@ -120,7 +120,7 @@ interface RetrofitService {
 
     companion object {
 
-        val baseURL = "http://192.168.100.62:8080/"
+        val baseURL = "https://ayoles-core.herokuapp.com/"
 
         fun create() : RetrofitService {
             val retrofit = Retrofit.Builder()
@@ -128,6 +128,7 @@ interface RetrofitService {
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(baseURL)
                 .build()
+
             return  retrofit.create(RetrofitService::class.java)
         }
     }

@@ -54,7 +54,7 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger2_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger2_version"
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger2_version"
-    compileOnly 'javax.annotation:jsr250-api:1.0'
+    compileOnly 'com.github.pengrad:jdk9-deps:1.0'
     implementation 'javax.inject:javax.inject:1'
 
     // ui

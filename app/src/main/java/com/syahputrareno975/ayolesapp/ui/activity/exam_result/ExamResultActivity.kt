@@ -3,6 +3,7 @@ package com.syahputrareno975.ayolesapp.ui.activity.exam_result
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -28,6 +29,7 @@ import com.syahputrareno975.ayolesapp.ui.activity.certificate_view.CertificateAc
 import com.syahputrareno975.ayolesapp.ui.adapter.AdapterExamResult
 import kotlinx.android.synthetic.main.activity_exam_result.*
 import javax.inject.Inject
+import kotlin.math.round
 
 
 class ExamResultActivity : AppCompatActivity(), ExamResultActivityContract.View {
@@ -45,6 +47,8 @@ class ExamResultActivity : AppCompatActivity(), ExamResultActivityContract.View 
     val listExamResult : ArrayList<ClassRoomExamResultModel> = ArrayList()
 
     val reqAllExamResult : AllClassRoomExamResultRequest = AllClassRoomExamResultRequest()
+
+    var exam_status = STATUS_NOT_PASS_EXAM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,8 +77,14 @@ class ExamResultActivity : AppCompatActivity(), ExamResultActivityContract.View 
         request_certificate_button.setOnClickListener {
             // request score
             // and cert
-            presenter.getOneClassRoomQualification(OneClassRoomQualificationRequest(classRoomModel.Id),false)
+            if (exam_status == STATUS_NOT_PASS_EXAM){
+                Toast.makeText(context,getString(R.string.not_qualified),Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            presenter.getOneClassRoomCertificate(OneClassRoomCertificateRequest(classRoomModel.Id),false)
         }
+        linear_layout_request_cert.visibility = View.GONE
+        request_certificate_button.visibility = View.GONE
 
         exam_result_nestedscrollview.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
             if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight) {
@@ -97,6 +107,7 @@ class ExamResultActivity : AppCompatActivity(), ExamResultActivityContract.View 
         exam_result_recycleview.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
 
         presenter.getAllClassRoomExamResult(reqAllExamResult,true)
+        presenter.getOneClassRoomQualification(OneClassRoomQualificationRequest(classRoomModel.Id),false)
     }
 
     fun checkNoResultFound(forceShow : Boolean){
@@ -145,11 +156,22 @@ class ExamResultActivity : AppCompatActivity(), ExamResultActivityContract.View 
     }
 
     override fun onGetOneClassRoomQualification(s: OneClassRoomQualificationResponse) {
+        val total_exam = s.Data.ClassRoomQualificationDetail.CourseQualification.CourseExamTotal
+        val total_score = s.Data.ClassRoomQualificationDetail.TotalScore
+
+        textview_total_exam.text = "${total_exam}"
+        textview_total_correct_answered_exam.text = "${total_score}"
+        textview_exam_score.text = "${ round((total_score.toFloat() / total_exam.toFloat()) * 100.0)}"
+
+        exam_status = s.Data.ClassRoomQualificationDetail.Status
+        linear_layout_request_cert.visibility = View.VISIBLE
+
         when {
-            s.Data.ClassRoomQualificationDetail.Status == STATUS_PASS_EXAM ->
-                presenter.getOneClassRoomCertificate(OneClassRoomCertificateRequest(classRoomModel.Id),false)
+            s.Data.ClassRoomQualificationDetail.Status == STATUS_PASS_EXAM -> {
+                textview_exam_score.setTextColor(Color.GREEN)
+            }
             s.Data.ClassRoomQualificationDetail.Status == STATUS_NOT_PASS_EXAM ->
-                Toast.makeText(context,getString(R.string.not_qualified),Toast.LENGTH_LONG).show()
+                textview_exam_score.setTextColor(Color.RED)
             else ->
                 Toast.makeText(context,getString(R.string.please_finish_exam),Toast.LENGTH_LONG).show()
         }
